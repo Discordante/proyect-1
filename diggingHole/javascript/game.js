@@ -34,7 +34,7 @@ class Game{
 
     draw(){
         this.hero.draw()
-    }
+    }                    
 
     move(){
         this.hero.move()
