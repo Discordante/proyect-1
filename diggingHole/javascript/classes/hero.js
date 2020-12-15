@@ -5,8 +5,8 @@ class Hero{
         this.x = this.ctx.canvas.width / 2
         this.y = 10
 
-        this.width = 0
-        this.height = 0
+        this.width = 40
+        this.height = 60
 
         this.vx = 0
         this.vy = 0
@@ -21,7 +21,8 @@ class Hero{
     }
 
     draw(){
-
+        this.ctx.fillStyle = 'red'
+        this.ctx.fillRect(this.x, this.y, this.width, this.height)
     }
 
     move(){
@@ -42,8 +43,9 @@ class Hero{
     }
     
     onKeyEvent(event){  
+        const status = event.type === 'keydown'
 
-        switch (event.key) {
+        switch (event.keyCode) {
             case KEY_UP:
                 this.movements.up = status
                 break;

@@ -7,14 +7,10 @@ const FPS = 1000/60
 
 //Controls: event.key
 
-const KEY_UP = 'ArrowUp'
-const KEY_DOWN = 'ArrowDown'
-const KEY_RIGHT = 'ArrowRight'
-const KEY_LEFT = 'ArrowLeft'
-
-const KEY_JUMP = ' '
-
-
+const KEY_UP = 38
+const KEY_RIGHT = 39
+const KEY_DOWN = 40
+const KEY_LEFT = 37
 
 //physics
 

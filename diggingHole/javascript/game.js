@@ -2,12 +2,17 @@ class Game{
     constructor(canvasId){
 
         this.canvas = document.getElementById(canvasId)
+        this.ctx = this.canvas.getContext('2d')
         this.canvas.width = 600
         this.canvas.height = 800
-        this.ctx = this.canvas.getContext('2d')
 
 
         this.drawInterval = undefined
+
+
+
+
+        this.hero = new Hero(this.ctx)
     }
 
 
@@ -28,7 +33,7 @@ class Game{
     }
 
     draw(){
-
+        this.hero.draw()
     }
 
     move(){
@@ -39,8 +44,8 @@ class Game{
 
     }
 
-    onKeyEvent(){
-        this.hero.onKeyEvent()
+    onKeyEvent(event){
+        this.hero.onKeyEvent(event)
 
     }
 }
