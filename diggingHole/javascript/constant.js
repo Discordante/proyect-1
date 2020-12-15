@@ -16,5 +16,5 @@ const KEY_JUMP = 'Space'
 //physics
 
 const VELOCITY = {x: 5, y: 0}
-const GRAVITY = {x: 0, y: 0.8}
+const GRAVITY = {x: 0, y: 0.7}
 const MAX_GRAVITY = 20

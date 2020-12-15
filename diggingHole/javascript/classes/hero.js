@@ -5,10 +5,10 @@ class Hero{
         this.width = 40
         this.height = 60
 
-        this.pos = {x: this.ctx.canvas.width / 2, y: 0}, // position
+        this.pos = {x: this.ctx.canvas.width / 2, y: 0} // position
 
-        this.vel = {x: 0, y: 0}, // velocity
-        this.accel = {x: 0, y: 0}, // velocity
+        this.vel = {x: 0, y: 0} // velocity
+        this.accel = {x: 0, y: 0} // acceleration
         
 
         this.movements = {
@@ -21,6 +21,8 @@ class Hero{
             isJumping: false,
             jumpLimit: this.pos.y 
         }
+
+        this.colisionStatus = false
     }
 
     draw(){
@@ -51,8 +53,6 @@ class Hero{
         if(this.vel.y >= 15){
             this.movements.isJumping = false
         }
-     
-        
 
         //position  
         this.pos.x += this.vel.x
@@ -80,6 +80,20 @@ class Hero{
         if(this.pos.y <= 0){   
             this.pos.y = 0
         }
+    }
+
+    collision(block){
+        if(this.pos.y < block.pos.y + block.height && this.pos.y + this.height > block.pos.y && this.pos.x < block.pos.x + block.width && this.pos.x + this.width > block.pos.x && !this.colisionStatus){
+            console.log('colision')
+            this.vel.y = 0
+            this.colisionStatus = true
+        }
+
+        else if(this.colisionStatus) {  
+            this.colisionStatus = false
+        }
+        
+
     }
     
     onKeyEvent(event){  

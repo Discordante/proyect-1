@@ -13,6 +13,10 @@ class Game{
 
 
         this.hero = new Hero(this.ctx)
+        this.blocks = [
+            new Block(this.ctx, 300, 700),
+            new Block(this.ctx, 500, 600)
+        ]
     }
 
 
@@ -22,7 +26,7 @@ class Game{
                 this.clear()
                 this.move()
                 this.draw()
-                this.checkColisions()
+                this.checkCollisions()
 
             },FPS)
         }
@@ -34,14 +38,15 @@ class Game{
 
     draw(){
         this.hero.draw()
+        this.blocks.forEach(elem => elem.draw())
     }                    
 
     move(){
         this.hero.move()
     }
 
-    checkColisions(){
-
+    checkCollisions(){
+        this.blocks.forEach(block => this.hero.collision(block))
     }
 
     onKeyEvent(event){
