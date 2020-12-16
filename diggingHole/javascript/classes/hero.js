@@ -16,10 +16,11 @@ class Hero{
             down: false,
             right: false,
             left: false,
+            run: false,
 
             jump: false,
             isJumping: false,
-            jumpLimit: this.pos.y 
+            jumpLimit: -30
         }
 
         this.colisionStatus = false
@@ -34,39 +35,37 @@ class Hero{
    
         //horizontal movement
         if (this.movements.right){
-            this.vel.x = VELOCITY.x
+            this.movements.run ?  this.vel.x = VELOCITY.x + 3 : this.vel.x = VELOCITY.x
+            
         } 
         else if (this.movements.left) {
-            this.vel.x = -VELOCITY.x
+            this.movements.run ?  this.vel.x = -VELOCITY.x - 3 : this.vel.x = -VELOCITY.x
         } 
         else {
             this.vel.x = 0
         }
 
-
-        //jump
-        if(this.movements.jump && !this.movements.isJumping){
-            this.movements.isJumping = true
-            this.vel.y = -15
-        }
-        
-        if(this.vel.y >= 15){
-            this.movements.isJumping = false
-        }
-
-        //position  
-        this.pos.x += this.vel.x
-        this.pos.y += this.vel.y
-
         //gravity
-        this.vel.y += GRAVITY.y
+        this.vel.y += GRAVITY
         if(this.vel.y >= MAX_GRAVITY){
             this.vel.y = MAX_GRAVITY
         }
 
-            
+        //jump
+        if(this.movements.jump && !this.movements.isJumping){
+            this.movements.isJumping = true
+            this.vel.y = this.movements.jumpLimit
+        }
+        
+        if(!this.movements.jump && this.vel.y >= MAX_GRAVITY){
+            this.movements.isJumping = false
+        }
 
+        //update position  
+        this.pos.x += this.vel.x
+        this.pos.y += this.vel.y
 
+        
         //limits
         if(this.pos.x >= this.ctx.canvas.width - this.width){
             this.pos.x = this.ctx.canvas.width - this.width
@@ -80,24 +79,37 @@ class Hero{
         if(this.pos.y <= 0){   
             this.pos.y = 0
         }
+
     }
 
     collision(block){
-        if(this.pos.y < block.pos.y + block.height && this.pos.y + this.height > block.pos.y && this.pos.x < block.pos.x + block.width && this.pos.x + this.width > block.pos.x && !this.colisionStatus){
-            console.log('colision')
-            this.vel.y = 0
+        if(this.pos.x < block.pos.x + block.width && this.pos.x + this.width > block.pos.x && this.pos.y < block.pos.y + block.height && this.pos.y + this.height > block.pos.y){
+
+            if(this.pos.y < block.pos.y){
+                console.log('colision up')
+                this.pos.y = block.pos.y - this.height 
+            }
+            else if(this.pos.y > block.pos.y){
+                console.log('colision down')
+                this.pos.y = block.pos.y + this.height 
+                this.vel.y =0
+            }
+            else if(this.pos.x < block.pos.x){
+                console.log('colision left')
+                this.pos.x = block.pos.x - this.width 
+            }
+            else if(this.pos.x > block.pos.x){
+                console.log('colision right')
+                this.pos.x = block.pos.x + block.width 
+            }
+            
             this.colisionStatus = true
         }
-
-        else if(this.colisionStatus) {  
-            this.colisionStatus = false
-        }
-        
-
+           
     }
     
     onKeyEvent(event){  
-        const status = event.type === 'keydown'
+        const status = event.type === 'keydown' 
 
         switch (event.code) {
             case KEY_UP:
@@ -114,6 +126,9 @@ class Hero{
                 break;
             case KEY_JUMP:
                 this.movements.jump = status
+                break;
+            case KEY_RUN:
+                this.movements.run = status
                 break;
 
             default:

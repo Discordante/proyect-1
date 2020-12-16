@@ -15,7 +15,9 @@ class Game{
         this.hero = new Hero(this.ctx)
         this.blocks = [
             new Block(this.ctx, 300, 700),
-            new Block(this.ctx, 500, 600)
+            new Block(this.ctx, 500, 600),
+            new Block(this.ctx, 300, 300),
+            new Block(this.ctx, 50, 750)
         ]
     }
 
