@@ -92,7 +92,7 @@ class Hero{
             else if(this.pos.y > block.pos.y){
                 console.log('colision down')
                 this.pos.y = block.pos.y + this.height 
-                this.vel.y =0
+                this.vel.y = 0
             }
             else if(this.pos.x < block.pos.x){
                 console.log('colision left')
@@ -102,7 +102,6 @@ class Hero{
                 console.log('colision right')
                 this.pos.x = block.pos.x + block.width 
             }
-            
             this.colisionStatus = true
         }
            
