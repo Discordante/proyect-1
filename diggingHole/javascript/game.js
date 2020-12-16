@@ -26,9 +26,10 @@ class Game{
         if(!this.drawInterval){
             this.drawInterval = setInterval(() => {
                 this.clear()
+                this.checkCollisions()
                 this.move()
                 this.draw()
-                this.checkCollisions()
+                
 
             },FPS)
         }

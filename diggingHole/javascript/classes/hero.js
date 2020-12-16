@@ -9,7 +9,7 @@ class Hero{
 
         this.vel = {x: 0, y: 0} // velocity
         this.accel = {x: 0, y: 0} // acceleration
-        
+        this.collideWith = ''
 
         this.movements = {
             up: false,
@@ -83,27 +83,39 @@ class Hero{
     }
 
     collision(block){
-        if(this.pos.x < block.pos.x + block.width && this.pos.x + this.width > block.pos.x && this.pos.y < block.pos.y + block.height && this.pos.y + this.height > block.pos.y){
+      
 
-            if(this.pos.y < block.pos.y){
-                console.log('colision up')
-                this.pos.y = block.pos.y - this.height 
-            }
-            else if(this.pos.y > block.pos.y){
+        if (
+                this.pos.y <= block.pos.y + block.height && 
+                this.pos.y >= block.pos.y && 
+                this.pos.x + this.width >= block.pos.x && 
+                this.pos.x <= block.pos.x + block.width ) 
+                {
+
                 console.log('colision down')
-                this.pos.y = block.pos.y + this.height 
-                this.vel.y = 0
-            }
-            else if(this.pos.x < block.pos.x){
-                console.log('colision left')
-                this.pos.x = block.pos.x - this.width 
-            }
-            else if(this.pos.x > block.pos.x){
-                console.log('colision right')
-                this.pos.x = block.pos.x + block.width 
-            }
+                this.pos.y = block.pos.y + block.height + 1
+                this.vel.y = 0   
+            } else if( 
+                this.pos.y + this.height >= block.pos.y &&
+                this.pos.y + this.height <= block.pos.y + block.height &&
+                this.pos.x + this.width >= block.pos.x && 
+                this.pos.x <= block.pos.x + block.width
+                ){
+                    console.log('colision up')
+                    this.pos.y  = block.pos.y - this.height
+                    this.vel.y = 0
+                }
+            // } else if(this.pos.x < block.pos.x){
+            //     console.log('colision left')
+            //     this.pos.x = block.pos.x - this.width 
+            //     return
+            // } else if(this.pos.x > block.pos.x){
+            //     console.log('colision right')
+            //     this.pos.x = block.pos.x + block.width 
+            //     return
+            // }
             this.colisionStatus = true
-        }
+            
            
     }
     
