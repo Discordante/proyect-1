@@ -1,9 +1,9 @@
 class Block{
-    constructor(ctx, x, y){
+    constructor(ctx, x, y, height, width){
         this.ctx = ctx
 
-        this.width = 150
-        this.height = 20
+        this.height = height
+        this.width = width
 
         this.pos = {x, y} // position
     }

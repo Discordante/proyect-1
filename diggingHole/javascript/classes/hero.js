@@ -5,7 +5,7 @@ class Hero{
         this.width = 40
         this.height = 60
 
-        this.pos = {x: this.ctx.canvas.width / 2, y: 0} // position
+        this.pos = {x: 300, y: 0} // position
         this.vel = {x: 0, y: 0} // velocity
         this.accel = {x: 0, y: 0} // acceleration
 
@@ -17,7 +17,7 @@ class Hero{
             run: false,
 
             jump: false,
-            isJumping: false,
+            jumpStatus: false,
             isDown: false,
             jumpLimit: -30,
         }
@@ -59,7 +59,7 @@ class Hero{
 
         }
         //bend movement
-        if (this.movements.down){ 
+        if (this.movements.down && !this.colisionStatus.right && !this.colisionStatus.left){ 
             this.height = 30
             this.movements.isDown = true
         } 
@@ -77,20 +77,18 @@ class Hero{
         }
 
         //jump
-        if(this.movements.jump && !this.movements.isJumping && !this.movements.isDown){
-            this.movements.isJumping = true
+        if(this.movements.jump && !this.movements.jumpStatus && !this.movements.isDown && !this.colisionStatus.left && !this.colisionStatus.right){
+            this.movements.jumpStatus = true
             this.vel.y = this.movements.jumpLimit
         }
         
-        else if(!this.movements.jump && this.vel.y >= MAX_GRAVITY || this.colisionStatus.left || this.colisionStatus.right || this.colisionStatus.up || (this.colisionStatus.down && !this.movements.isDown)){
-            this.movements.isJumping = false
+        else if(!this.movements.jump && this.movements.jumpStatus || !this.movements.jump && this.colisionStatus.left || !this.movements.jump && this.colisionStatus.right || !this.movements.jump && this.colisionStatus.up || !this.movements.jump && this.colisionStatus.down){
+            this.movements.jumpStatus = false
         }
-
 
         //update position  
         this.pos.x += this.vel.x
         this.pos.y += this.vel.y
-
         
         //limits
         if(this.pos.x >= this.ctx.canvas.width - this.width){
@@ -126,7 +124,7 @@ class Hero{
                 this.pos.x + this.width >= block.pos.x && 
                 this.pos.x <= block.pos.x + block.width 
                 ){
-                    this.pos.y  = block.pos.y - this.height 
+                    this.pos.y  = block.pos.y - this.height - 3
                     this.vel.y = 0
                     this.vel.x = 0
                     this.colisionStatus.up = true
@@ -159,6 +157,7 @@ class Hero{
                 this.colisionStatus.left = false
                 this.colisionStatus.right = false
             }
+        console.log(this.colisionStatus.up)
     }
      
     onKeyEvent(event){  

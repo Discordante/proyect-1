@@ -14,10 +14,12 @@ class Game{
 
         this.hero = new Hero(this.ctx)
         this.blocks = [
-            new Block(this.ctx, 300, 700),
-            new Block(this.ctx, 500, 600),
-            new Block(this.ctx, 300, 300),
-            new Block(this.ctx, 50, 750)
+          
+            new Block(this.ctx, 50, 730, 20, 150),
+            new Block(this.ctx, 400, 730, 20, 150),
+
+
+            new Block(this.ctx, 0, 780, 20, 600)  
         ]
     }
 
@@ -33,7 +35,7 @@ class Game{
             },FPS)
         }
     }
-
+ 
     clear(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     }
