@@ -30,7 +30,6 @@ class Game{
                 this.move()
                 this.draw()
                 
-
             },FPS)
         }
     }
