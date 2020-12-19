@@ -12,7 +12,7 @@ const KEY_RIGHT = 'ArrowRight'
 const KEY_DOWN = 'ArrowDown'
 const KEY_LEFT = 'ArrowLeft'
 const KEY_JUMP = 'Space'
-const KEY_RUN = 'ControlLeft'
+const KEY_RUN = 'ShiftLeft'
 
 //physics
 

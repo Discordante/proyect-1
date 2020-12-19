@@ -3,7 +3,7 @@ class Hero{
         this.ctx = ctx
 
         this.width = 40
-        this.height = 60
+        this.height = 40
 
         this.health = 100
 
@@ -45,46 +45,58 @@ class Hero{
 
     collision(block){
       
-        if (
+        if (    //---collision down---
                 this.pos.y <= block.pos.y + block.height && 
                 this.pos.y >= block.pos.y && 
                 this.pos.x + this.width >= block.pos.x && 
-                this.pos.x <= block.pos.x + block.width 
-                ){
-                    this.pos.y = block.pos.y + block.height 
+                this.pos.x <= block.pos.x + block.width &&
+                this.pos.y + this.height > block.pos.y + block.height)
+                {
+                    console.log('down')
+                    this.pos.y = block.pos.y + block.height + 1
                     this.vel.y = 0   
                     this.vel.x = 0
                     this.colisionStatus.down = true
 
             } 
-            else if( 
+
+            else if(//---collision up---
                 this.pos.y + this.height >= block.pos.y &&
                 this.pos.y + this.height <= block.pos.y + block.height &&
-                this.pos.x + this.width >= block.pos.x && 
-                this.pos.x <= block.pos.x + block.width 
-                ){
-                    this.pos.y  = block.pos.y - this.height 
+                this.pos.x + this.width >= block.pos.x &&
+                this.pos.x <= block.pos.x + block.width &&
+                this.pos.y < block.pos.y) 
+
+                {
+                    console.log('up')
+                    this.pos.y  = block.pos.y - this.height - 1
                     this.vel.y = 0
                     this.vel.x = 0
                     this.colisionStatus.up = true
                 }
-             else if( 
+
+            else if( //---collision left---
                 this.pos.y + this.height >= block.pos.y &&
                 this.pos.y <= block.pos.y + block.height &&
-                this.pos.x + this.width >= block.pos.x && 
-                this.pos.x <= block.pos.x 
-                ){
+                this.pos.x + this.width >= block.pos.x &&
+                this.pos.x < block.pos.x)
+        
+                {
+                    console.log('left')
                     this.pos.x  = block.pos.x - this.width - 1
                     this.vel.x = 0
                     this.vel.y = 0
                     this.colisionStatus.left = true
                 }
-            else if( 
+
+            else if( // ---collision right---
                 this.pos.y + this.height >= block.pos.y &&
                 this.pos.y <= block.pos.y + block.height &&
-                this.pos.x + this.width >= block.pos.x && 
-                this.pos.x <= block.pos.x + block.width 
-                ){
+                this.pos.x <= block.pos.x + block.width &&
+                this.pos.x + this.width > block.pos.x + block.width) 
+
+                {
+                    //console.log('right')
                     this.pos.x  = block.pos.x + block.width + 1
                     this.vel.x = 0
                     this.vel.y = 0
@@ -95,17 +107,10 @@ class Hero{
                 this.colisionStatus.down = false
                 this.colisionStatus.left = false
                 this.colisionStatus.right = false
-
             }
-
-        console.log(`up: ${this.colisionStatus.up}`)
-        //console.log(`down: ${this.colisionStatus.down}`)
-        //console.log(`left: ${this.colisionStatus.left}`)
-        //console.log(`right: ${this.colisionStatus.right}`)
     }
 
     move(){
-
         //horizontal movement
         if (this.movements.right){
             if(!this.movements.down){
@@ -128,17 +133,19 @@ class Hero{
             this.vel.x = 0
 
         }
-        //bend movement
+
+        //crouch movement
         if (this.movements.down && !this.colisionStatus.right && !this.colisionStatus.left){ 
-            this.height = 30
+            this.height = 20
             this.movements.crouchStatus = true
         } 
 
         if(!this.movements.down && this.movements.crouchStatus && !this.colisionStatus.down){
-            this.pos.y -= 30
-            this.height = 60
+            this.pos.y -= 20
+            this.height = 40
             this.movements.crouchStatus = false
         } 
+
         //gravity
         this.vel.y += GRAVITY
         if(this.vel.y >= MAX_GRAVITY){
