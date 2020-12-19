@@ -12,6 +12,7 @@ class GeneralClass{
     }
 
     draw(){
+        this.ctx.fillStyle = 'yellow'
         this.ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height)
     }
 

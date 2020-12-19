@@ -3,7 +3,7 @@ class Hero{
         this.ctx = ctx
 
         this.width = 40
-        this.height = 40
+        this.height = 60
 
         this.health = 100
 
@@ -50,7 +50,7 @@ class Hero{
                 this.pos.y >= block.pos.y && 
                 this.pos.x + this.width >= block.pos.x && 
                 this.pos.x <= block.pos.x + block.width &&
-                this.pos.y + this.height > block.pos.y + block.height)
+                this.pos.y + this.height > block.pos.y + block.height) 
                 {
                     console.log('down')
                     this.pos.y = block.pos.y + block.height + 1
@@ -136,13 +136,13 @@ class Hero{
 
         //crouch movement
         if (this.movements.down && !this.colisionStatus.right && !this.colisionStatus.left){ 
-            this.height = 20
+            this.height = 30
             this.movements.crouchStatus = true
         } 
 
         if(!this.movements.down && this.movements.crouchStatus && !this.colisionStatus.down){
-            this.pos.y -= 20
-            this.height = 40
+            this.pos.y -= 30
+            this.height = 60
             this.movements.crouchStatus = false
         } 
 

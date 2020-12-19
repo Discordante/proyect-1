@@ -1,8 +1,10 @@
 class Door extends GeneralClass{
     constructor(ctx, x, y, height, width){
-        super(ctx, x, y, height, width)
-    }
+        super(ctx, x, y)
 
-    // this.pos.y + this.height > block.pos.y + block.height &&
-    //this.pos.y < block.pos.y &&
+        this.height = height
+        this.width = width
+    }
+    
+    
 }
