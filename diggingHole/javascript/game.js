@@ -15,11 +15,10 @@ class Game{
         this.hero = new Hero(this.ctx)
         this.blocks = [
           
-            new Block(this.ctx, 50, 730, 20, 150),
-            new Block(this.ctx, 400, 730, 20, 150),
-
-
-            new Block(this.ctx, 0, 780, 20, 600)  
+    
+            new Block(this.ctx, 120, 730, 20, 120),
+            new Block(this.ctx, 350, 730, 20, 150),
+            new Block(this.ctx, 50, 770, 20, 500)  
         ]
     }
 
@@ -31,6 +30,7 @@ class Game{
                 this.checkCollisions()
                 this.move()
                 this.draw()
+                this.gameOver()
                 
             },FPS)
         }
@@ -51,6 +51,12 @@ class Game{
 
     checkCollisions(){
         this.blocks.forEach(block => this.hero.collision(block))
+    }
+
+    gameOver(){
+        if(this.hero.gameOver()){
+            location.reload();
+        }
     }
 
     onKeyEvent(event){
