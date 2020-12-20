@@ -9,7 +9,7 @@ class Game{
         this.drawInterval = undefined
         
         
-        this.door = new Door(this.ctx, 135, 660, 80, 50)  
+        this.door = new Door(this.ctx, 120, 632)  
         this.hero = new Hero(this.ctx)
         this.dungeonKey = new DungeonKey(this.ctx, 500, 600)
         

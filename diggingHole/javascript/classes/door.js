@@ -1,16 +1,29 @@
 class Door extends GeneralClass{
-    constructor(ctx, x, y, height, width){
+    constructor(ctx, x, y){
         super(ctx, x, y)
 
-        this.height = height
-        this.width = width
+        this.height = 100
+        this.width = 95
 
         this.doorStatus = false
+
+        this.img = new Image()
+        this.img.src = './././images/environment/door.png'
+        this.ready = false
+        this.img.onload = () => {
+            this.img.ready = true
+        }
+
+    }
+    
+    isReady(){
+        return this.img.ready
     }
     
     draw(){
-        this.ctx.fillStyle = 'green'
-        super.draw()
+        if(this.isReady()){
+            this.ctx.drawImage(this.img, this.pos.x, this.pos.y, this.width, this.height)
+        }
     }
 
     collision(element){
