@@ -6,17 +6,23 @@ class DungeonKey extends GeneralClass{
         this.y = y
 
         this.height = 20
-        this.width = 30
+        this.width = 35
 
         this.keyInventary = false
         this.collisionCounter = 0
 
+        //Graphics
         this.img = new Image()
         this.img.src = './././images/Items/Key_01.png'
         this.ready = false
         this.img.onload = () => {
             this.img.ready = true
         }
+
+        //Sound
+        this.sounds = {
+            itemCollision: new Audio('./././sound/item_collision.mp3'),
+          }
 
     }
     
@@ -35,10 +41,11 @@ class DungeonKey extends GeneralClass{
     collision(element){
         if(super.collision(element)){
             this.collisionCounter++
-        }
-        if(this.collisionCounter >= 1){
-            this.keyInventary = true
-            element.inventory.doorKey = true
+            if(this.collisionCounter === 1){
+                this.sounds.itemCollision.play()
+                this.keyInventary = true
+                element.inventory.doorKey = true
+            }
         }
     }
 }
