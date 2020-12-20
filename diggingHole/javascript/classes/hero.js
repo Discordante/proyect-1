@@ -23,8 +23,8 @@ class Hero{
             right: false,
             left: false,
             run: false,
-
             jump: false,
+
             jumpStatus: false,
             jumpLimit: -30,
             jumpTimer: 0,

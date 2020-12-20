@@ -9,6 +9,7 @@ class GeneralClass{
         this.vel = {x: 0, y: 0} // velocity
         this.accel = {x: 0, y: 0} // acceleration
 
+
     }
 
     draw(){

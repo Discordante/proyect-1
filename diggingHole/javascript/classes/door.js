@@ -23,5 +23,4 @@ class Door extends GeneralClass{
         }
         console.log(element.inventory.doorKey)
     }
-
 }

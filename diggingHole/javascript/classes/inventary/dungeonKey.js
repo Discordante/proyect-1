@@ -1,23 +1,35 @@
 class DungeonKey extends GeneralClass{
-    constructor(ctx, x, y, height, width){
+    constructor(ctx, x, y){
         super(ctx, x, y)
 
         this.x = x
         this.y = y
 
         this.height = 20
-        this.width = 20
+        this.width = 30
 
         this.keyInventary = false
         this.collisionCounter = 0
+
+        this.img = new Image()
+        this.img.src = './././images/Items/Key_01.png'
+        this.ready = false
+        this.img.onload = () => {
+            this.img.ready = true
+        }
+
     }
     
+    isReady(){
+        return this.img.ready
+    }
+
     draw(){
         if(!this.keyInventary){
-            this.ctx.fillStyle = 'yellow'
-            super.draw()
+            if(this.isReady()){
+                this.ctx.drawImage(this.img, this.pos.x, this.pos.y, this.width, this.height)
+            }
         }
-        
     }
 
     collision(element){
