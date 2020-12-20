@@ -3,11 +3,15 @@ class Hero{
         this.ctx = ctx
 
         this.width = 40
+        this.defaultHeight = 60
         this.height = 60
 
         this.health = 100
-
+        this.blocked = false
         this.pos = {x: 300, y: 0} // position
+        this.previousX = this.pos.x
+        this.previousY = this.pos.y
+
         this.vel = {x: 0, y: 0} // velocity
         this.accel = {x: 0, y: 0} // acceleration
 
@@ -44,13 +48,30 @@ class Hero{
 
 
     collision(block){
+
+
+        if (this.movements.crouchStatus) {
+            if (this.pos.y <= block.pos.y + block.height && 
+                this.pos.y >= block.pos.y && 
+                this.pos.x + this.width >= block.pos.x && 
+                this.pos.x <= block.pos.x + block.width &&
+                this.pos.y + this.defaultHeight > block.pos.y + block.height &&
+                this.previousY > block.pos.y + block.height) {
+                    this.blocked = true
+                }
+
+        } else {
+            this.blocked= false
+        }
       
         if (    //---collision down---
                 this.pos.y <= block.pos.y + block.height && 
                 this.pos.y >= block.pos.y && 
                 this.pos.x + this.width >= block.pos.x && 
                 this.pos.x <= block.pos.x + block.width &&
-                this.pos.y + this.height > block.pos.y + block.height) 
+                this.pos.y + this.height > block.pos.y + block.height &&
+                this.previousY > block.pos.y + block.height
+                ) 
                 {
                     console.log('down')
                     this.pos.y = block.pos.y + block.height + 1
@@ -65,7 +86,9 @@ class Hero{
                 this.pos.y + this.height <= block.pos.y + block.height &&
                 this.pos.x + this.width >= block.pos.x &&
                 this.pos.x <= block.pos.x + block.width &&
-                this.pos.y < block.pos.y) 
+                this.pos.y < block.pos.y && 
+                this.previousY + this.height < block.pos.y 
+                ) 
 
                 {
                     console.log('up')
@@ -79,13 +102,13 @@ class Hero{
                 this.pos.y + this.height >= block.pos.y &&
                 this.pos.y <= block.pos.y + block.height &&
                 this.pos.x + this.width >= block.pos.x &&
-                this.pos.x < block.pos.x)
+                this.pos.x < block.pos.x && 
+                this.previousX +  this.width < block.pos.x)
         
                 {
                     console.log('left')
                     this.pos.x  = block.pos.x - this.width - 1
                     this.vel.x = 0
-                    this.vel.y = 0
                     this.colisionStatus.left = true
                 }
 
@@ -93,15 +116,16 @@ class Hero{
                 this.pos.y + this.height >= block.pos.y &&
                 this.pos.y <= block.pos.y + block.height &&
                 this.pos.x <= block.pos.x + block.width &&
-                this.pos.x + this.width > block.pos.x + block.width) 
+                this.pos.x + this.width > block.pos.x + block.width &&
+                this.previousX > block.pos.x + block.width
+                ) 
 
                 {
-                    //console.log('right')
+                    console.log('right')
                     this.pos.x  = block.pos.x + block.width + 1
                     this.vel.x = 0
-                    this.vel.y = 0
                     this.colisionStatus.right = true
-                } 
+                }
             else{
                 this.colisionStatus.up = false
                 this.colisionStatus.down = false
@@ -110,11 +134,16 @@ class Hero{
             }
     }
 
+    
+
     move(){
-        //horizontal movement
+
+        this.previousX = this.pos.x
+        this.previousY = this.pos.y
+        
         if (this.movements.right){
             if(!this.movements.down){
-                this.movements.run ?  this.vel.x = VELOCITY.x + 3 : this.movements.crouchStatus? this.vel.x = VELOCITY.x -2.99 : this.vel.x = VELOCITY.x
+                this.movements.run ?  this.vel.x = VELOCITY.x + 3 : this.movements.crouchStatus? this.vel.x = VELOCITY.x -2.99 : this.vel.x = VELOCITY.x;
             }
             else if(!this.movements.run){
                 this.movements.down ?  this.vel.x = VELOCITY.x - 2.99 : this.vel.x = VELOCITY.x
@@ -131,20 +160,20 @@ class Hero{
         } 
         else {
             this.vel.x = 0
-
         }
 
         //crouch movement
-        if (this.movements.down && !this.colisionStatus.right && !this.colisionStatus.left){ 
-            this.height = 30
+        if (this.movements.down && !this.movements.crouchStatus){ 
+            this.height = 20
             this.movements.crouchStatus = true
         } 
 
         if(!this.movements.down && this.movements.crouchStatus && !this.colisionStatus.down){
-            this.pos.y -= 30
-            this.height = 60
+            this.pos.y -= 50
+            this.height = this.defaultHeight
             this.movements.crouchStatus = false
         } 
+
 
         //gravity
         this.vel.y += GRAVITY
@@ -214,7 +243,6 @@ class Hero{
             default:
                 break;
           }
-
     }
     
 

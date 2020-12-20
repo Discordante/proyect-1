@@ -55,6 +55,7 @@ class Game{
         this.blocks.forEach(block => this.hero.collision(block))
     }
 
+
     gameOver(){
         if(this.hero.gameOver()){
             location.reload();
