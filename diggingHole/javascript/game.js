@@ -9,8 +9,9 @@ class Game{
         this.drawInterval = undefined
         
         
-        this.door = new Door(this.ctx, 135, 660, 80, 60)  
+        this.door = new Door(this.ctx, 135, 660, 80, 50)  
         this.hero = new Hero(this.ctx)
+        this.dungeonKey = new DungeonKey(this.ctx, 500, 600)
         
         this.blocks = [
             new Block(this.ctx, 120, 730, 20, 90),
@@ -32,7 +33,7 @@ class Game{
                 this.move()
                 this.draw()
                 this.gameOver()
-                
+                this.newWorld()
             },FPS)
         }
     }
@@ -44,6 +45,8 @@ class Game{
     draw(){
         this.hero.draw()
         this.door.draw()
+        this.dungeonKey.draw()
+
         this.blocks.forEach(elem => elem.draw())
     }                    
 
@@ -53,12 +56,19 @@ class Game{
 
     checkCollisions(){
         this.blocks.forEach(block => this.hero.collision(block))
+        this.door.collision(this.hero)
+        this.dungeonKey.collision(this.hero)
     }
 
+    newWorld(){
+        if(this.door.enterDoor(this.hero)){
+            location.reload()
+        }
+    }
 
     gameOver(){
         if(this.hero.gameOver()){
-            location.reload();
+            alert('Game Over')
         }
     }
 

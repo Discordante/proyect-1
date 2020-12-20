@@ -7,7 +7,9 @@ class Hero{
         this.height = 60
 
         this.health = 100
+
         this.blocked = false
+
         this.pos = {x: 300, y: 0} // position
         this.previousX = this.pos.x
         this.previousY = this.pos.y
@@ -31,6 +33,10 @@ class Hero{
             crouchStatus: false
         }
 
+        this.inventory = {
+            doorKey: false
+        }
+
 
         this.colisionStatus = {
             up: false,
@@ -50,7 +56,7 @@ class Hero{
     collision(block){
 
 
-        if (this.movements.crouchStatus) {
+      /*   if (this.movements.crouchStatus) {
             if (this.pos.y <= block.pos.y + block.height && 
                 this.pos.y >= block.pos.y && 
                 this.pos.x + this.width >= block.pos.x && 
@@ -62,8 +68,8 @@ class Hero{
 
         } else {
             this.blocked= false
-        }
-      
+        } */
+
         if (    //---collision down---
                 this.pos.y <= block.pos.y + block.height && 
                 this.pos.y >= block.pos.y && 
@@ -73,7 +79,7 @@ class Hero{
                 this.previousY > block.pos.y + block.height
                 ) 
                 {
-                    console.log('down')
+                    //console.log('down')
                     this.pos.y = block.pos.y + block.height + 1
                     this.vel.y = 0   
                     this.vel.x = 0
@@ -91,7 +97,7 @@ class Hero{
                 ) 
 
                 {
-                    console.log('up')
+                    //console.log('up')
                     this.pos.y  = block.pos.y - this.height - 1
                     this.vel.y = 0
                     this.vel.x = 0
@@ -106,7 +112,7 @@ class Hero{
                 this.previousX +  this.width < block.pos.x)
         
                 {
-                    console.log('left')
+                    //console.log('left')
                     this.pos.x  = block.pos.x - this.width - 1
                     this.vel.x = 0
                     this.colisionStatus.left = true
@@ -121,7 +127,7 @@ class Hero{
                 ) 
 
                 {
-                    console.log('right')
+                    //console.log('right')
                     this.pos.x  = block.pos.x + block.width + 1
                     this.vel.x = 0
                     this.colisionStatus.right = true
@@ -168,7 +174,7 @@ class Hero{
             this.movements.crouchStatus = true
         } 
 
-        if(!this.movements.down && this.movements.crouchStatus && !this.colisionStatus.down){
+        if(!this.movements.down && this.movements.crouchStatus){
             this.pos.y -= 50
             this.height = this.defaultHeight
             this.movements.crouchStatus = false
