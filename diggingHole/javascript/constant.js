@@ -19,3 +19,7 @@ const KEY_RUN = 'ShiftLeft'
 const VELOCITY = {x: 5, y: 0}
 const GRAVITY = 3
 const MAX_GRAVITY = 20
+
+
+//traps
+const FLOOR_TRAP_DAMAGE = 100

@@ -44,6 +44,14 @@ class Hero{
             right: false,
             left: false
         }
+
+        this.sounds = {
+            die: new Audio('./././sound/game_over.mp3')
+          } 
+          this.sounds.die.volume = 0.2
+
+
+    
     }
 
     
@@ -251,6 +259,11 @@ class Hero{
           }
     }
     
+    healthStatus(element){
+        if(element.trapStatus){
+            this.health -= element.damage
+        }
+    }
 
     gameOver(){
         if(this.pos.y >= this.ctx.canvas.height){
@@ -260,7 +273,11 @@ class Hero{
         /* if(this.vel.y >= MAX_GRAVITY && this.colisionStatus.up){
             this.health -= 20
         } */
+        if(this.health <= 0){
+            this.sounds.die.play()
+            return true
+        }
 
-        return this.health <= 0 ? true : false
+        return false
     }
 } 
