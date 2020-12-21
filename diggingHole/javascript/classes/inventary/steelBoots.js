@@ -1,19 +1,19 @@
-class DungeonKey extends GeneralClass{
+class SteelBoots extends GeneralClass{
     constructor(ctx, x, y){
         super(ctx, x, y)
 
         this.x = x
         this.y = y
 
-        this.height = 20
-        this.width = 35
+        this.height = 30
+        this.width = 30
 
         this.BootsInventary = false
         this.collisionCounter = 0
 
         //Graphics
         this.img = new Image()
-        this.img.src = './././images/Items/Key_01.png'
+        this.img.src = './././images/Items/steel_boots.png'
         this.ready = false
         this.img.onload = () => {
             this.img.ready = true
@@ -31,7 +31,7 @@ class DungeonKey extends GeneralClass{
     }
 
     draw(){
-        if(!this.keyInventary){
+        if(!this.BootsInventary){
             if(this.isReady()){
                 this.ctx.drawImage(this.img, this.pos.x, this.pos.y, this.width, this.height)
             }
@@ -43,8 +43,8 @@ class DungeonKey extends GeneralClass{
             this.collisionCounter++
             if(this.collisionCounter === 1){
                 this.sounds.itemCollision.play()
-                this.keyInventary = true
-                element.inventory.doorKey = true
+                this.BootsInventary = true
+                element.inventory.steelBoots = true
             }
         }
     }

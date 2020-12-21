@@ -10,7 +10,7 @@ class Hero{
 
         this.blocked = false
 
-        this.pos = {x: 300, y: 0} // position
+        this.pos = {x: 100, y: 50} // position
         this.previousX = this.pos.x
         this.previousY = this.pos.y
 
@@ -34,7 +34,8 @@ class Hero{
         }
 
         this.inventory = {
-            doorKey: false
+            doorKey: false,
+            steelBoots: false
         }
 
 
@@ -46,12 +47,11 @@ class Hero{
         }
 
         this.sounds = {
-            die: new Audio('./././sound/game_over.mp3')
+            die: new Audio('./././sound/game_over.mp3'),
+            jump: new Audio('./././sound/jump.mp3')
           } 
           this.sounds.die.volume = 0.2
-
-
-    
+          this.sounds.jump.volume = 0.1
     }
 
     
@@ -199,6 +199,7 @@ class Hero{
         if(this.movements.jump && !this.movements.jumpStatus && !this.movements.isDown && !this.colisionStatus.left && !this.colisionStatus.right){
             this.movements.jumpStatus = true
             this.vel.y = this.movements.jumpLimit
+            this.sounds.jump.play()
 
             this.movements.jumpTimerFunction = setInterval(() => {
                 this.movements.jumpTimer++

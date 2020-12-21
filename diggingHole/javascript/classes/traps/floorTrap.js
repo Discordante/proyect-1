@@ -32,7 +32,7 @@ class FloorTrap extends GeneralClass{
     } */
 
     collision(element){
-        if(super.collision(element)){
+        if(super.collision(element) && !element.inventory.steelBoots){
             this.trapStatus = true
             this.sounds.trapActive.play()
         }
