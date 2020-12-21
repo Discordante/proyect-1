@@ -27,4 +27,11 @@ class GeneralClass{
          return false
     }
 
+    move(){
+
+        //update position  
+        this.pos.x += this.vel.x
+        this.pos.y += this.vel.y
+
+    }
 }

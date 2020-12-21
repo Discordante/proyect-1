@@ -14,6 +14,15 @@ class Game{
         this.dungeonKey = new DungeonKey(this.ctx, 550, 100)
         this.steelBoots = new SteelBoots(this.ctx, 120, 470)
 
+
+        //arrows
+        this.arrow = new Arrow(this.ctx)
+        this.arrowArray = [
+            new Arrow(this.ctx)
+        ]
+        
+
+
         //traps
         this.floorTraps = [
             new FloorTrap(this.ctx, 395, 398),
@@ -42,6 +51,8 @@ class Game{
                 this.checkCollisions()
                 this.move()
                 this.draw()
+                this.generateElements()
+                this.deleteElements()
                 this.checkHealth()
                 this.gameOver()
                 this.newWorld()
@@ -61,11 +72,25 @@ class Game{
         this.steelBoots.draw()
 
         this.blocks.forEach(elem => elem.draw())
+
         this.floorTraps.forEach(trap => trap.draw())
+        this.arrowArray.forEach(arrow => arrow.draw())
     }                    
 
     move(){
         this.hero.move()
+        this.arrowArray.forEach(arrow => arrow.move(this.hero))
+    }
+
+    generateElements(){
+        //console.log(this.arrowArray.length)
+       if(this.arrow.generateArrow(this.hero)){
+           this.arrowArray.push(new Arrow(this.ctx))
+       }
+    }
+
+    deleteElements(){
+        //this.arrowArray.filter(arrow => arrow.pos.x <= 0) 
     }
 
     checkCollisions(){
@@ -74,11 +99,13 @@ class Game{
         this.dungeonKey.collision(this.hero)
         this.steelBoots.collision(this.hero)
         this.floorTraps.forEach(trap => trap.collision(this.hero))
+        this.arrowArray.forEach(arrow => arrow.collision(this.hero))
     }
 
 
     checkHealth(){
         this.floorTraps.forEach(trap => this.hero.healthStatus(trap))
+        this.arrowArray.forEach(arrow => this.hero.healthStatus(arrow))
     }
 
     newWorld(){

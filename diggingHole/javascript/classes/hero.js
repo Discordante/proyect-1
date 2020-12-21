@@ -151,7 +151,6 @@ class Hero{
     
 
     move(){
-
         this.previousX = this.pos.x
         this.previousY = this.pos.y
         
@@ -262,6 +261,9 @@ class Hero{
     
     healthStatus(element){
         if(element.trapStatus){
+            this.health -= element.damage
+        }
+        if(element.arrowStatus){
             this.health -= element.damage
         }
     }
