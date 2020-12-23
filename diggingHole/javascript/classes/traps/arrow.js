@@ -43,20 +43,19 @@ class Arrow extends GeneralClass{
             this.arrowStatus = true
             this.sounds.arrowImpact.play()
         }
-    }
+    } 
 
     move(element){
        super.move(element)
-       if(!this.arrowStatus){
+       if(!this.arrowStatus && this.pos.x > 0){
         this.sounds.arrowShoot.play()
        }
-    }
+    } 
 
     generateArrow(element){
-
-    }
-
-    deleteArrow(){
-    
+        if(element.pos.y >= this.pos.y - 10 && element.pos.y <= this.pos.y + 10 && element.pos.x >= this.pos.x - 300 && this.arrowReady){
+            this.arrowReady = false
+            return true
+        }
     }
 }

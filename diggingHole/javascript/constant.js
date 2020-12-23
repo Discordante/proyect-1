@@ -31,3 +31,4 @@ const ARROW_SPEED = -15
 
 //health
 const HERO_HEALTH = 100
+const POTION_HEAL = 20

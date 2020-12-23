@@ -29,7 +29,8 @@ class GeneralClass{
 
             return true
          }
-         return false
+
+        return false
     }
 
     move(){

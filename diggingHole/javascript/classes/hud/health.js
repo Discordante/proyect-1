@@ -9,6 +9,9 @@ class Health{
         this.pos = {x: 0, y: 0}
         this.hp = HERO_HEALTH
 
+        this.heartBeatSound = true
+        this.soundInterval = undefined
+
         //sprite
         this.sprite = new Image()
         this.sprite.src = './././images/hud/health-bar.png'
@@ -81,16 +84,17 @@ class Health{
             case 30:
                 this.sprite.horizontalFrameIndex = 0
                 this.sprite.verticalFrameIndex = 3
+                this.sound()
                 break;
             case 20:
                 this.sprite.horizontalFrameIndex = 1
                 this.sprite.verticalFrameIndex = 3
-                this.sounds.heartBeat.play()
+                this.sound()
                 break;
             case 10:
                 this.sprite.horizontalFrameIndex = 0
                 this.sprite.verticalFrameIndex = 4
-                this.sounds.heartBeat.play()
+                this.sound()
                 break;
             case 0:
                 this.sprite.horizontalFrameIndex = 1
@@ -102,16 +106,33 @@ class Health{
 
     }
 
+    sound(){
+        if(this.hp <= 30 && this.heartBeatSound){
+            this.sounds.heartBeat.play()
+            this.heartBeatSound = false
+        }
+        if(this.heartBeatSound){    
+            setInterval(()=>{
+                this.heartBeatSound = false
+                clearInterval(this.soundInterval)
+            },5000)
+        }
+    }
+
     healthStatus(element){
-        
+        console.log(this.hp)
         if(element.trapStatus && element.trapReady){
             this.hp -= element.damage
             element.trapReady = false
         }
         if(element.arrowStatus && element.arrowReady){
-            console.log()
+
             this.hp -= element.damage
             element.arrowReady = false
+        }
+        if(element.potionStatus  && element.potionReady){
+            this.hp += POTION_HEAL
+            element.potionReady = false
         }
     }
 }

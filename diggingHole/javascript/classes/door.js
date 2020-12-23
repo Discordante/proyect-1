@@ -22,9 +22,6 @@ class Door extends GeneralClass{
 
     }
     
-    isReady(){
-        return this.img.ready
-    }
     
     draw(){
         if(this.isReady()){

@@ -9,32 +9,38 @@ class Game{
         this.drawInterval = undefined
         
         
-        
+        //hero
         this.hero = new Hero(this.ctx)
         this.health = new Health (this.ctx)
 
+        //dungeon
         this.door = new Door(this.ctx, 125, 640)  
         this.dungeonKey = new DungeonKey(this.ctx, 550, 100)
 
-
-        this.steelBoots = new SteelBoots(this.ctx, 120, 470)
-
-
-        //arrows
-        this.arrow = new Arrow(this.ctx)
-        this.arrowArray = [
-            new Arrow(this.ctx)
+        //inventary
+        this.steelBoots = new SteelBoots(this.ctx, 120, 465)
+        this.potionsArray = [
+            new Potions(this.ctx, 520, 745)
         ]
         
 
 
+        //arrows
+        
+
         //traps
+
+
+        this.arrow = new Arrow(this.ctx)
+        this.arrowArray = []
+
         this.floorTraps = [
             new FloorTrap(this.ctx, 395, 398),
             new FloorTrap(this.ctx, 305, 578),
             new FloorTrap(this.ctx, 520, 768)
         ]
         
+        //blocks
         this.blocks = [
             new Block(this.ctx, 120, 730, 20, 90),
             new Block(this.ctx, 300, 100, 20, 50),
@@ -51,7 +57,7 @@ class Game{
         this.sounds = {
             gameOver: new Audio('./././sound/game-over.mp3')
         } 
-        this.sounds.gameOver.volume = 0.5
+        this.sounds.gameOver.volume = 0.6
     }
 
 
@@ -63,7 +69,6 @@ class Game{
                 this.move()
                 this.draw()
                 this.generateElements()
-                this.deleteElements()
                 this.checkHealth()
                 this.gameOver()
                 this.newWorld()
@@ -82,6 +87,8 @@ class Game{
         this.door.draw()
         this.dungeonKey.draw()
         this.steelBoots.draw()
+        this.potionsArray.forEach(potion => potion.draw())
+
 
         this.blocks.forEach(elem => elem.draw())
 
@@ -100,15 +107,14 @@ class Game{
        }
     }
 
-    deleteElements(){
-        //this.arrowArray.filter(arrow => arrow.pos.x <= 0) 
-    }
-
     checkCollisions(){
         this.blocks.forEach(block => this.hero.collision(block))
         this.door.collision(this.hero)
+
         this.dungeonKey.collision(this.hero)
         this.steelBoots.collision(this.hero)
+        this.potionsArray.forEach(potion => potion.collision(this.hero))
+
         this.floorTraps.forEach(trap => trap.collision(this.hero))
         this.arrowArray.forEach(arrow => arrow.collision(this.hero))
     }
@@ -117,6 +123,7 @@ class Game{
     checkHealth(){
         this.floorTraps.forEach(trap => this.health.healthStatus(trap))
         this.arrowArray.forEach(arrow => this.health.healthStatus(arrow))
+        this.potionsArray.forEach(potion => this.health.healthStatus(potion))
     }
 
     newWorld(){
@@ -128,7 +135,19 @@ class Game{
     gameOver(){
         if(this.health.hp <= 0){
             this.sounds.gameOver.play()
-            alert('Game Over')
+            clearInterval(this.drawInterval);
+            this.ctx.fillStyle = 'rgba(0, 0, 0)'
+            this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height)
+            this.ctx.save()
+            this.ctx.font = '50px Sans-serif'
+            this.ctx.fillStyle = 'red'
+            this.ctx.textAlign = 'center'
+            this.ctx.fillText(
+                'You lose...',
+                this.ctx.canvas.width / 2,
+                this.ctx.canvas.height / 2,
+            )
+            this.ctx.restore()
         }
     }
 

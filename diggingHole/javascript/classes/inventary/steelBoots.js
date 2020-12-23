@@ -5,8 +5,8 @@ class SteelBoots extends GeneralClass{
         this.x = x
         this.y = y
 
-        this.height = 30
-        this.width = 30
+        this.height = 35
+        this.width = 35
 
         this.BootsInventary = false
         this.collisionCounter = 0
@@ -31,11 +31,11 @@ class SteelBoots extends GeneralClass{
     }
 
     draw(){
-        if(!this.BootsInventary){
-            if(this.isReady()){
-                this.ctx.drawImage(this.img, this.pos.x, this.pos.y, this.width, this.height)
-            }
+        
+        if(this.isReady() && !this.BootsInventary){
+            this.ctx.drawImage(this.img, this.pos.x, this.pos.y, this.width, this.height)
         }
+        
     }
 
     collision(element){
