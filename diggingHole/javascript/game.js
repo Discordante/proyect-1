@@ -9,9 +9,14 @@ class Game{
         this.drawInterval = undefined
         
         
-        this.door = new Door(this.ctx, 125, 640)  
+        
         this.hero = new Hero(this.ctx)
+        this.health = new Health (this.ctx)
+
+        this.door = new Door(this.ctx, 125, 640)  
         this.dungeonKey = new DungeonKey(this.ctx, 550, 100)
+
+
         this.steelBoots = new SteelBoots(this.ctx, 120, 470)
 
 
@@ -41,6 +46,12 @@ class Game{
             new Block(this.ctx, 300, 580, 110, 100),  
             new Block(this.ctx, 50, 770, 20, 500)  
         ]
+
+
+        this.sounds = {
+            gameOver: new Audio('./././sound/game-over.mp3')
+        } 
+        this.sounds.gameOver.volume = 0.5
     }
 
 
@@ -66,6 +77,7 @@ class Game{
 
     draw(){
         this.hero.draw()
+        this.health.draw()
 
         this.door.draw()
         this.dungeonKey.draw()
@@ -83,7 +95,6 @@ class Game{
     }
 
     generateElements(){
-        //console.log(this.arrowArray.length)
        if(this.arrow.generateArrow(this.hero)){
            this.arrowArray.push(new Arrow(this.ctx))
        }
@@ -104,8 +115,8 @@ class Game{
 
 
     checkHealth(){
-        this.floorTraps.forEach(trap => this.hero.healthStatus(trap))
-        this.arrowArray.forEach(arrow => this.hero.healthStatus(arrow))
+        this.floorTraps.forEach(trap => this.health.healthStatus(trap))
+        this.arrowArray.forEach(arrow => this.health.healthStatus(arrow))
     }
 
     newWorld(){
@@ -115,7 +126,8 @@ class Game{
     }
 
     gameOver(){
-        if(this.hero.gameOver()){
+        if(this.health.hp <= 0){
+            this.sounds.gameOver.play()
             alert('Game Over')
         }
     }

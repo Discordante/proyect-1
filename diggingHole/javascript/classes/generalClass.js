@@ -12,7 +12,12 @@ class GeneralClass{
 
     }
 
+    isReady(){
+        return this.img.ready
+    }
+
     draw(){
+        
         this.ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height)
     }
     

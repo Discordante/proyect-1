@@ -21,9 +21,13 @@ const GRAVITY = 3
 const MAX_GRAVITY = 20
 
 
-//traps
-const FLOOR_TRAP_DAMAGE = 100
+//damages
+const FLOOR_TRAP_DAMAGE = 50
+const ARROW_DAMAGE = 30
 
 //arrows
-const ARROW_DAMAGE = 30
 const ARROW_SPEED = -15
+
+
+//health
+const HERO_HEALTH = 100

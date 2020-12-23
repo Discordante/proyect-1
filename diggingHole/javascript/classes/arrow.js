@@ -9,7 +9,7 @@ class Arrow extends GeneralClass{
         this.vel = {x: ARROW_SPEED, y: 0} // velocity
 
         this.arrowStatus = false
-        this.arrowActive = false
+        this.arrowReady = true
 
         this.damage = ARROW_DAMAGE
 
@@ -25,34 +25,35 @@ class Arrow extends GeneralClass{
         }  */
 
         this.sounds = {
-            arrow: new Audio('')
+            arrowShoot: new Audio('././sound/arrow-shoot.mp3'),
+            arrowImpact: new Audio('././sound/damage-sound.mp3')
           } 
     }
 
-    isReady(){
-        return this.img.ready
-    }
     
-    /* draw(){
-        if(this.isReady()){
-            this.ctx.drawImage(this.img, this.pos.x, this.pos.y, this.width, this.height)
+   draw(){
+        if(!this.arrowStatus){
+            this.ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height)
         }
-    } */
+    } 
 
     collision(element){
-        if(super.collision(element)){
+        if(super.collision(element) && this.arrowReady){
             this.vel.x = 0
             this.arrowStatus = true
-            //this.sounds.arrow.play()
+            this.sounds.arrowImpact.play()
         }
     }
 
     move(element){
        super.move(element)
+       if(!this.arrowStatus){
+        this.sounds.arrowShoot.play()
+       }
     }
 
     generateArrow(element){
-        
+
     }
 
     deleteArrow(){
