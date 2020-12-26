@@ -17,6 +17,7 @@ const KEY_RUN = 'ShiftLeft'
 //physics
 
 const VELOCITY = {x: 5, y: 0}
+const ENEMY_VELOCITY = {x: 3, y: 0}
 const GRAVITY = 3
 const MAX_GRAVITY = 20
 
@@ -32,4 +33,5 @@ const ARROW_SPEED = -15
 
 //health
 const HERO_HEALTH = 100
+const BASIC_ENEMY_HP = 50
 const POTION_HEAL = 20

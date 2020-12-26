@@ -23,7 +23,6 @@ class SteelBoots extends GeneralClass{
         this.sounds = {
             itemCollision: new Audio('./././sound/item_collision.mp3'),
           }
-
     }
     
     isReady(){

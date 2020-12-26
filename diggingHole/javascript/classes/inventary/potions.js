@@ -10,6 +10,7 @@ class Potions extends GeneralClass{
 
         this.potionStatus = false
         this.potionReady = true
+        this.collisionCounter = 0
 
         this.img = new Image()
         this.img.src = './././images/Items/potion.png'
@@ -32,10 +33,11 @@ class Potions extends GeneralClass{
     }
 
     collision(element){
-        if(super.collision(element) && this.potionReady){
+        if(super.collision(element) && this.potionReady && this.collisionCounter === 0){
+            this.collisionCounter++
             this.potionStatus = true
             this.sounds.pickPotion.play()
-        }
+        } 
     }
     
 }

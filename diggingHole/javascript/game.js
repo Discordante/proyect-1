@@ -60,6 +60,10 @@ class Game{
             new Block(this.ctx, 1000, 770, 20, 500)
         ]
 
+        this.basicEnemies = [
+            new BasicEnemy(this.ctx, 1380, 200),
+        ]
+
 
         this.sounds = {
             gameOver: new Audio('./././sound/game-over.mp3')
@@ -73,6 +77,7 @@ class Game{
             this.drawInterval = setInterval(() => {
                 this.clear()
                 this.generateElements()
+                this.activateElements()
                 this.move()
                 this.draw()
                 this.checkCollisions()
@@ -97,6 +102,8 @@ class Game{
         this.hero.draw()
         this.health.draw()
 
+        this.basicEnemies.forEach(enemy => enemy.draw())
+
         this.door.draw()
         this.dungeonKey.draw()
         this.steelBoots.draw()
@@ -114,6 +121,9 @@ class Game{
 
     move(){
         this.hero.move()
+
+        this.basicEnemies.forEach(enemy => enemy.move(this.hero))
+
         this.arrowArray.forEach(arrow => arrow.move(this.hero))
         this.roofTraps.forEach(trap => trap.move(this.hero))
     }
@@ -124,14 +134,26 @@ class Game{
        }
     }
 
-    checkCollisions(){
-        this.blocks.forEach(block => this.hero.collision(block))
-        this.door.collision(this.hero)
+    activateElements(){
+        this.basicEnemies.forEach(enemy => enemy.activateEnemy(this.hero))
+    }
 
+    checkCollisions(){
+
+        //blocks
+        this.blocks.forEach(block => this.hero.collisionBlocks(block))
+        this.basicEnemies.forEach(enemy => this.blocks.forEach(block => enemy.collisionBlocks(block)))
+
+        //enemies
+        this.basicEnemies.forEach(enemy => this.hero.collision(enemy))
+
+        //environment
+        this.door.collision(this.hero)
         this.dungeonKey.collision(this.hero)
         this.steelBoots.collision(this.hero)
         this.potionsArray.forEach(potion => potion.collision(this.hero))
 
+        //traps
         this.floorTraps.forEach(trap => trap.collision(this.hero))
         this.roofTraps.forEach(trap => trap.collision(this.hero))
         this.arrowArray.forEach(arrow => arrow.collision(this.hero))
@@ -154,7 +176,7 @@ class Game{
     }
 
     gameOver(){
-        if(this.health.hp <= 0){
+        if(this.health.hp <= 0 || this.hero.pos.y >= 1000){
             this.sounds.gameOver.play()
             clearInterval(this.drawInterval);
             this.ctx.fillStyle = 'rgba(0, 0, 0)'
