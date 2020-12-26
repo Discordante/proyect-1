@@ -120,17 +120,19 @@ class Health{
     }
 
     healthStatus(element){
-        console.log(this.hp)
         if(element.trapStatus && element.trapReady){
             this.hp -= element.damage
             element.trapReady = false
         }
+        if(element.trapDamage && element.roofTrapReady){
+            this.hp -= element.damage
+            element.roofTrapReady = false
+        }
         if(element.arrowStatus && element.arrowReady){
-
             this.hp -= element.damage
             element.arrowReady = false
         }
-        if(element.potionStatus  && element.potionReady){
+        if(element.potionStatus  && element.potionReady && this.hp < 100){
             this.hp += POTION_HEAL
             element.potionReady = false
         }

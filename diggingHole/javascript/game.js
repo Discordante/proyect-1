@@ -39,6 +39,11 @@ class Game{
             new FloorTrap(this.ctx, 305, 578),
             new FloorTrap(this.ctx, 520, 768)
         ]
+
+        this.roofTraps = [
+            new RoofTrap(this.ctx, 480, 405),
+
+        ]
         
         //blocks
         this.blocks = [
@@ -93,12 +98,14 @@ class Game{
         this.blocks.forEach(elem => elem.draw())
 
         this.floorTraps.forEach(trap => trap.draw())
+        this.roofTraps.forEach(trap => trap.draw())
         this.arrowArray.forEach(arrow => arrow.draw())
     }                    
 
     move(){
         this.hero.move()
         this.arrowArray.forEach(arrow => arrow.move(this.hero))
+        this.roofTraps.forEach(trap => trap.move(this.hero))
     }
 
     generateElements(){
@@ -116,12 +123,14 @@ class Game{
         this.potionsArray.forEach(potion => potion.collision(this.hero))
 
         this.floorTraps.forEach(trap => trap.collision(this.hero))
+        this.roofTraps.forEach(trap => trap.collision(this.hero))
         this.arrowArray.forEach(arrow => arrow.collision(this.hero))
     }
 
 
     checkHealth(){
         this.floorTraps.forEach(trap => this.health.healthStatus(trap))
+        this.roofTraps.forEach(trap => this.health.healthStatus(trap))
         this.arrowArray.forEach(arrow => this.health.healthStatus(arrow))
         this.potionsArray.forEach(potion => this.health.healthStatus(potion))
     }

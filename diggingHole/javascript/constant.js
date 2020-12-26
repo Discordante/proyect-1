@@ -23,6 +23,7 @@ const MAX_GRAVITY = 20
 
 //damages
 const FLOOR_TRAP_DAMAGE = 50
+const ROOF_TRAP_DAMAGE = 50
 const ARROW_DAMAGE = 30
 
 //arrows
