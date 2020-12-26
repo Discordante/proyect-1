@@ -2,8 +2,8 @@ class BasicEnemy{
     constructor(ctx, x, y){
         this.ctx = ctx
 
-        this.width = 70
-        this.height = 100
+        this.width = 60
+        this.height = 80
 
         this.pos = {x, y}  // position
         this.vel = {x: 0, y: 0} // velocity
@@ -14,7 +14,10 @@ class BasicEnemy{
 
         this.hp = BASIC_ENEMY_HP
 
-        this.enemyStatus = false
+        this.enemyStatus = false 
+
+        this.damage = ENEMY_DAMAGE
+        this.enemyDamage = false
 
         this.colisionStatus = {
             up: false,
@@ -108,17 +111,84 @@ class BasicEnemy{
                 }
     }
 
+    collision(element){
+        //LEFT COLLISION
+        if( element.pos.y + element.height >= this.pos.y &&
+            element.pos.y <= this.pos.y + this.height &&
+            element.pos.x + element.width >= this.pos.x &&
+            element.pos.x < this.pos.x && 
+            element.previousX +  element.width <= this.pos.x)
+            {
+
+                this.colisionStatus.left = true
+                this.enemyDamage = true
+                //this.pos.x = element.pos.x + element.width + 1 //you push enemy
+                element.pos.x = this.pos.x - element.width - 1   //enemy blocks you
+                
+            }
+        //RIGHT COLLISION
+        else if( 
+            element.pos.y + element.height >= this.pos.y &&
+            element.pos.y <= this.pos.y + this.height &&
+            element.pos.x <= this.pos.x + this.width &&
+            element.pos.x + element.width > this.pos.x + this.width &&
+            element.previousX >= this.pos.x + this.width)
+            {
+
+                this.colisionStatus.right = true
+                this.enemyDamage = true
+                //this.pos.x = element.pos.x - this.width - 1 //you push enemy
+                element.pos.x = this.pos.x + this.width + 1   //enemy blocks you
+                
+            }
+        //TOP COLLISION
+        else if( 
+            element.pos.y + element.height >= this.pos.y &&
+            element.pos.y + element.height <= this.pos.y + this.height &&
+            element.pos.x + element.width >= this.pos.x &&
+            element.pos.x <= this.pos.x + this.width &&
+            element.pos.y < this.pos.y && 
+            element.previousY + element.height < this.pos.y) 
+            {
+
+                this.colisionStatus.up = true
+                this.enemyDamage = true
+                element.vel.y = -20
+            }
+         //BOTTOM COLLISION
+        else if(
+            element.pos.y <= this.pos.y + this.height && 
+            element.pos.y >= this.pos.y && 
+            element.pos.x + element.width >= this.pos.x && 
+            element.pos.x <= this.pos.x + this.width &&
+            element.pos.y + element.height > this.pos.y + this.height &&
+            element.previousY > this.pos.y + this.height)
+            {
+
+                this.colisionStatus.down = true
+                this.enemyDamage = true
+            }  
+        else{
+            this.colisionStatus.up = false
+            this.colisionStatus.down = false
+            this.colisionStatus.left = false
+            this.colisionStatus.right = false
+
+            this.enemyDamage = false
+            } 
+    }
+
     move(hero){
+        
         if(this.enemyStatus){
-            
-            if(hero.pos.x > this.pos.x + this.width){
+            if(hero.pos.x > this.pos.x + this.width + 2){
                 this.vel.x = ENEMY_VELOCITY.x
             }
-            else if(hero.pos.x + hero.width < this.pos.x){
+            else if(hero.pos.x + hero.width < this.pos.x - 2){
                 this.vel.x = -ENEMY_VELOCITY.x
             }
-        }
-        
+        } 
+         
         //gravity
         this.vel.y += GRAVITY
         if(this.vel.y >= MAX_GRAVITY){
@@ -132,6 +202,5 @@ class BasicEnemy{
         
         this.pos.x += this.vel.x
         this.pos.y += this.vel.y
-
     }
 }

@@ -145,7 +145,7 @@ class Game{
         this.basicEnemies.forEach(enemy => this.blocks.forEach(block => enemy.collisionBlocks(block)))
 
         //enemies
-        this.basicEnemies.forEach(enemy => this.hero.collision(enemy))
+        this.basicEnemies.forEach(enemy => enemy.collision(this.hero))
 
         //environment
         this.door.collision(this.hero)
@@ -165,6 +165,9 @@ class Game{
         this.roofTraps.forEach(trap => this.health.healthStatus(trap))
         this.arrowArray.forEach(arrow => this.health.healthStatus(arrow))
         this.potionsArray.forEach(potion => this.health.healthStatus(potion))
+
+        this.basicEnemies.forEach(enemy => this.health.healthStatus(enemy))
+        
     }
 
     newWorld(){
