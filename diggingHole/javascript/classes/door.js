@@ -6,7 +6,8 @@ class Door extends GeneralClass{
         this.width = 80
 
         this.doorStatus = false
-        this.doorLock = false
+        this.doorLock = true
+        this.doorThrough = false
         
         this.img = new Image()
         this.img.src = './././images/environment/door.png'
@@ -38,13 +39,14 @@ class Door extends GeneralClass{
             this.sounds.openDoor.currentTime = 0
             this.sounds.openDoor.play()
             setTimeout(() => {
-                this.doorLock = true
+                this.doorLock = false
             }, 1700)
         }
         else if(this.doorStatus && element.movements.up && !element.inventory.doorKey){
             this.sounds.closedDoor.play()
             setInterval(() => {
-                this.doorLock = false
+                this.doorLock = true
+                this.doorThrough = true
             }, 1000)
         }
         return this.doorLock

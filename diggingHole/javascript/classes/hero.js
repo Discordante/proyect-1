@@ -61,22 +61,7 @@ class Hero{
 
 
     collision(block){
-
-
-      /*   if (this.movements.crouchStatus) {
-            if (this.pos.y <= block.pos.y + block.height && 
-                this.pos.y >= block.pos.y && 
-                this.pos.x + this.width >= block.pos.x && 
-                this.pos.x <= block.pos.x + block.width &&
-                this.pos.y + this.defaultHeight > block.pos.y + block.height &&
-                this.previousY > block.pos.y + block.height) {
-                    this.blocked = true
-                }
-
-        } else {
-            this.blocked= false
-        } */
-
+        
         if (    //---collision down---
                 this.pos.y <= block.pos.y + block.height && 
                 this.pos.y >= block.pos.y && 
@@ -214,7 +199,7 @@ class Hero{
         this.pos.x += this.vel.x
         this.pos.y += this.vel.y
         
-        //limits
+     /*    //limits
         if(this.pos.x >= this.ctx.canvas.width - this.width){
             this.pos.x = this.ctx.canvas.width - this.width
         } 
@@ -224,7 +209,7 @@ class Hero{
 
         if(this.pos.y <= 0){   
             this.pos.y = 0
-        }
+        } */
 
     }
 

@@ -3,6 +3,7 @@ class Game{
 
         this.canvas = document.getElementById(canvasId)
         this.ctx = this.canvas.getContext('2d')
+
         this.canvas.width = 600
         this.canvas.height = 800
 
@@ -55,7 +56,8 @@ class Game{
             new Block(this.ctx, 500, 300, 20, 100),   
             new Block(this.ctx, 380, 400, 20, 200),  
             new Block(this.ctx, 300, 580, 110, 100),  
-            new Block(this.ctx, 50, 770, 20, 500)  
+            new Block(this.ctx, 50, 770, 20, 500),
+            new Block(this.ctx, 1000, 770, 20, 500)
         ]
 
 
@@ -70,10 +72,10 @@ class Game{
         if(!this.drawInterval){
             this.drawInterval = setInterval(() => {
                 this.clear()
-                this.checkCollisions()
+                this.generateElements()
                 this.move()
                 this.draw()
-                this.generateElements()
+                this.checkCollisions()
                 this.checkHealth()
                 this.gameOver()
                 this.newWorld()
@@ -86,6 +88,12 @@ class Game{
     }
 
     draw(){
+        this.ctx.save()
+
+        if(!this.door.enterDoor(this.hero)){
+            this.ctx.translate(-950, 0)
+        }
+
         this.hero.draw()
         this.health.draw()
 
@@ -100,6 +108,8 @@ class Game{
         this.floorTraps.forEach(trap => trap.draw())
         this.roofTraps.forEach(trap => trap.draw())
         this.arrowArray.forEach(arrow => arrow.draw())
+
+        this.ctx.restore()
     }                    
 
     move(){
@@ -136,8 +146,10 @@ class Game{
     }
 
     newWorld(){
-        if(this.door.enterDoor(this.hero)){
-            location.reload()
+        if(!this.door.enterDoor(this.hero) && !this.door.doorThrough){
+            this.hero.pos.x = 1100
+            this.hero.pos.y = 400
+            this.door.doorThrough = true
         }
     }
 

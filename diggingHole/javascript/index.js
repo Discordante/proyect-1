@@ -12,5 +12,4 @@ window.onload = () => {
       document.addEventListener('keypress', () => {
         game.start()
       })
-      
   }
