@@ -23,6 +23,10 @@ class Game{
             new Stairs(this.ctx, 400, 700),
         ]
         
+        this.barrels = [
+            new Barrel(this.ctx, 300, 570)
+        ]
+
         //inventary
         this.steelBoots = new SteelBoots(this.ctx, 120, 465)
         this.dungeonKey = new DungeonKey(this.ctx, 550, 100)
@@ -148,6 +152,7 @@ class Game{
         //environment
         this.door.draw()
         this.ladders.forEach(ladder => ladder.draw())
+        this.barrels.forEach(barrel => barrel.draw())
 
         //inventory
         this.dungeonKey.draw()
@@ -175,14 +180,17 @@ class Game{
     }                    
 
     move(){
+        //characters
         this.hero.move()
-
         this.basicEnemies.forEach(enemy => enemy.move(this.hero))
 
+        //traps
         this.arrowArray.forEach(arrow => arrow.move(this.hero))
         this.roofTraps.forEach(trap => trap.move(this.hero))
 
+        //environment
         this.ladders.forEach(ladder => ladder.upLadder(this.hero))
+        this.barrels.forEach(barrel => barrel.move())
     }
 
     generateElements(){
@@ -200,6 +208,7 @@ class Game{
         //blocks
         this.basicBlocks.forEach(platform => platform.forEach(block => this.hero.collisionBlocks(block)))
         this.basicEnemies.forEach(enemy => this.basicBlocks.forEach(blockArr => blockArr.forEach(block => enemy.collisionBlocks(block))))
+        this.barrels.forEach(barrel => this.basicBlocks.forEach(blockArr => blockArr.forEach(block => barrel.collisionBlocks(block))))
 
         //enemies
         this.basicEnemies.forEach(enemy => enemy.collision(this.hero))
@@ -207,6 +216,8 @@ class Game{
         //environment
         this.door.collision(this.hero)
         this.ladders.forEach(ladder => ladder.collision(this.hero))
+        this.barrels.forEach(barrel => barrel.collision(this.hero))
+       
 
         //inventory
         this.dungeonKey.collision(this.hero)

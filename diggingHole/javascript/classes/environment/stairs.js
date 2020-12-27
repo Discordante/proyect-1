@@ -33,7 +33,6 @@ class Stairs extends GeneralClass{
     }
 
     upLadder(element){
-        console.log(this.stairStatus)
         if(element.movements.up && this.stairStatus){
             element.vel.y = -GRAVITY
         }
