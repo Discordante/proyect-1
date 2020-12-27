@@ -31,4 +31,11 @@ class Stairs extends GeneralClass{
     collision(element){
         this.stairStatus = super.collision(element)
     }
+
+    upLadder(element){
+        console.log(this.stairStatus)
+        if(element.movements.up && this.stairStatus){
+            element.vel.y = -GRAVITY
+        }
+    }
 }

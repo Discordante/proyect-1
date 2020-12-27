@@ -175,6 +175,8 @@ class Game{
 
         this.arrowArray.forEach(arrow => arrow.move(this.hero))
         this.roofTraps.forEach(trap => trap.move(this.hero))
+
+        this.ladders.forEach(ladder => ladder.upLadder(this.hero))
     }
 
     generateElements(){
@@ -198,6 +200,9 @@ class Game{
 
         //environment
         this.door.collision(this.hero)
+        this.ladders.forEach(ladder => ladder.collision(this.hero))
+
+        //inventory
         this.dungeonKey.collision(this.hero)
         this.steelBoots.collision(this.hero)
         this.potionsArray.forEach(potion => potion.collision(this.hero))

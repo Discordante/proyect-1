@@ -13,6 +13,7 @@ const KEY_DOWN = 'ArrowDown'
 const KEY_LEFT = 'ArrowLeft'
 const KEY_JUMP = 'Space'
 const KEY_RUN = 'ShiftLeft'
+const KEY_CROUCH = 'ControlLeft'
 
 //physics
 

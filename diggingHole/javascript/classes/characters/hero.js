@@ -17,6 +17,8 @@ class Hero{
         this.vel = {x: 0, y: 0} // velocity
         this.accel = {x: 0, y: 0} // acceleration
 
+        this.gravityStatus = true
+
         this.movements = {
             up: false,
             down: false,
@@ -24,6 +26,7 @@ class Hero{
             left: false,
             run: false,
             jump: false,
+            crouch: false,
 
             jumpStatus: false,
             jumpLimit: -30,
@@ -131,19 +134,19 @@ class Hero{
         this.previousY = this.pos.y
         
         if (this.movements.right){
-            if(!this.movements.down){
+            if(!this.movements.crouch){
                 this.movements.run ?  this.vel.x = VELOCITY.x + 3 : this.movements.crouchStatus? this.vel.x = VELOCITY.x -2.99 : this.vel.x = VELOCITY.x;
             }
             else if(!this.movements.run){
-                this.movements.down ?  this.vel.x = VELOCITY.x - 2.99 : this.vel.x = VELOCITY.x
+                this.movements.crouch ?  this.vel.x = VELOCITY.x - 2.99 : this.vel.x = VELOCITY.x
             }
         } 
         else if (this.movements.left) {
-            if(!this.movements.down){
+            if(!this.movements.crouch){
                 this.movements.run ?  this.vel.x = -VELOCITY.x - 3 : this.movements.crouchStatus? this.vel.x = -VELOCITY.x +2.99 : this.vel.x = -VELOCITY.x
             }
             else if(!this.movements.run){
-                this.movements.down ?  this.vel.x = -VELOCITY.x + 2.99 : this.vel.x = -VELOCITY.x
+                this.movements.crouch ?  this.vel.x = -VELOCITY.x + 2.99 : this.vel.x = -VELOCITY.x
             }
             
         } 
@@ -152,12 +155,12 @@ class Hero{
         }
 
         //crouch movement
-        if (this.movements.down && !this.movements.crouchStatus){ 
+        if (this.movements.crouch && !this.movements.crouchStatus){ 
             this.height = 20
             this.movements.crouchStatus = true
         } 
 
-        if(!this.movements.down && this.movements.crouchStatus){
+        if(!this.movements.crouch && this.movements.crouchStatus){
             this.pos.y -= 50
             this.height = this.defaultHeight
             this.movements.crouchStatus = false
@@ -165,10 +168,13 @@ class Hero{
 
 
         //gravity
-        this.vel.y += GRAVITY
-        if(this.vel.y >= MAX_GRAVITY){
-            this.vel.y = MAX_GRAVITY
+        if(this.gravityStatus){
+            this.vel.y += GRAVITY
+            if(this.vel.y >= MAX_GRAVITY){
+                this.vel.y = MAX_GRAVITY
+            }
         }
+        
         
         //jump
         if(this.movements.jump && !this.movements.jumpStatus && !this.movements.isDown && !this.colisionStatus.left && !this.colisionStatus.right){
@@ -228,6 +234,9 @@ class Hero{
                 break;
             case KEY_RUN:
                 this.movements.run = status
+                break;
+            case KEY_CROUCH:
+                this.movements.crouch = status
                 break;
 
             default:

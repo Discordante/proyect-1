@@ -29,7 +29,6 @@ class GeneralClass{
 
             return true
          }
-
         return false
     }
 
