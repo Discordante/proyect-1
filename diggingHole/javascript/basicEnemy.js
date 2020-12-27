@@ -123,7 +123,9 @@ class BasicEnemy{
                 this.colisionStatus.left = true
                 this.enemyDamage = true
                 //this.pos.x = element.pos.x + element.width + 1 //you push enemy
-                element.pos.x = this.pos.x - element.width - 1   //enemy blocks you
+                element.pos.x = this.pos.x - element.width - 20   //enemy blocks you
+                element.vel.y = -15
+                element.vel.x = -50
                 
             }
         //RIGHT COLLISION
@@ -138,7 +140,9 @@ class BasicEnemy{
                 this.colisionStatus.right = true
                 this.enemyDamage = true
                 //this.pos.x = element.pos.x - this.width - 1 //you push enemy
-                element.pos.x = this.pos.x + this.width + 1   //enemy blocks you
+                element.pos.x = this.pos.x + this.width + 20   //enemy blocks you
+                element.vel.y = -15
+                element.vel.x = 50
                 
             }
         //TOP COLLISION
@@ -154,6 +158,10 @@ class BasicEnemy{
                 this.colisionStatus.up = true
                 this.enemyDamage = true
                 element.vel.y = -20
+
+                if(element.inventory.steelBoots){
+                    this.hp -=10
+                }
             }
          //BOTTOM COLLISION
         else if(

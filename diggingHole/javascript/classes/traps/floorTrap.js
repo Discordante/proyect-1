@@ -19,7 +19,6 @@ class FloorTrap extends GeneralClass{
 
         this.sounds = {
             trapActive: new Audio('./././sound/Spike_Trap_1.m4a'),
-            trapDamage: new Audio('././sound/damage-sound.mp3')
           } 
     }
 
@@ -37,7 +36,6 @@ class FloorTrap extends GeneralClass{
         if(super.collision(element) && !element.inventory.steelBoots && this.trapReady){
             this.trapStatus = true
             this.sounds.trapActive.play()
-            this.sounds.trapDamage.play()
         }
     }
 }

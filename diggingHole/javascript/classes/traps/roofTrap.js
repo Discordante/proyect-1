@@ -20,7 +20,6 @@ class RoofTrap extends GeneralClass{
 
         this.sounds = {
             roofTrapActive: new Audio('./././sound/roof-trap.mp3'),
-            trapHit: new Audio('././sound/damage-sound.mp3')
         } 
     }
 
@@ -52,7 +51,6 @@ class RoofTrap extends GeneralClass{
     collision(element){
         if(super.collision(element) && !element.inventory.ironHelmet && this.roofTrapReady){
             this.trapDamage = true
-            this.sounds.trapHit.play()
         }
     }
 }

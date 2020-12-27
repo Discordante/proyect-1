@@ -8,6 +8,7 @@ class Health{
 
         this.pos = {x: 0, y: 0}
         this.hp = HERO_HEALTH
+        this.previousHp = 0
 
         this.heartBeatSound = true
         this.soundInterval = undefined
@@ -30,7 +31,8 @@ class Health{
         }
 
         this.sounds = {
-            heartBeat: new Audio('./././sound/heartbeat.mp3')
+            heartBeat: new Audio('./././sound/heartbeat.mp3'),
+            damage: new Audio('././sound/damage-sound.mp3')
           } 
     }
 
@@ -121,6 +123,7 @@ class Health{
 
     healthStatus(element){
         console.log(this.hp)
+        this.previousHp = this.hp
         if(element.trapStatus && element.trapReady){
             this.hp -= element.damage
             element.trapReady = false
@@ -142,10 +145,14 @@ class Health{
             this.hp -= element.damage
         }
 
-        if(element.potionStatus  && element.potionReady && this.hp < 100){
+        if(element.potionStatus && element.potionReady && this.hp < 100){
             this.hp += POTION_HEAL
             element.potionReady = false
         }
+        if(this.previousHp > this.hp){
+            this.sounds.damage.play()
+        }
+
     }
 }
 

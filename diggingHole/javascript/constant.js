@@ -26,7 +26,7 @@ const MAX_GRAVITY = 20
 const FLOOR_TRAP_DAMAGE = 50
 const ROOF_TRAP_DAMAGE = 50
 const ARROW_DAMAGE = 30
-const ENEMY_DAMAGE = 1
+const ENEMY_DAMAGE = 10
 //arrows
 const ARROW_SPEED = -15
 

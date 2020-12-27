@@ -26,7 +26,6 @@ class Arrow extends GeneralClass{
 
         this.sounds = {
             arrowShoot: new Audio('././sound/arrow-shoot.mp3'),
-            arrowImpact: new Audio('././sound/damage-sound.mp3')
           } 
     }
 
@@ -41,7 +40,6 @@ class Arrow extends GeneralClass{
         if(super.collision(element) && this.arrowReady){
             this.vel.x = 0
             this.arrowStatus = true
-            this.sounds.arrowImpact.play()
         }
     } 
 
