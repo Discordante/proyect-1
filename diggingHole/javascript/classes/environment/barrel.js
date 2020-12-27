@@ -25,10 +25,10 @@ class Barrel{
             this.img.ready = true
         }
 
-        /* this.sounds = {
-            jump: new Audio('./././sound/jump.mp3')
-          } 
-          this.sounds.jump.volume = 0.1 */
+        this.sounds = {
+            scrap: new Audio('./././sound/scrapping.mp3')
+        } 
+        //this.sounds.scrap.volume = 0.1 
 
     }
 
@@ -160,18 +160,28 @@ class Barrel{
     }
 
     move(){
-        
         //gravity
         this.vel.y += GRAVITY
         if(this.vel.y >= MAX_GRAVITY){
             this.vel.y = MAX_GRAVITY
         }
+        
+
+        if(this.previousX != this.pos.x){
+            this.sounds.scrap.play()
+        }
+        else{
+            this.sounds.scrap.pause()
+        }
 
         //update position  
         this.previousX = this.pos.x
         this.previousY = this.pos.y
-        
+ 
+
         this.pos.x += this.vel.x
         this.pos.y += this.vel.y
+
+        
     }
 }

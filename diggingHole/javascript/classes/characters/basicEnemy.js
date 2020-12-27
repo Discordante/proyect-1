@@ -2,8 +2,8 @@ class BasicEnemy{
     constructor(ctx, x, y){
         this.ctx = ctx
 
-        this.width = 60
-        this.height = 80
+        this.width = 100
+        this.height = 130
 
         this.pos = {x, y}  // position
         this.vel = {x: 0, y: 0} // velocity
@@ -26,10 +26,17 @@ class BasicEnemy{
             left: false
         }
 
+        this.img = new Image()
+        this.img.src = './././images/sprites/enemy/enemy-1.png'
+        this.ready = false
+        this.img.onload = () => {
+            this.img.ready = true
+        }
+
         /* this.sounds = {
-            jump: new Audio('./././sound/jump.mp3')
-          } 
-          this.sounds.jump.volume = 0.1 */
+            laugh: new Audio('../../../sound/Evil-Laugh-2.mp3')
+        } 
+        //this.sounds.laugh.volume = 0.1  */
 
     }
 
@@ -38,14 +45,18 @@ class BasicEnemy{
     }
 
     draw(){
-        this.ctx.fillStyle = 'green'
-        this.ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height)
+        if(this.isReady()){
+            this.ctx.drawImage(this.img, this.pos.x, this.pos.y, this.width, this.height)
+        }
     }
     
     activateEnemy(hero){
         //console.log(Math.hypot((this.pos.x - hero.pos.x),(this.pos.y - hero.pos.y))) 
-        if(Math.hypot((this.pos.x - hero.pos.x),(this.pos.y - hero.pos.y)) < 300){
+        if(Math.hypot((this.pos.x - hero.pos.x),(this.pos.y - hero.pos.y)) < ACT_ENEMY_DISTANCE){
             this.enemyStatus = true
+        }
+        else{
+            this.enemyStatus = false
         }
     }
 

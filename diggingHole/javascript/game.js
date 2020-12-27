@@ -21,6 +21,11 @@ class Game{
             new Stairs(this.ctx, 400, 620),
             new Stairs(this.ctx, 400, 660),
             new Stairs(this.ctx, 400, 700),
+
+            new Stairs(this.ctx, 1150, 300),
+            new Stairs(this.ctx, 1150, 340),
+            new Stairs(this.ctx, 1150, 380)
+
         ]
         
         this.barrels = [
@@ -103,6 +108,13 @@ class Game{
                 new BasicBlock(this.ctx, 1350, 770),
                 new BasicBlock(this.ctx, 1400, 770),
                 new BasicBlock(this.ctx, 1450, 770, 'right')
+            ],
+            [
+                new BasicBlock(this.ctx, 1000, 300, 'left'),
+                new BasicBlock(this.ctx, 1050, 300),
+                new BasicBlock(this.ctx, 1100, 300),
+                new BasicBlock(this.ctx, 1200, 300),
+                new BasicBlock(this.ctx, 1250, 300, 'right')
             ]
 
         ]
