@@ -37,9 +37,9 @@ class Game{
 
        
         this.floorTraps = [
-            new FloorTrap(this.ctx, 395, 398),
-            new FloorTrap(this.ctx, 305, 578),
-            new FloorTrap(this.ctx, 220, 758)
+            new FloorTrap(this.ctx, 395, 380),
+            new FloorTrap(this.ctx, 305, 560),
+            new FloorTrap(this.ctx, 220, 740)
         ]
     
         this.roofTraps = [
@@ -50,6 +50,7 @@ class Game{
         
         //blocks
         this.basicBlocks = [
+            //level1
             [   
                 new BasicBlock(this.ctx, 0, 300, 'left'),
                 new BasicBlock(this.ctx, 50, 300),
@@ -86,6 +87,7 @@ class Game{
                 new BasicBlock(this.ctx, 450, 580, 'right')
 
             ],
+            //level2
             [
                 new BasicBlock(this.ctx, 1000, 770, 'left'),
                 new BasicBlock(this.ctx, 1050, 770),
@@ -141,9 +143,7 @@ class Game{
             this.ctx.translate(-950, 0)
         }
 
-        //characters
-        this.hero.draw()
-        this.basicEnemies.forEach(enemy => enemy.draw())
+        
 
         //environment
         this.door.draw()
@@ -154,8 +154,7 @@ class Game{
         this.steelBoots.draw()
         this.potionsArray.forEach(potion => potion.draw())
 
-        //floor
-        this.basicBlocks.forEach(platform => platform.forEach(block => block.draw()))
+        
         
         //traps
         this.floorTraps.forEach(trap => trap.draw())
@@ -164,6 +163,13 @@ class Game{
 
         //HUD
         this.health.draw()
+
+        //characters
+        this.hero.draw()
+        this.basicEnemies.forEach(enemy => enemy.draw())
+
+        //floor
+        this.basicBlocks.forEach(platform => platform.forEach(block => block.draw()))
 
         this.ctx.restore()
     }                    

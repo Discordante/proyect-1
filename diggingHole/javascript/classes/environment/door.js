@@ -45,7 +45,7 @@ class Door extends GeneralClass{
         else if(this.doorStatus && element.movements.up && !element.inventory.doorKey){
             this.sounds.closedDoor.play()
             setInterval(() => {
-                this.doorLock = true
+                /* this.doorLock = true */
                 this.doorThrough = true
             }, 1000)
         }
