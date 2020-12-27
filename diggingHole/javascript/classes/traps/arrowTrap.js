@@ -17,12 +17,12 @@ class Arrow extends GeneralClass{
         this.arrowInterval = undefined
 
        
-        /* this.img = new Image()
+        /*this.img = new Image()
         this.img.src = ''
         this.ready = false
         this.img.onload = () => {
             this.img.ready = true
-        }  */
+        } */
 
         this.sounds = {
             arrowShoot: new Audio('././sound/arrow-shoot.mp3'),

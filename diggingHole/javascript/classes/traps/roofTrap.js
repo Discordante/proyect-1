@@ -35,7 +35,7 @@ class RoofTrap extends GeneralClass{
             }
         }
 
-        if(element.pos.x >= this.pos.x - 10 && element.pos.x <= this.pos.x + 10 && element.pos.y >= this.pos.y && this.roofTrapReady){
+        if(element.pos.x + element.width>= this.pos.x && element.pos.x <= this.pos.x + 10 && element.pos.y >= this.pos.y && this.roofTrapReady){
             this.gravityStatus = true
             this.sounds.roofTrapActive.play()
         }

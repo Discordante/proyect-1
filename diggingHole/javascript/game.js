@@ -15,7 +15,7 @@ class Game{
         this.health = new Health (this.ctx)
 
         //dungeon
-        this.door = new Door(this.ctx, 125, 640)  
+        this.door = new Door(this.ctx, 125, 680)  
         this.dungeonKey = new DungeonKey(this.ctx, 550, 100)
 
         //inventary
@@ -26,21 +26,23 @@ class Game{
         
 
 
-        //arrows
+        
         
 
         //traps
 
-
+        //arrows
         this.arrow = new Arrow(this.ctx)
         this.arrowArray = []
 
+        //floor
         this.floorTraps = [
             new FloorTrap(this.ctx, 395, 398),
             new FloorTrap(this.ctx, 305, 578),
             new FloorTrap(this.ctx, 520, 768)
         ]
-
+        
+        //roof
         this.roofTraps = [
             new RoofTrap(this.ctx, 480, 405),
 
@@ -48,20 +50,48 @@ class Game{
         
         //blocks
         this.blocks = [
-            new Block(this.ctx, 120, 730, 20, 90),
-            new Block(this.ctx, 300, 100, 20, 50),
             new Block(this.ctx, 350, 730, 20, 150),
             new Block(this.ctx, 100, 500, 20, 100), 
-            new Block(this.ctx, 0, 300, 20, 150),
-            new Block(this.ctx, 500, 300, 20, 100),   
             new Block(this.ctx, 380, 400, 20, 200),  
             new Block(this.ctx, 300, 580, 110, 100),  
-            new Block(this.ctx, 50, 770, 20, 500),
             new Block(this.ctx, 1000, 770, 20, 500)
         ]
 
+        this.floorGenerator = new BasicBlock(this.ctx)
+        this.basicBlocks = [
+            [   
+                new BasicBlock(this.ctx, 0, 300, 'left'),
+                new BasicBlock(this.ctx, 50, 300),
+                new BasicBlock(this.ctx, 100, 300),
+                new BasicBlock(this.ctx, 150, 300, 'right')
+            ],
+            [
+                new BasicBlock(this.ctx, 500, 300, 'left'),
+                new BasicBlock(this.ctx, 550, 300, 'right')
+            ],
+            [
+                new BasicBlock(this.ctx, 100, 770, 'left'),
+                new BasicBlock(this.ctx, 150, 770),
+                new BasicBlock(this.ctx, 200, 770),
+                new BasicBlock(this.ctx, 250, 770),
+                new BasicBlock(this.ctx, 300, 770),
+                new BasicBlock(this.ctx, 350, 770),
+                new BasicBlock(this.ctx, 400, 770),
+                new BasicBlock(this.ctx, 450, 770),
+                new BasicBlock(this.ctx, 500, 770, 'right'),
+            ],
+            [
+                new BasicBlock(this.ctx, 380, 400, 'left'),
+                new BasicBlock(this.ctx, 430, 770),
+                new BasicBlock(this.ctx, 430, 770),
+                new BasicBlock(this.ctx, 480, 770, 'right')
+            ]
+
+        ]
+
+        //enemies
         this.basicEnemies = [
-            new BasicEnemy(this.ctx, 1380, 200),
+            new BasicEnemy(this.ctx, 1380, 200)
         ]
 
 
@@ -110,8 +140,11 @@ class Game{
         this.potionsArray.forEach(potion => potion.draw())
 
 
+        //floor
         this.blocks.forEach(elem => elem.draw())
-
+        this.basicBlocks.forEach(platform => platform.forEach(block => block.draw()))
+        
+        //traps
         this.floorTraps.forEach(trap => trap.draw())
         this.roofTraps.forEach(trap => trap.draw())
         this.arrowArray.forEach(arrow => arrow.draw())
@@ -132,6 +165,17 @@ class Game{
        if(this.arrow.generateArrow(this.hero)){
            this.arrowArray.push(new Arrow(this.ctx))
        }
+
+       this.floorGenerator.generateElements(this.basicBlocks)
+
+       /* let auxFloor = []
+       for(let i = 0; i<5; i++){
+           auxFloor.push(new BasicBlock(this.ctx, (200 + i * 50), 300, 2))
+           if(i === 4){
+            this.basicBlocks.push(auxFloor)
+            auxFloor = []
+        }
+       } */
     }
 
     activateElements(){
@@ -142,6 +186,7 @@ class Game{
 
         //blocks
         this.blocks.forEach(block => this.hero.collisionBlocks(block))
+        this.basicBlocks.forEach(platform => platform.forEach(block => this.hero.collisionBlocks(block)))
         this.basicEnemies.forEach(enemy => this.blocks.forEach(block => enemy.collisionBlocks(block)))
 
         //enemies

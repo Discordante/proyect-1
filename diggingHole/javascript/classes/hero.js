@@ -33,13 +33,14 @@ class Hero{
             crouchStatus: false
         }
 
+        //inventary
         this.inventory = {
             doorKey: false,
             steelBoots: false,
             ironHelmet: false
         }
 
-
+        //collisions
         this.colisionStatus = {
             up: false,
             down: false,
@@ -47,18 +48,22 @@ class Hero{
             left: false
         }
 
+        //sounds
         this.sounds = {
             jump: new Audio('./././sound/jump.mp3')
-          } 
-          this.sounds.jump.volume = 0.1
+        } 
+        this.sounds.jump.volume = 0.1
+
     }
 
-    
+    isReady() {
+        return this.sprite.isReady
+    }
+
     draw(){
         this.ctx.fillStyle = 'red'
         this.ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height)
     }
-
 
     collisionBlocks(block){
         

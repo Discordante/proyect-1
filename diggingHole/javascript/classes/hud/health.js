@@ -122,7 +122,6 @@ class Health{
     }
 
     healthStatus(element){
-        console.log(this.hp)
         this.previousHp = this.hp
         if(element.trapStatus && element.trapReady){
             this.hp -= element.damage
