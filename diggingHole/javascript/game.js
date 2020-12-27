@@ -15,44 +15,37 @@ class Game{
         this.health = new Health (this.ctx)
 
         //dungeon
-        this.door = new Door(this.ctx, 125, 680)  
+        this.door = new Door(this.ctx, 125, 670)  
         this.dungeonKey = new DungeonKey(this.ctx, 550, 100)
 
         //inventary
         this.steelBoots = new SteelBoots(this.ctx, 120, 465)
         this.potionsArray = [
-            new Potions(this.ctx, 520, 745)
+            new Potions(this.ctx, 470, 735)
         ]
         
-
-
-        
-        
-
         //traps
 
         //arrows
-        this.arrow = new Arrow(this.ctx)
+        this.arrow = new ArrowTrap(this.ctx)
         this.arrowArray = []
 
         //floor
         this.floorTraps = [
             new FloorTrap(this.ctx, 395, 398),
             new FloorTrap(this.ctx, 305, 578),
-            new FloorTrap(this.ctx, 520, 768)
+            new FloorTrap(this.ctx, 220, 758)
         ]
         
         //roof
         this.roofTraps = [
             new RoofTrap(this.ctx, 480, 405),
+            new RoofTrap(this.ctx, 170, 530),
 
         ]
         
         //blocks
         this.blocks = [
-            new Block(this.ctx, 350, 730, 20, 150),
-            new Block(this.ctx, 100, 500, 20, 100), 
-            new Block(this.ctx, 380, 400, 20, 200),  
             new Block(this.ctx, 300, 580, 110, 100),  
             new Block(this.ctx, 1000, 770, 20, 500)
         ]
@@ -70,21 +63,24 @@ class Game{
                 new BasicBlock(this.ctx, 550, 300, 'right')
             ],
             [
-                new BasicBlock(this.ctx, 100, 770, 'left'),
-                new BasicBlock(this.ctx, 150, 770),
-                new BasicBlock(this.ctx, 200, 770),
-                new BasicBlock(this.ctx, 250, 770),
-                new BasicBlock(this.ctx, 300, 770),
-                new BasicBlock(this.ctx, 350, 770),
-                new BasicBlock(this.ctx, 400, 770),
-                new BasicBlock(this.ctx, 450, 770),
-                new BasicBlock(this.ctx, 500, 770, 'right'),
+                new BasicBlock(this.ctx, 100, 760, 'left'),
+                new BasicBlock(this.ctx, 150, 760),
+                new BasicBlock(this.ctx, 200, 760),
+                new BasicBlock(this.ctx, 250, 760),
+                new BasicBlock(this.ctx, 300, 760),
+                new BasicBlock(this.ctx, 350, 760),
+                new BasicBlock(this.ctx, 400, 760),
+                new BasicBlock(this.ctx, 450, 760),
+                new BasicBlock(this.ctx, 500, 760, 'right'),
             ],
             [
                 new BasicBlock(this.ctx, 380, 400, 'left'),
-                new BasicBlock(this.ctx, 430, 770),
-                new BasicBlock(this.ctx, 430, 770),
-                new BasicBlock(this.ctx, 480, 770, 'right')
+                new BasicBlock(this.ctx, 430, 400),
+                new BasicBlock(this.ctx, 480, 400, 'right'),
+            ],
+            [
+                new BasicBlock(this.ctx, 100, 500, 'left'),
+                new BasicBlock(this.ctx, 150, 500, 'right'),
             ]
 
         ]
@@ -163,7 +159,7 @@ class Game{
 
     generateElements(){
        if(this.arrow.generateArrow(this.hero)){
-           this.arrowArray.push(new Arrow(this.ctx))
+           this.arrowArray.push(new ArrowTrap(this.ctx))
        }
 
        this.floorGenerator.generateElements(this.basicBlocks)
@@ -206,12 +202,12 @@ class Game{
 
 
     checkHealth(){
-        this.floorTraps.forEach(trap => this.health.healthStatus(trap))
-        this.roofTraps.forEach(trap => this.health.healthStatus(trap))
-        this.arrowArray.forEach(arrow => this.health.healthStatus(arrow))
-        this.potionsArray.forEach(potion => this.health.healthStatus(potion))
+        this.floorTraps.forEach(trap => this.health.healthStatus(trap, this.hero))
+        this.roofTraps.forEach(trap => this.health.healthStatus(trap, this.hero))
+        this.arrowArray.forEach(arrow => this.health.healthStatus(arrow, this.hero))
+        this.potionsArray.forEach(potion => this.health.healthStatus(potion, this.hero))
 
-        this.basicEnemies.forEach(enemy => this.health.healthStatus(enemy))
+        this.basicEnemies.forEach(enemy => this.health.healthStatus(enemy, this.hero))
         
     }
 

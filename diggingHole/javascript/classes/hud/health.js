@@ -121,37 +121,48 @@ class Health{
         }
     }
 
-    healthStatus(element){
+    healthStatus(element, hero){
+        console.log(this.hp)
         this.previousHp = this.hp
-        if(element.trapStatus && element.trapReady){
-            this.hp -= element.damage
-            element.trapReady = false
-        }
-        if(element.trapDamage && element.roofTrapReady){
-            this.hp -= element.damage
-            element.roofTrapReady = false
-        }
-        if(element.arrowStatus && element.arrowReady){
-            this.hp -= element.damage
-            element.arrowReady = false
-        }
-        
-        /* if(element.colisionStatus.up || element.colisionStatus.down || element.colisionStatus.left || element.colisionStatus.right){
-            this.hp -= element.damage
-        } */
 
-        if(element.enemyDamage){
-            this.hp -= element.damage
+        if(element instanceof FloorTrap){
+            if(element.trapStatus && element.trapReady){
+                this.hp -= element.damage
+                element.trapReady = false
+            }
+        }
+        else if(element instanceof RoofTrap){
+            if(element.trapDamage && element.roofTrapReady){
+                this.hp -= element.damage
+                element.roofTrapReady = false
+            }
+        }
+        else if(element instanceof ArrowTrap){
+            if(element.arrowStatus && element.arrowReady){
+                this.hp -= element.damage
+                element.arrowReady = false
+            }
         }
 
-        if(element.potionStatus && element.potionReady && this.hp < 100){
-            this.hp += POTION_HEAL
-            element.potionReady = false
+        else if(element instanceof BasicEnemy){
+            if(element.colisionStatus.down || element.colisionStatus.left || element.colisionStatus.right){
+                this.hp -= element.damage
+            }
+            if(element.colisionStatus.up){
+                hero.inventory.steelBoots ? 1 : this.hp -= element.damage 
+            }
         }
+
+        else if(element instanceof Potions){
+            if(element.potionStatus && element.potionReady && this.hp < 100){
+                this.hp += POTION_HEAL
+                element.potionReady = false
+            }
+        }
+
         if(this.previousHp > this.hp){
             this.sounds.damage.play()
         }
-
     }
 }
 

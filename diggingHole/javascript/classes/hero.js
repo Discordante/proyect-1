@@ -33,7 +33,7 @@ class Hero{
             crouchStatus: false
         }
 
-        //inventary
+        //inventory
         this.inventory = {
             doorKey: false,
             steelBoots: false,

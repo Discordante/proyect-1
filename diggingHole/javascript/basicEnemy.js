@@ -17,7 +17,7 @@ class BasicEnemy{
         this.enemyStatus = false 
 
         this.damage = ENEMY_DAMAGE
-        this.enemyDamage = false
+        this.enemyDamageUp = true
 
         this.colisionStatus = {
             up: false,

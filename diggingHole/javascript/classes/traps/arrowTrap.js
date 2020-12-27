@@ -1,4 +1,4 @@
-class Arrow extends GeneralClass{
+class ArrowTrap extends GeneralClass{
     constructor(ctx, x, y){
         super(ctx)
 
