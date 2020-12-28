@@ -220,20 +220,34 @@ class BasicEnemy{
             }
         } 
 
-        else if(this.enemyStatus && this.enemyPhase === 2){ //REVISAR!
+        else if(this.enemyStatus && this.enemyPhase === 2){
             if(this.enemyDirection === 'left'){
                 this.vel.x = -ENEMY_VELOCITY.x
-                if(this.pos.x <= 1000){
+                if(this.pos.x <= 1600){
                     this.enemyDirection = 'right'
                 }
             }
             if(this.enemyDirection === 'right'){
                 this.vel.x = ENEMY_VELOCITY.x
-                if(this.pos.x>= 1400){
+                if(this.pos.x>= 2400){
                     this.enemyDirection = 'left'
                 }
             }
         }
+        /* else if(this.enemyStatus && this.enemyPhase === 3){
+            if(this.enemyDirection === 'left'){
+                this.vel.x = -ENEMY_VELOCITY.x * 2
+                if(this.pos.x <= 1600){
+                    this.enemyDirection = 'right'
+                }
+            }
+            if(this.enemyDirection === 'right'){
+                this.vel.x = ENEMY_VELOCITY.x * 2
+                if(this.pos.x >= 2400){
+                    this.enemyDirection = 'left'
+                }
+            }
+        } */
          
         //gravity
         this.vel.y += GRAVITY

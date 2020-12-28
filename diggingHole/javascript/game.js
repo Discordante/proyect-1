@@ -4,7 +4,7 @@ class Game{
         this.canvas = document.getElementById(canvasId)
         this.ctx = this.canvas.getContext('2d')
 
-        this.canvas.width = 600
+        this.canvas.width = 1200
         this.canvas.height = 800
 
         this.drawInterval = undefined
@@ -24,18 +24,18 @@ class Game{
                 new Stairs(this.ctx, 400, 700)
             ],
             [
-                new Stairs(this.ctx, 1150, 300),
-                new Stairs(this.ctx, 1150, 340),
-                new Stairs(this.ctx, 1150, 380)
+                new Stairs(this.ctx, 1805, 300),
+                new Stairs(this.ctx, 1805, 340),
+                new Stairs(this.ctx, 1805, 380)
             ]
         ]
         
+        //objects
         this.barrels = [
             new Barrel(this.ctx, 300, 570, 'barrel'),
-            new Barrel(this.ctx, 50, 50, 'box'),
-            new Barrel(this.ctx, 1380, 200, 'barrel'),
-            new Barrel(this.ctx, 1480, 200, 'box'),
-            new Barrel(this.ctx, 1100, 200, 'box'),
+            new Barrel(this.ctx, 2080, 200, 'barrel'),
+            new Barrel(this.ctx, 1700, 200, 'box'),
+            new Barrel(this.ctx, 2000, 200, 'box'),
         ]
 
         //inventary
@@ -46,7 +46,6 @@ class Game{
         ]
         
         //traps
-
         this.arrow = new ArrowTrap(this.ctx)
         this.arrowArray = []
 
@@ -104,36 +103,57 @@ class Game{
             ],
             //level2
             [
-                new BasicBlock(this.ctx, 1000, 770, 'left'),
-                new BasicBlock(this.ctx, 1050, 770),
-                new BasicBlock(this.ctx, 1100, 770),
-                new BasicBlock(this.ctx, 1150, 770),
-                new BasicBlock(this.ctx, 1200, 770),
-                new BasicBlock(this.ctx, 1250, 770),
-                new BasicBlock(this.ctx, 1300, 770),
-                new BasicBlock(this.ctx, 1350, 770),
-                new BasicBlock(this.ctx, 1400, 770),
-                new BasicBlock(this.ctx, 1450, 770, 'right')
+                new BasicBlock(this.ctx, 1600, 770, 'left'),
+                new BasicBlock(this.ctx, 1650, 770),
+                new BasicBlock(this.ctx, 1700, 770),
+                new BasicBlock(this.ctx, 1750, 770),
+                new BasicBlock(this.ctx, 1800, 770),
+                new BasicBlock(this.ctx, 1850, 770),
+                new BasicBlock(this.ctx, 1900, 770),
+                new BasicBlock(this.ctx, 1950, 770),
+                new BasicBlock(this.ctx, 2000, 770),
+                new BasicBlock(this.ctx, 2050, 770),
+                new BasicBlock(this.ctx, 2100, 770),
+                new BasicBlock(this.ctx, 2150, 770),
+                new BasicBlock(this.ctx, 2200, 770),
+                new BasicBlock(this.ctx, 2250, 770),
+                new BasicBlock(this.ctx, 2300, 770),
+                new BasicBlock(this.ctx, 2350, 770),
+                new BasicBlock(this.ctx, 2400, 770),
+                new BasicBlock(this.ctx, 2450, 770, 'right')
             ],
             [
-                new BasicBlock(this.ctx, 1000, 300, 'left'),
-                new BasicBlock(this.ctx, 1050, 300),
-                new BasicBlock(this.ctx, 1100, 300),
-                new BasicBlock(this.ctx, 1200, 300),
+                new BasicBlock(this.ctx, 1600, 300, 'left'),
+                new BasicBlock(this.ctx, 1650, 300),
+                new BasicBlock(this.ctx, 1700, 300),
+                new BasicBlock(this.ctx, 1750, 300),
                 new BasicBlock(this.ctx, 1250, 300, 'right')
             ],
             [
-                new BasicBlock(this.ctx, 1350, 300, 'left'),
-                new BasicBlock(this.ctx, 1400, 300),
-                new BasicBlock(this.ctx, 1450, 300),
-                new BasicBlock(this.ctx, 1500, 300, 'right')
+                new BasicBlock(this.ctx, 1950, 300, 'left'),
+                new BasicBlock(this.ctx, 2000, 300),
+                new BasicBlock(this.ctx, 2050, 300),
+                new BasicBlock(this.ctx, 2100, 300, 'right')
             ]
 
         ]
 
+        //generate walls
+
+        for(let i = 0; i < 16; i++){
+            let auxArray1 = []
+            let auxArray2 = []
+            auxArray1.push(new BasicBlock(this.ctx, 0, 50 * i, 'wall-left'))
+            auxArray2.push(new BasicBlock(this.ctx, 1150, 50 * i, 'wall-right'))
+            if(i < 16){
+                this.basicBlocks.push(auxArray1)
+                this.basicBlocks.push(auxArray2)
+            }
+        }
+        
         //enemies
         this.basicEnemies = [
-            new BasicEnemy(this.ctx, 1380, 200)
+            new BasicEnemy(this.ctx, 2200, 200)
         ]
 
 
@@ -168,7 +188,7 @@ class Game{
         this.ctx.save()
 
         if(!this.door.doorLock){
-            this.ctx.translate(-950, 0)
+            this.ctx.translate(-1550, 0)
         }
 
         //environment
@@ -217,6 +237,7 @@ class Game{
        if(this.arrow.generateArrow(this.hero)){
            this.arrowArray.push(new ArrowTrap(this.ctx))
        }
+
     }
 
     activateElements(){
@@ -265,7 +286,7 @@ class Game{
         this.door.enterDoor(this.hero)
 
         if(!this.door.doorLock && !this.door.doorThrough){
-            this.hero.pos.x = 1100
+            this.hero.pos.x = 1700
             this.hero.pos.y = 400
             this.door.doorThrough = true
         }

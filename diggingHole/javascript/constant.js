@@ -16,7 +16,6 @@ const KEY_RUN = 'ShiftLeft'
 const KEY_CROUCH = 'ControlLeft'
 
 //physics
-
 const VELOCITY = {x: 5, y: 0}
 const ENEMY_VELOCITY = {x: 3, y: 0}
 const GRAVITY = 3

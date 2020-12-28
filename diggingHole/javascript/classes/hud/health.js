@@ -6,7 +6,7 @@ class Health{
         this.width = 400
         this.height = 250
 
-        this.pos = {x: 0, y: 0}
+        this.pos = {x: 40, y: 0}
         this.hp = HERO_HEALTH
         this.previousHp = 0
 

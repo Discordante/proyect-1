@@ -19,6 +19,12 @@ class BasicBlock{
         if(this.side === 'left'){
             this.img.src = '././images/environment/floor/Ground_10.png'
         }
+        else if(this.side === 'wall-right'){
+            this.img.src = '././images/environment/wall/wall-right.png'
+        }
+        else if(this.side === 'wall-left'){
+            this.img.src = '././images/environment/wall/wall-left.png'
+        }
         else if(this.side === 'right'){
             this.img.src = '././images/environment/floor/Ground_12.png'
         }
