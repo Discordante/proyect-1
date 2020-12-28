@@ -16,6 +16,11 @@ class Game{
 
         //environment
         this.door = new Door(this.ctx, 125, 670)  
+
+        this.safeBoxes = [
+            new SafeBox(this.ctx, 2695, 503),
+        ]
+
         this.ladders = [
             [
                 new Stairs(this.ctx, 400, 580),
@@ -123,11 +128,17 @@ class Game{
                 new BasicBlock(this.ctx, 2450, 770, 'right')
             ],
             [
+                new BasicBlock(this.ctx, 2600, 550, 'left'),
+                new BasicBlock(this.ctx, 2650, 550),
+                new BasicBlock(this.ctx, 2700, 550),
+                new BasicBlock(this.ctx, 2750, 550),
+                new BasicBlock(this.ctx, 2800, 550, 'right')
+            ],
+            [
                 new BasicBlock(this.ctx, 1600, 300, 'left'),
                 new BasicBlock(this.ctx, 1650, 300),
                 new BasicBlock(this.ctx, 1700, 300),
-                new BasicBlock(this.ctx, 1750, 300),
-                new BasicBlock(this.ctx, 1250, 300, 'right')
+                new BasicBlock(this.ctx, 1750, 300, 'right')
             ],
             [
                 new BasicBlock(this.ctx, 1950, 300, 'left'),
@@ -193,6 +204,7 @@ class Game{
 
         //environment
         this.door.draw()
+        this.safeBoxes.forEach(safeBox => safeBox.draw())
         this.ladders.forEach(ladder => ladder.forEach( step => step.draw()))
         this.barrels.forEach(barrel => barrel.draw())
 
@@ -242,6 +254,7 @@ class Game{
 
     activateElements(){
         this.basicEnemies.forEach(enemy => enemy.activateEnemy(this.hero))
+        this.safeBoxes.forEach(safeBox => safeBox.openSafeBox(this.hero))
     }
 
     checkCollisions(){
@@ -253,11 +266,15 @@ class Game{
 
         //enemies
         this.basicEnemies.forEach(enemy => enemy.collision(this.hero))
+        this.basicEnemies.forEach(enemy => this.barrels.forEach(barrel => enemy.collision(barrel)))
 
         //environment
         this.door.collision(this.hero)
+        this.safeBoxes.forEach(safeBox => safeBox.collision(this.hero))
         this.ladders.forEach(ladder => ladder.forEach( step => step.collision(this.hero)))
         this.barrels.forEach(barrel => barrel.collision(this.hero))
+        this.barrels.forEach(barrel =>  this.barrels.forEach(element => barrel.collision(element)))
+
        
 
         //inventory
@@ -273,13 +290,15 @@ class Game{
 
 
     checkHealth(){
+        //hero
         this.floorTraps.forEach(trap => this.health.healthStatus(trap, this.hero))
         this.roofTraps.forEach(trap => this.health.healthStatus(trap, this.hero))
         this.arrowArray.forEach(arrow => this.health.healthStatus(arrow, this.hero))
         this.potionsArray.forEach(potion => this.health.healthStatus(potion, this.hero))
-
         this.basicEnemies.forEach(enemy => this.health.healthStatus(enemy, this.hero))
         
+        //enemies
+        this.basicEnemies.forEach(enemy => enemy.healthStatus())
     }
 
     newWorld(){

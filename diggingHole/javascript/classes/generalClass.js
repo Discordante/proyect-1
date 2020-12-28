@@ -9,6 +9,7 @@ class GeneralClass{
         this.vel = {x: 0, y: 0} // velocity
         this.accel = {x: 0, y: 0} // acceleration
 
+        this.gravityStatus = true
 
     }
 
@@ -33,6 +34,14 @@ class GeneralClass{
     }
 
     move(){
+
+        /* //gravity
+        if(this.gravityStatus){
+            this.vel.y += GRAVITY
+            if(this.vel.y >= MAX_GRAVITY){
+                this.vel.y = MAX_GRAVITY
+            }
+        } */
 
         //update position  
         this.pos.x += this.vel.x

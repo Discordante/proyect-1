@@ -38,8 +38,12 @@ class BasicEnemy{
             this.img.ready = true
         }
 
+        this.deathSound = true
         this.sounds = {
-            laugh: new Audio('./././sound/Evil-Laugh-2.mp3')
+            laugh: new Audio('./././sound/Evil-Laugh-2.mp3'),
+            boxHit: new Audio('./././sound/box-hit.mp3'),
+            damage: new Audio('./././sound/damage-sound.mp3'),
+            death : new Audio('./././sound/Monster-Growl.mp3')
         } 
         //this.sounds.laugh.volume = 0.1 
 
@@ -143,14 +147,13 @@ class BasicEnemy{
             element.pos.x < this.pos.x && 
             element.previousX +  element.width <= this.pos.x)
             {
-
-                this.colisionStatus.left = true
-                this.enemyDamage = true
-                //this.pos.x = element.pos.x + element.width + 1 //you push enemy
-                element.pos.x = this.pos.x - element.width - 20   //enemy blocks you
-                element.vel.y = -15
-                element.vel.x = -50
-                
+                if(element instanceof Hero){
+                    this.colisionStatus.left = true
+                    //this.pos.x = element.pos.x + element.width + 1 //you push enemy
+                    element.pos.x = this.pos.x - element.width - 20   //enemy blocks you
+                    element.vel.y = -15
+                    element.vel.x = -50
+                }
             }
         //RIGHT COLLISION
         else if( 
@@ -160,15 +163,14 @@ class BasicEnemy{
             element.pos.x + element.width > this.pos.x + this.width &&
             element.previousX >= this.pos.x + this.width)
             {
-
-                this.colisionStatus.right = true
-                this.enemyDamage = true
-                //this.pos.x = element.pos.x - this.width - 1 //you push enemy
-                element.pos.x = this.pos.x + this.width + 20   //enemy blocks you
-                element.vel.y = -15
-                element.vel.x = 50
-                
-            }
+                if(element instanceof Hero){
+                    this.colisionStatus.right = true
+                    //this.pos.x = element.pos.x - this.width - 1 //you push enemy
+                    element.pos.x = this.pos.x + this.width + 20   //enemy blocks you
+                    element.vel.y = -15
+                    element.vel.x = 50
+                }
+        }
         //TOP COLLISION
         else if( 
             element.pos.y + element.height >= this.pos.y &&
@@ -180,11 +182,17 @@ class BasicEnemy{
             {
 
                 this.colisionStatus.up = true
-                this.enemyDamage = true
                 element.vel.y = -20
 
-                if(element.inventory.steelBoots){
-                    this.hp -=10
+                if(element instanceof Barrel){
+                    this.hp -= 50
+                    this.sounds.boxHit.play()
+                    if(this.enemyDirection === 'left'){
+                        element.vel.x = 5
+                    }
+                    else{
+                        element.vel.x = -5
+                    }
                 }
             }
          //BOTTOM COLLISION
@@ -196,18 +204,19 @@ class BasicEnemy{
             element.pos.y + element.height > this.pos.y + this.height &&
             element.previousY > this.pos.y + this.height)
             {
-
-                this.colisionStatus.down = true
-                this.enemyDamage = true
+                if(element instanceof Hero){
+                    this.colisionStatus.down = true
+                }
             }  
         else{
-            this.colisionStatus.up = false
-            this.colisionStatus.down = false
-            this.colisionStatus.left = false
-            this.colisionStatus.right = false
+            if(element instanceof Hero){
+                this.colisionStatus.up = false
+                this.colisionStatus.down = false
+                this.colisionStatus.left = false
+                this.colisionStatus.right = false
+            }
+        } 
 
-            this.enemyDamage = false
-            } 
     }
 
     move(hero){
@@ -234,20 +243,6 @@ class BasicEnemy{
                 }
             }
         }
-        /* else if(this.enemyStatus && this.enemyPhase === 3){
-            if(this.enemyDirection === 'left'){
-                this.vel.x = -ENEMY_VELOCITY.x * 2
-                if(this.pos.x <= 1600){
-                    this.enemyDirection = 'right'
-                }
-            }
-            if(this.enemyDirection === 'right'){
-                this.vel.x = ENEMY_VELOCITY.x * 2
-                if(this.pos.x >= 2400){
-                    this.enemyDirection = 'left'
-                }
-            }
-        } */
          
         //gravity
         this.vel.y += GRAVITY
@@ -262,5 +257,17 @@ class BasicEnemy{
         
         this.pos.x += this.vel.x
         this.pos.y += this.vel.y
+    }
+
+    healthStatus(){
+        this.previousHp = this.hp
+        if(this.hp <= 0 && this.deathSound){
+    
+            this.deathSound = false
+            this.sounds.death.play()
+            setTimeout(() => {
+                this.pos.x = undefined
+            },2000)
+        }
     }
 }

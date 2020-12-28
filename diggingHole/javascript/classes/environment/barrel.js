@@ -121,7 +121,7 @@ class Barrel{
             element.previousX +  element.width <= this.pos.x)
             {
                 this.colisionStatus.left = true
-                this.pos.x = element.pos.x + element.width + 1 //you push enemy
+                this.pos.x = element.pos.x + element.width + 1 
             }
         //RIGHT COLLISION
         else if( 
@@ -132,7 +132,7 @@ class Barrel{
             element.previousX >= this.pos.x + this.width)
             {
                 this.colisionStatus.right = true
-                this.pos.x = element.pos.x - this.width - 1 //you push enemy
+                this.pos.x = element.pos.x - this.width - 1 
             }
         //TOP COLLISION
         else if( 

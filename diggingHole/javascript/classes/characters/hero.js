@@ -38,7 +38,7 @@ class Hero{
 
         //inventory
         this.inventory = {
-            doorKey: false,
+            doorKey: false, //change later
             steelBoots: false
         }
 

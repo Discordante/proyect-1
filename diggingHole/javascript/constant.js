@@ -33,9 +33,9 @@ const ARROW_SPEED = -15
 
 //health
 const HERO_HEALTH = 100
-const BASIC_ENEMY_HP = 50
+const BASIC_ENEMY_HP = 150
 const POTION_HEAL = 20
 
 
 //distances
-const ACT_ENEMY_DISTANCE = 300
+const ACT_ENEMY_DISTANCE = 350
