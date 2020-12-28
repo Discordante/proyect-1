@@ -12,9 +12,14 @@ class BasicEnemy{
         this.previousX = this.pos.x
         this.previousY = this.pos.y
 
+        this.distance = undefined
+
         this.hp = BASIC_ENEMY_HP
 
-        this.enemyStatus = false 
+        this.enemyLaugh = true
+        this.enemyStatus = false
+        this.enemyPhase = 0
+        this.enemyDirection = 'left'
 
         this.damage = ENEMY_DAMAGE
         this.enemyDamageUp = true
@@ -33,10 +38,10 @@ class BasicEnemy{
             this.img.ready = true
         }
 
-        /* this.sounds = {
-            laugh: new Audio('../../../sound/Evil-Laugh-2.mp3')
+        this.sounds = {
+            laugh: new Audio('./././sound/Evil-Laugh-2.mp3')
         } 
-        //this.sounds.laugh.volume = 0.1  */
+        //this.sounds.laugh.volume = 0.1 
 
     }
 
@@ -51,12 +56,20 @@ class BasicEnemy{
     }
     
     activateEnemy(hero){
-        //console.log(Math.hypot((this.pos.x - hero.pos.x),(this.pos.y - hero.pos.y))) 
-        if(Math.hypot((this.pos.x - hero.pos.x),(this.pos.y - hero.pos.y)) < ACT_ENEMY_DISTANCE){
-            this.enemyStatus = true
+        this.distance = Math.hypot((this.pos.x - hero.pos.x),(this.pos.y - hero.pos.y))
+
+        if(this.distance < ACT_ENEMY_DISTANCE){
+            this.enemyPhase = 1
+            if(this.enemyLaugh){
+                this.sounds.laugh.play()
+                this.enemyLaugh = false
+            }
+            setTimeout(() =>{
+                this.enemyStatus = true
+            },7000)
         }
-        else{
-            this.enemyStatus = false
+        else if(this.distance >= ACT_ENEMY_DISTANCE && this.enemyStatus){
+            this.enemyPhase = 2
         }
     }
 
@@ -198,8 +211,7 @@ class BasicEnemy{
     }
 
     move(hero){
-        
-        if(this.enemyStatus){
+        if(this.enemyStatus && this.enemyPhase === 1){
             if(hero.pos.x > this.pos.x + this.width + 2){
                 this.vel.x = ENEMY_VELOCITY.x
             }
@@ -207,6 +219,21 @@ class BasicEnemy{
                 this.vel.x = -ENEMY_VELOCITY.x
             }
         } 
+
+        else if(this.enemyStatus && this.enemyPhase === 2){ //REVISAR!
+            if(this.enemyDirection === 'left'){
+                this.vel.x = -ENEMY_VELOCITY.x
+                if(this.pos.x <= 1000){
+                    this.enemyDirection = 'right'
+                }
+            }
+            if(this.enemyDirection === 'right'){
+                this.vel.x = ENEMY_VELOCITY.x
+                if(this.pos.x>= 1400){
+                    this.enemyDirection = 'left'
+                }
+            }
+        }
          
         //gravity
         this.vel.y += GRAVITY

@@ -39,4 +39,4 @@ const POTION_HEAL = 20
 
 
 //distances
-const ACT_ENEMY_DISTANCE = 400
+const ACT_ENEMY_DISTANCE = 300

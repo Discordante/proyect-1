@@ -17,19 +17,25 @@ class Game{
         //environment
         this.door = new Door(this.ctx, 125, 670)  
         this.ladders = [
-            new Stairs(this.ctx, 400, 580),
-            new Stairs(this.ctx, 400, 620),
-            new Stairs(this.ctx, 400, 660),
-            new Stairs(this.ctx, 400, 700),
-
-            new Stairs(this.ctx, 1150, 300),
-            new Stairs(this.ctx, 1150, 340),
-            new Stairs(this.ctx, 1150, 380)
-
+            [
+                new Stairs(this.ctx, 400, 580),
+                new Stairs(this.ctx, 400, 620),
+                new Stairs(this.ctx, 400, 660),
+                new Stairs(this.ctx, 400, 700)
+            ],
+            [
+                new Stairs(this.ctx, 1150, 300),
+                new Stairs(this.ctx, 1150, 340),
+                new Stairs(this.ctx, 1150, 380)
+            ]
         ]
         
         this.barrels = [
-            new Barrel(this.ctx, 300, 570)
+            new Barrel(this.ctx, 300, 570, 'barrel'),
+            new Barrel(this.ctx, 50, 50, 'box'),
+            new Barrel(this.ctx, 1380, 200, 'barrel'),
+            new Barrel(this.ctx, 1480, 200, 'box'),
+            new Barrel(this.ctx, 1100, 200, 'box'),
         ]
 
         //inventary
@@ -115,6 +121,12 @@ class Game{
                 new BasicBlock(this.ctx, 1100, 300),
                 new BasicBlock(this.ctx, 1200, 300),
                 new BasicBlock(this.ctx, 1250, 300, 'right')
+            ],
+            [
+                new BasicBlock(this.ctx, 1350, 300, 'left'),
+                new BasicBlock(this.ctx, 1400, 300),
+                new BasicBlock(this.ctx, 1450, 300),
+                new BasicBlock(this.ctx, 1500, 300, 'right')
             ]
 
         ]
@@ -155,15 +167,13 @@ class Game{
     draw(){
         this.ctx.save()
 
-        if(!this.door.enterDoor(this.hero)){
+        if(!this.door.doorLock){
             this.ctx.translate(-950, 0)
         }
 
-        
-
         //environment
         this.door.draw()
-        this.ladders.forEach(ladder => ladder.draw())
+        this.ladders.forEach(ladder => ladder.forEach( step => step.draw()))
         this.barrels.forEach(barrel => barrel.draw())
 
         //inventory
@@ -171,19 +181,17 @@ class Game{
         this.steelBoots.draw()
         this.potionsArray.forEach(potion => potion.draw())
 
-        
-        
-        //traps
-        this.floorTraps.forEach(trap => trap.draw())
-        this.roofTraps.forEach(trap => trap.draw())
-        this.arrowArray.forEach(arrow => arrow.draw())
-
         //HUD
         this.health.draw()
 
         //characters
         this.hero.draw()
         this.basicEnemies.forEach(enemy => enemy.draw())
+
+        //traps
+        this.floorTraps.forEach(trap => trap.draw())
+        this.roofTraps.forEach(trap => trap.draw())
+        this.arrowArray.forEach(arrow => arrow.draw())
 
         //floor
         this.basicBlocks.forEach(platform => platform.forEach(block => block.draw()))
@@ -201,7 +209,7 @@ class Game{
         this.roofTraps.forEach(trap => trap.move(this.hero))
 
         //environment
-        this.ladders.forEach(ladder => ladder.upLadder(this.hero))
+        this.ladders.forEach(ladder => ladder.forEach( step => step.upLadder(this.hero)))
         this.barrels.forEach(barrel => barrel.move())
     }
 
@@ -227,7 +235,7 @@ class Game{
 
         //environment
         this.door.collision(this.hero)
-        this.ladders.forEach(ladder => ladder.collision(this.hero))
+        this.ladders.forEach(ladder => ladder.forEach( step => step.collision(this.hero)))
         this.barrels.forEach(barrel => barrel.collision(this.hero))
        
 
@@ -254,7 +262,9 @@ class Game{
     }
 
     newWorld(){
-        if(!this.door.enterDoor(this.hero) && !this.door.doorThrough){
+        this.door.enterDoor(this.hero)
+
+        if(!this.door.doorLock && !this.door.doorThrough){
             this.hero.pos.x = 1100
             this.hero.pos.y = 400
             this.door.doorThrough = true
@@ -264,18 +274,23 @@ class Game{
     gameOver(){
         if(this.health.hp <= 0 || this.hero.pos.y >= 1000){
             this.sounds.gameOver.play()
-            clearInterval(this.drawInterval);
-            this.ctx.fillStyle = 'rgba(0, 0, 0)'
-            this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height)
-            this.ctx.save()
-            this.ctx.font = '50px Sans-serif'
-            this.ctx.fillStyle = 'red'
-            this.ctx.textAlign = 'center'
-            this.ctx.fillText(
-                'You lose...',
-                this.ctx.canvas.width / 2,
-                this.ctx.canvas.height / 2,
-            )
+            setTimeout(() => {
+                clearInterval(this.drawInterval);
+            },100)
+
+            setTimeout(() => {
+                this.ctx.fillStyle = 'rgba(0, 0, 0)'
+                this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height)
+                this.ctx.save()
+                this.ctx.font = '50px Sans-serif'
+                this.ctx.fillStyle = 'red'
+                this.ctx.textAlign = 'center'
+                this.ctx.fillText(
+                    'You lose...',
+                    this.ctx.canvas.width / 2,
+                    this.ctx.canvas.height / 2,
+                    )
+            },2000)
             this.ctx.restore()
         }
     }

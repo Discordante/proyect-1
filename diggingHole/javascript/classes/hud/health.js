@@ -121,6 +121,10 @@ class Health{
         }
     }
 
+    enemyHealth(enemy,object){
+
+    }
+
     healthStatus(element, hero){
         //console.log(this.hp)
         this.previousHp = this.hp

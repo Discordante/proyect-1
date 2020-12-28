@@ -39,8 +39,7 @@ class Hero{
         //inventory
         this.inventory = {
             doorKey: false,
-            steelBoots: false,
-            ironHelmet: false
+            steelBoots: false
         }
 
         //collisions

@@ -1,9 +1,10 @@
 class Barrel{
-    constructor(ctx, x, y){
+    constructor(ctx, x, y, type){
         this.ctx = ctx
 
         this.width = 45
         this.height = 50
+        this.type = type
 
         this.pos = {x, y}  // position
         this.vel = {x: 0, y: 0} // velocity
@@ -19,7 +20,13 @@ class Barrel{
         }
 
         this.img = new Image()
-        this.img.src = './././images/environment/Wooden_Barrel.png'
+        if(this.type === 'barrel'){
+            this.img.src = './././images/environment/Wooden_Barrel.png'
+        }
+        else {
+            this.img.src = './././images/environment/Wooden_Box.png'
+        }
+        
         this.ready = false
         this.img.onload = () => {
             this.img.ready = true
@@ -181,7 +188,5 @@ class Barrel{
 
         this.pos.x += this.vel.x
         this.pos.y += this.vel.y
-
-        
     }
 }
