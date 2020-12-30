@@ -45,7 +45,7 @@ class BasicEnemy{
             damage: new Audio('./././sound/damage-sound.mp3'),
             death : new Audio('./././sound/Monster-Growl.mp3')
         } 
-        //this.sounds.laugh.volume = 0.1 
+        this.sounds.laugh.volume = 0.3 
 
     }
 
@@ -62,21 +62,64 @@ class BasicEnemy{
     activateEnemy(hero){
         this.distance = Math.hypot((this.pos.x - hero.pos.x),(this.pos.y - hero.pos.y))
 
-        if(this.distance < ACT_ENEMY_DISTANCE){
-            this.enemyPhase = 1
+        if(hero.pos.x >= 1200 && !this.enemyStatus){
             if(this.enemyLaugh){
                 this.sounds.laugh.play()
                 this.enemyLaugh = false
             }
             setTimeout(() =>{
                 this.enemyStatus = true
-            },7000)
+                this.enemyPhase = 1
+            },6000)
+        }
+        else if(this.distance <= ACT_ENEMY_DISTANCE && this.enemyStatus){
+            this.enemyPhase = 1
         }
         else if(this.distance >= ACT_ENEMY_DISTANCE && this.enemyStatus){
             this.enemyPhase = 2
         }
     }
 
+    move(hero){
+        if(this.enemyStatus && this.enemyPhase === 1){
+            if(hero.pos.x > this.pos.x + this.width + 2){
+                this.vel.x = ENEMY_VELOCITY.x
+            }
+            else if(hero.pos.x + hero.width < this.pos.x - 2){
+                this.vel.x = -ENEMY_VELOCITY.x
+            }
+        } 
+
+        else if(this.enemyStatus && this.enemyPhase === 2){
+            if(this.enemyDirection === 'left'){
+                this.vel.x = -ENEMY_VELOCITY.x
+                if(this.pos.x <= 1600){
+                    this.enemyDirection = 'right'
+                }
+            }
+            if(this.enemyDirection === 'right'){
+                this.vel.x = ENEMY_VELOCITY.x
+                if(this.pos.x>= 2400){
+                    this.enemyDirection = 'left'
+                }
+            }
+        }
+         
+        //gravity
+        this.vel.y += GRAVITY
+        if(this.vel.y >= MAX_GRAVITY){
+            this.vel.y = MAX_GRAVITY
+        }
+
+        //update position  
+
+        this.previousX = this.pos.x
+        this.previousY = this.pos.y
+        
+        this.pos.x += this.vel.x
+        this.pos.y += this.vel.y
+    }
+ 
     collisionBlocks(block){
         
         if (    //---collision down---
@@ -219,50 +262,10 @@ class BasicEnemy{
 
     }
 
-    move(hero){
-        if(this.enemyStatus && this.enemyPhase === 1){
-            if(hero.pos.x > this.pos.x + this.width + 2){
-                this.vel.x = ENEMY_VELOCITY.x
-            }
-            else if(hero.pos.x + hero.width < this.pos.x - 2){
-                this.vel.x = -ENEMY_VELOCITY.x
-            }
-        } 
-
-        else if(this.enemyStatus && this.enemyPhase === 2){
-            if(this.enemyDirection === 'left'){
-                this.vel.x = -ENEMY_VELOCITY.x
-                if(this.pos.x <= 1600){
-                    this.enemyDirection = 'right'
-                }
-            }
-            if(this.enemyDirection === 'right'){
-                this.vel.x = ENEMY_VELOCITY.x
-                if(this.pos.x>= 2400){
-                    this.enemyDirection = 'left'
-                }
-            }
-        }
-         
-        //gravity
-        this.vel.y += GRAVITY
-        if(this.vel.y >= MAX_GRAVITY){
-            this.vel.y = MAX_GRAVITY
-        }
-
-        //update position  
-
-        this.previousX = this.pos.x
-        this.previousY = this.pos.y
-        
-        this.pos.x += this.vel.x
-        this.pos.y += this.vel.y
-    }
-
     healthStatus(){
         this.previousHp = this.hp
         if(this.hp <= 0 && this.deathSound){
-    
+            this.enemyStatus = false
             this.deathSound = false
             this.sounds.death.play()
             setTimeout(() => {

@@ -33,9 +33,17 @@ class FloorTrap extends GeneralClass{
     }
 
     collision(element){
-        if(super.collision(element) && !element.inventory.steelBoots && this.trapReady){
-            this.trapStatus = true
-            this.sounds.trapActive.play()
+        if(super.collision(element) && this.trapReady){
+            if(element instanceof Hero && !element.inventory.steelBoots){
+                this.trapStatus = true
+            }
+            if(element instanceof Barrel){
+                this.trapReady = false
+                this.trapStatus = true
+            }
+            if(this.trapStatus){
+                this.sounds.trapActive.play()
+            }
         }
     }
 }

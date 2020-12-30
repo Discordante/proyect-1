@@ -29,22 +29,28 @@ class Game{
                 new Stairs(this.ctx, 400, 700)
             ],
             [
-                new Stairs(this.ctx, 1805, 300),
-                new Stairs(this.ctx, 1805, 340),
-                new Stairs(this.ctx, 1805, 380)
+                new Stairs(this.ctx, 1100, 500),
+                new Stairs(this.ctx, 1100, 540),
+                new Stairs(this.ctx, 1100, 580),
+                new Stairs(this.ctx, 1100, 620)
+            ],
+            [
+                new Stairs(this.ctx, 1805, 250),
+                new Stairs(this.ctx, 1805, 290),
+                new Stairs(this.ctx, 1805, 330)
             ]
         ]
         
         //objects
         this.barrels = [
-            new Barrel(this.ctx, 300, 570, 'barrel'),
-            new Barrel(this.ctx, 2080, 200, 'barrel'),
-            new Barrel(this.ctx, 1700, 200, 'box'),
-            new Barrel(this.ctx, 2000, 200, 'box'),
+            new Barrel(this.ctx, 300, 650, 'barrel'),
+            new Barrel(this.ctx, 2080, 100, 'barrel'),
+            new Barrel(this.ctx, 1700, 100, 'box'),
+            new Barrel(this.ctx, 2000, 100, 'box'),
         ]
 
         //inventary
-        this.steelBoots = new SteelBoots(this.ctx, 120, 465)
+        this.steelBoots = new SteelBoots(this.ctx, 1040, 668)
         this.dungeonKey = new DungeonKey(this.ctx, 550, 100)
         this.potionsArray = [
             new Potions(this.ctx, 470, 735)
@@ -77,8 +83,21 @@ class Game{
                 new BasicBlock(this.ctx, 150, 300, 'right')
             ],
             [
-                new BasicBlock(this.ctx, 500, 300, 'left'),
-                new BasicBlock(this.ctx, 550, 300, 'right')
+                new BasicBlock(this.ctx, 800, 300, 'left'),
+                new BasicBlock(this.ctx, 850, 300),
+                new BasicBlock(this.ctx, 900, 300),
+                new BasicBlock(this.ctx, 950, 300),
+                new BasicBlock(this.ctx, 1000, 300),
+                new BasicBlock(this.ctx, 1050, 300),
+                new BasicBlock(this.ctx, 1100, 300, 'right')
+            ],
+            [
+                new BasicBlock(this.ctx, 800, 500, 'left'),
+                new BasicBlock(this.ctx, 850, 500),
+                new BasicBlock(this.ctx, 900, 500),
+                new BasicBlock(this.ctx, 950, 500),
+                new BasicBlock(this.ctx, 1000, 500),
+                new BasicBlock(this.ctx, 1050, 500, 'right')
             ],
             [
                 new BasicBlock(this.ctx, 100, 760, 'left'),
@@ -92,9 +111,9 @@ class Game{
                 new BasicBlock(this.ctx, 500, 760, 'right'),
             ],
             [
-                new BasicBlock(this.ctx, 380, 400, 'left'),
-                new BasicBlock(this.ctx, 430, 400),
-                new BasicBlock(this.ctx, 480, 400, 'right'),
+                new BasicBlock(this.ctx, 1000, 700, 'left'),
+                new BasicBlock(this.ctx, 1050, 700),
+                new BasicBlock(this.ctx, 1100, 700, 'right'),
             ],
             [
                 new BasicBlock(this.ctx, 100, 500, 'left'),
@@ -135,16 +154,16 @@ class Game{
                 new BasicBlock(this.ctx, 2800, 550, 'right')
             ],
             [
-                new BasicBlock(this.ctx, 1600, 300, 'left'),
-                new BasicBlock(this.ctx, 1650, 300),
-                new BasicBlock(this.ctx, 1700, 300),
-                new BasicBlock(this.ctx, 1750, 300, 'right')
+                new BasicBlock(this.ctx, 1600, 250, 'left'),
+                new BasicBlock(this.ctx, 1650, 250),
+                new BasicBlock(this.ctx, 1700, 250),
+                new BasicBlock(this.ctx, 1750, 250, 'right')
             ],
             [
-                new BasicBlock(this.ctx, 1950, 300, 'left'),
-                new BasicBlock(this.ctx, 2000, 300),
-                new BasicBlock(this.ctx, 2050, 300),
-                new BasicBlock(this.ctx, 2100, 300, 'right')
+                new BasicBlock(this.ctx, 1950, 250, 'left'),
+                new BasicBlock(this.ctx, 2000, 250),
+                new BasicBlock(this.ctx, 2050, 250),
+                new BasicBlock(this.ctx, 2100, 250, 'right')
             ]
 
         ]
@@ -286,6 +305,7 @@ class Game{
         this.floorTraps.forEach(trap => trap.collision(this.hero))
         this.roofTraps.forEach(trap => trap.collision(this.hero))
         this.arrowArray.forEach(arrow => arrow.collision(this.hero))
+        this.floorTraps.forEach(trap => this.barrels.forEach(barrel => trap.collision(barrel)))
     }
 
 
