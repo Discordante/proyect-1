@@ -1,36 +1,37 @@
 class BlockWithMotion extends BasicBlock{
-    constructor(ctx, x, y, timer, side){
-        super(ctx, x, y, side)
+    constructor(ctx, x, y, leftLimit, rightLimit, side){
+        super()
         this.ctx = ctx
 
+        this.width = 150
+        this.height = 50
+
+
+        this.leftLimit = leftLimit
+        this.rightLimit = rightLimit
+        
         this.pos = {x, y} 
         this.vel = {x: 1, y: 0} 
-        this.dir = true   //true: right ----- false: left
+        this.direction = true   //true: right ----- false: left
 
-        this.timer = timer
         this.side = side
-        this.intervalStatus = undefined
-        this.timerCounter = 0
+
     }
 
 
     move(hero){
-        this.intervalStatus = setInterval(() =>{
 
-            if(this.dir){
-                this.dir = false
-                this.vel.x = -1
-            }
-            else{
-                this.dir = true
-                this.vel.x = 1
-            }
-        },this.timer)
-
+        if(this.pos.x >= this.rightLimit && this.direction){
+            this.vel.x = -1
+            this.direction = false
+        }
+        else if(this.pos.x <= this.leftLimit && !this.direction){
+            this.vel.x = 1
+            this.direction = true
+        }
+        
         //update position  
         this.pos.x += this.vel.x
         this.pos.y += this.vel.y
-        
-        
     }
 }

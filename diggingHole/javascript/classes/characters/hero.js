@@ -33,13 +33,15 @@ class Hero{
             jumpTimer: 0,
             jumpTimerFunction: undefined,
 
-            crouchStatus: false
+            crouchStatus: false,
+
+            motion:0
         }
 
         //inventory
         this.inventory = {
-            doorKey: false, //change later
-            steelBoots: false
+            doorKey: true, //change later
+            steelBoots: true
         }
 
         //collisions
@@ -95,9 +97,14 @@ class Hero{
 
                 {
                     //console.log('up')
-                    this.pos.y  = block.pos.y - this.height - 1
-                    this.vel.y = 0
-                    this.vel.x = 0
+                    if(block instanceof BasicBlock){
+                        this.pos.y  = block.pos.y - this.height - 1
+                        this.vel.y = 0
+                        
+                    }
+                    if(block instanceof BlockWithMotion){
+                        this.movements.motion = true
+                    }
                 }
 
             else if( //---collision left---
@@ -126,9 +133,13 @@ class Hero{
                     this.pos.x  = block.pos.x + block.width + 1
                     this.vel.x = 0
                 }
+                
+            else{
+                this.movements.motion = false
+            }
     }
 
-    move(){
+    move(element){
         this.previousX = this.pos.x
         this.previousY = this.pos.y
         
@@ -149,6 +160,15 @@ class Hero{
             }
             
         } 
+
+        //MotionBlocks
+        else if(this.movements.motion && element.direction){
+            this.vel.x = 1
+        }
+        else if(this.movements.motion && !element.direction){
+            this.vel.x = -1
+        }
+
         else {
             this.vel.x = 0
         }

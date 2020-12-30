@@ -62,7 +62,6 @@ class Game{
 
        
         this.floorTraps = [
-            new FloorTrap(this.ctx, 395, 380),
             new FloorTrap(this.ctx, 305, 560),
             new FloorTrap(this.ctx, 220, 740)
         ]
@@ -169,12 +168,7 @@ class Game{
         ]
 
         this.blocksMotion = [
-
-            [   
-                new BlockWithMotion(this.ctx, 300, 300, 3000, 'left'),
-                new BlockWithMotion(this.ctx, 350, 300, 3000),
-                new BlockWithMotion(this.ctx, 400, 300, 3000, 'right')
-            ]
+            new BlockWithMotion(this.ctx, 350, 300, 300, 500)      
         ]
 
         //generate walls
@@ -255,14 +249,15 @@ class Game{
 
         //floor
         this.basicBlocks.forEach(platform => platform.forEach(block => block.draw()))
-        this.blocksMotion.forEach(platform => platform.forEach(block => block.draw()))
+        this.blocksMotion.forEach(block => block.draw())
 
         this.ctx.restore()
     }                    
 
     move(){
         //characters
-        this.hero.move()
+        //this.hero.move()
+        this.blocksMotion.forEach(block => this.hero.move(block))
         this.basicEnemies.forEach(enemy => enemy.move(this.hero))
 
         //traps
@@ -274,7 +269,7 @@ class Game{
         this.barrels.forEach(barrel => barrel.move())
 
         //floor
-        this.blocksMotion.forEach(platform => platform.forEach(block => block.move(this.hero)))
+        this.blocksMotion.forEach(block => block.move(this.hero))
     }
 
     generateElements(){
@@ -293,7 +288,7 @@ class Game{
 
         //blocks
         this.basicBlocks.forEach(platform => platform.forEach(block => this.hero.collisionBlocks(block)))
-        this.blocksMotion.forEach(platform => platform.forEach(block => this.hero.collisionBlocks(block)))
+        this.blocksMotion.forEach(block => this.hero.collisionBlocks(block))
         this.basicEnemies.forEach(enemy => this.basicBlocks.forEach(blockArr => blockArr.forEach(block => enemy.collisionBlocks(block))))
         this.barrels.forEach(barrel => this.basicBlocks.forEach(blockArr => blockArr.forEach(block => barrel.collisionBlocks(block))))
 
@@ -307,8 +302,6 @@ class Game{
         this.ladders.forEach(ladder => ladder.forEach( step => step.collision(this.hero)))
         this.barrels.forEach(barrel => barrel.collision(this.hero))
         this.barrels.forEach(barrel =>  this.barrels.forEach(element => barrel.collision(element)))
-
-       
 
         //inventory
         this.dungeonKey.collision(this.hero)

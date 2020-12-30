@@ -7,11 +7,12 @@ class BasicBlock{
         this.width = 50
         this.height = 50
 
-        this.finalBlock = []
 
         this.pos = {x, y}  // position
         this.vel = {x: 0, y: 0} // velocity
         this.accel = {x: 0, y: 0} // acceleration
+
+        this.collisionStatus = undefined
 
         //image
         this.img = new Image()
@@ -55,8 +56,11 @@ class BasicBlock{
             this.pos.y  < element.pos.y + element.height &&
             this.pos.y  + this.height > element.pos.y) {
 
-            return true
-         }
-        return false
+                this.collisionStatus = true
+        }
+         else{
+            this.collisionStatus = false
+        }
+        return this.collisionStatus
     }
 }
