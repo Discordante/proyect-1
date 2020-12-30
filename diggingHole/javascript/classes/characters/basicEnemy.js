@@ -112,7 +112,6 @@ class BasicEnemy{
         }
 
         //update position  
-
         this.previousX = this.pos.x
         this.previousY = this.pos.y
         

@@ -3,7 +3,6 @@ class BasicBlock{
         this.ctx = ctx
 
         this.side = side
-        this.lenght = length
 
         this.width = 50
         this.height = 50
@@ -59,22 +58,5 @@ class BasicBlock{
             return true
          }
         return false
-    }
-
-    move(){
-        //update position  
-        this.pos.x += this.vel.x
-        this.pos.y += this.vel.y
-
-    }
-
-    generateElements(element){
-        for(let i = 0; i < length; i++){
-            this.finalBlock.push(new BasicBlock(this.ctx, (this.pos.x + length * 50), this.pos.y, 2), 4 , 2)
-            if(i === this.lenght-1){
-                element.push(this.finalBlock)
-                this.finalBlock = []
-            }
-        }
     }
 }

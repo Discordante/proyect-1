@@ -168,6 +168,15 @@ class Game{
 
         ]
 
+        this.blocksMotion = [
+
+            [   
+                new BlockWithMotion(this.ctx, 300, 300, 3000, 'left'),
+                new BlockWithMotion(this.ctx, 350, 300, 3000),
+                new BlockWithMotion(this.ctx, 400, 300, 3000, 'right')
+            ]
+        ]
+
         //generate walls
 
         for(let i = 0; i < 16; i++){
@@ -246,6 +255,7 @@ class Game{
 
         //floor
         this.basicBlocks.forEach(platform => platform.forEach(block => block.draw()))
+        this.blocksMotion.forEach(platform => platform.forEach(block => block.draw()))
 
         this.ctx.restore()
     }                    
@@ -262,6 +272,9 @@ class Game{
         //environment
         this.ladders.forEach(ladder => ladder.forEach( step => step.upLadder(this.hero)))
         this.barrels.forEach(barrel => barrel.move())
+
+        //floor
+        this.blocksMotion.forEach(platform => platform.forEach(block => block.move(this.hero)))
     }
 
     generateElements(){
@@ -280,6 +293,7 @@ class Game{
 
         //blocks
         this.basicBlocks.forEach(platform => platform.forEach(block => this.hero.collisionBlocks(block)))
+        this.blocksMotion.forEach(platform => platform.forEach(block => this.hero.collisionBlocks(block)))
         this.basicEnemies.forEach(enemy => this.basicBlocks.forEach(blockArr => blockArr.forEach(block => enemy.collisionBlocks(block))))
         this.barrels.forEach(barrel => this.basicBlocks.forEach(blockArr => blockArr.forEach(block => barrel.collisionBlocks(block))))
 
