@@ -57,6 +57,12 @@ class Game{
                 new Stairs(this.ctx, 250, 1440),
                 new Stairs(this.ctx, 250, 1480)
             ],
+            [
+                new Stairs(this.ctx, 195, 1200),
+                new Stairs(this.ctx, 195, 1240),
+                new Stairs(this.ctx, 195, 1280),
+                new Stairs(this.ctx, 195, 1320)
+            ],
             //level2
             [
                 new Stairs(this.ctx, 860, 2150),
@@ -75,6 +81,12 @@ class Game{
                 new Stairs(this.ctx, 1805, 250),
                 new Stairs(this.ctx, 1805, 290),
                 new Stairs(this.ctx, 1805, 330)
+            ],
+            [
+                new Stairs(this.ctx, 550, 2760),
+                new Stairs(this.ctx, 550, 2800),
+                new Stairs(this.ctx, 550, 2840)
+
             ]
         ]
         
@@ -273,7 +285,7 @@ class Game{
 
         this.blocksMotion = [
             new BlockWithMotion(this.ctx, 350, 300, 300, 500),
-            //new BlockWithMotion(this.ctx, 700, 1850, 700, 900)
+            new BlockWithMotion(this.ctx, 350, 400, 325, 700)
         ]
 
         //generate walls
@@ -387,7 +399,7 @@ class Game{
  
     move(){
         //characters
-        this.blocksMotion.forEach(block => this.hero.move(block))
+        this.hero.move()
         this.basicEnemies.forEach(enemy => enemy.move(this.hero))
 
         //traps
@@ -400,6 +412,7 @@ class Game{
 
         //floor
         this.blocksMotion.forEach(block => block.move(this.hero))
+
     }
 
     generateElements(){

@@ -35,7 +35,8 @@ class Hero{
 
             crouchStatus: false,
 
-            motion:0
+            motionBlockCollision: false,
+            motionBlockDirection: 'left'
         }
 
         //inventory
@@ -97,16 +98,13 @@ class Hero{
 
                 {
                     //console.log('up')
-                    if(block instanceof BasicBlock){
-                        this.movements.motion = false
-                        this.pos.y  = block.pos.y - this.height - 1
-                        this.vel.y = 0
+
+                    this.pos.y  = block.pos.y - this.height - 1
+                    this.vel.y = 0
                         
-                    }
                     if(block instanceof BlockWithMotion){
-                        this.movements.motion = true
-                        this.pos.y  = block.pos.y - this.height - 1
-                        this.vel.y = 0
+                        this.movements.motionBlockCollision = true
+                        this.pos.x
                     }
                 }
 
@@ -136,6 +134,9 @@ class Hero{
                     this.pos.x  = block.pos.x + block.width + 1
                     this.vel.x = 0
                 }
+            else{
+                this.movements.motionBlockCollision = false
+            }
     }
 
     move(element){
@@ -159,18 +160,18 @@ class Hero{
             }
             
         } 
-
-        //MotionBlocks
-        else if(this.movements.motion && element.direction){
+        
+        else if(this.movements.motionBlockDirection === 'right' && this.movements.motionBlockCollision){
             this.vel.x = 1
         }
-        else if(this.movements.motion && !element.direction){
+        else if(this.movements.motionBlockDirection === 'left' && this.movements.motionBlockCollision){
             this.vel.x = -1
         }
-
-        else {
+        else {  
             this.vel.x = 0
         }
+        
+        console.log(this.movements.motionBlockDirection)
 
         //crouch movement
         if (this.movements.crouch && !this.movements.crouchStatus){ 
