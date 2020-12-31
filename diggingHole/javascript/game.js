@@ -7,6 +7,8 @@ class Game{
         this.canvas.width = 1200
         this.canvas.height = 800
 
+        this.level = 1
+
         this.drawInterval = undefined
         
         
@@ -33,6 +35,16 @@ class Game{
                 new Stairs(this.ctx, 1100, 540),
                 new Stairs(this.ctx, 1100, 580),
                 new Stairs(this.ctx, 1100, 620)
+            ],
+            [
+                new Stairs(this.ctx, 950, 700),
+                new Stairs(this.ctx, 950, 740),
+                new Stairs(this.ctx, 950, 780),
+                new Stairs(this.ctx, 950, 820),
+                new Stairs(this.ctx, 950, 860),
+                new Stairs(this.ctx, 950, 900),
+                new Stairs(this.ctx, 950, 940),
+                new Stairs(this.ctx, 950, 980)
             ],
             [
                 new Stairs(this.ctx, 1805, 250),
@@ -163,6 +175,13 @@ class Game{
                 new BasicBlock(this.ctx, 2000, 250),
                 new BasicBlock(this.ctx, 2050, 250),
                 new BasicBlock(this.ctx, 2100, 250, 'right')
+            ],
+
+            //level2
+            [
+                new BasicBlock(this.ctx, 900, 1100, 'left'),
+                new BasicBlock(this.ctx, 950, 1100),
+                new BasicBlock(this.ctx, 1000, 1100, 'right'),
             ]
 
         ]
@@ -173,12 +192,12 @@ class Game{
 
         //generate walls
 
-        for(let i = 0; i < 16; i++){
+        for(let i = 0; i < 64; i++){
             let auxArray1 = []
             let auxArray2 = []
             auxArray1.push(new BasicBlock(this.ctx, 0, 50 * i, 'wall-left'))
             auxArray2.push(new BasicBlock(this.ctx, 1150, 50 * i, 'wall-right'))
-            if(i < 16){
+            if(i < 64){
                 this.basicBlocks.push(auxArray1)
                 this.basicBlocks.push(auxArray2)
             }
@@ -201,6 +220,7 @@ class Game{
         if(!this.drawInterval){
             this.drawInterval = setInterval(() => {
                 this.clear()
+                this.levelAdmin()
                 this.generateElements()
                 this.activateElements()
                 this.move()
@@ -217,11 +237,36 @@ class Game{
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     }
 
+    levelAdmin(){
+        this.level = Math.floor(this.hero.pos.y / 800)
+    }
+
     draw(){
         this.ctx.save()
 
         if(!this.door.doorLock){
             this.ctx.translate(-1550, 0)
+        }
+
+        switch(this.level){
+            case 0:
+                this.ctx.translate(0,0)
+                break
+            case 1:
+                this.ctx.translate(0,-this.canvas.height * this.level)
+                break
+            case 2:
+                this.ctx.translate(0,-this.canvas.height * this.level)
+                break
+            case 3:
+                this.ctx.translate(0,-this.canvas.height * this.level)
+                break
+            case 4:
+                this.ctx.translate(0,-this.canvas.height * this.level)
+                break
+            default:
+                this.ctx.translate(0,0)
+                break
         }
 
         //environment
@@ -236,7 +281,7 @@ class Game{
         this.potionsArray.forEach(potion => potion.draw())
 
         //HUD
-        this.health.draw()
+        this.health.draw(this.level)
 
         //characters
         this.hero.draw()
@@ -339,7 +384,7 @@ class Game{
     }
 
     gameOver(){
-        if(this.health.hp <= 0 || this.hero.pos.y >= 1000){
+        if(this.health.hp <= 0 /* || this.hero.pos.y >= 1000 */){
             this.sounds.gameOver.play()
             setTimeout(() => {
                 clearInterval(this.drawInterval);

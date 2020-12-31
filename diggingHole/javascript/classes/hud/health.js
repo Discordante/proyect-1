@@ -40,8 +40,9 @@ class Health{
         return this.sprite.isReady
     }
 
-    draw() {
-    if (this.isReady()) {
+    draw(level) {
+        this.pos.y = (level*800)
+        if (this.isReady()) {
             this.ctx.drawImage(
             this.sprite,
             this.sprite.horizontalFrameIndex * this.sprite.frameWidth,
@@ -119,10 +120,6 @@ class Health{
                 clearInterval(this.soundInterval)
             },5000)
         }
-    }
-
-    enemyHealth(enemy,object){
-
     }
 
     healthStatus(element, hero){
