@@ -10,7 +10,7 @@ class Hero{
 
         this.blocked = false
 
-        this.pos = {x: 100, y: 50} // position
+        this.pos = {x: 100, y: 200} // position
         this.previousX = this.pos.x
         this.previousY = this.pos.y
 
@@ -54,9 +54,9 @@ class Hero{
 
         //sounds
         this.sounds = {
-            jump: new Audio('./././sound/jump.mp3')
+            jump: new Audio('./././sound/jump-sound.mp3')
         } 
-        this.sounds.jump.volume = 0.1
+        this.sounds.jump.volume = 0.3
 
     }
 
@@ -98,12 +98,15 @@ class Hero{
                 {
                     //console.log('up')
                     if(block instanceof BasicBlock){
+                        this.movements.motion = false
                         this.pos.y  = block.pos.y - this.height - 1
                         this.vel.y = 0
                         
                     }
                     if(block instanceof BlockWithMotion){
                         this.movements.motion = true
+                        this.pos.y  = block.pos.y - this.height - 1
+                        this.vel.y = 0
                     }
                 }
 
@@ -133,10 +136,6 @@ class Hero{
                     this.pos.x  = block.pos.x + block.width + 1
                     this.vel.x = 0
                 }
-                
-            else{
-                this.movements.motion = false
-            }
     }
 
     move(element){

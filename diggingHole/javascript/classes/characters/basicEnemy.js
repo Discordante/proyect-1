@@ -62,7 +62,7 @@ class BasicEnemy{
     activateEnemy(hero){
         this.distance = Math.hypot((this.pos.x - hero.pos.x),(this.pos.y - hero.pos.y))
 
-        if(hero.pos.x >= 1200 && !this.enemyStatus){
+        if(this.distance <= 500 && !this.enemyStatus){
             if(this.enemyLaugh){
                 this.sounds.laugh.play()
                 this.enemyLaugh = false
@@ -93,13 +93,13 @@ class BasicEnemy{
         else if(this.enemyStatus && this.enemyPhase === 2){
             if(this.enemyDirection === 'left'){
                 this.vel.x = -ENEMY_VELOCITY.x
-                if(this.pos.x <= 1600){
+                if(this.pos.x <= 150){
                     this.enemyDirection = 'right'
                 }
             }
             if(this.enemyDirection === 'right'){
                 this.vel.x = ENEMY_VELOCITY.x
-                if(this.pos.x>= 2400){
+                if(this.pos.x>= 900){
                     this.enemyDirection = 'left'
                 }
             }

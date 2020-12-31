@@ -46,6 +46,31 @@ class Game{
                 new Stairs(this.ctx, 950, 940),
                 new Stairs(this.ctx, 950, 980)
             ],
+            //level1
+            [
+                new Stairs(this.ctx, 250, 1400),
+                new Stairs(this.ctx, 250, 1440),
+                new Stairs(this.ctx, 250, 1480)
+            ],
+            [
+                new Stairs(this.ctx, 250, 1400),
+                new Stairs(this.ctx, 250, 1440),
+                new Stairs(this.ctx, 250, 1480)
+            ],
+            //level2
+            [
+                new Stairs(this.ctx, 860, 2150),
+                new Stairs(this.ctx, 860, 2190),
+                new Stairs(this.ctx, 860, 2230),
+                new Stairs(this.ctx, 860, 2270),
+                new Stairs(this.ctx, 860, 2310),
+                new Stairs(this.ctx, 860, 2350),
+                new Stairs(this.ctx, 860, 2390),
+                new Stairs(this.ctx, 860, 2430),
+                new Stairs(this.ctx, 860, 2470),
+                new Stairs(this.ctx, 860, 2510)
+            ],
+            //level4
             [
                 new Stairs(this.ctx, 1805, 250),
                 new Stairs(this.ctx, 1805, 290),
@@ -56,9 +81,9 @@ class Game{
         //objects
         this.barrels = [
             new Barrel(this.ctx, 300, 650, 'barrel'),
-            new Barrel(this.ctx, 2080, 100, 'barrel'),
-            new Barrel(this.ctx, 1700, 100, 'box'),
-            new Barrel(this.ctx, 2000, 100, 'box'),
+            new Barrel(this.ctx, 150, 2600, 'barrel'),
+            new Barrel(this.ctx, 300, 2600, 'box'),
+            new Barrel(this.ctx, 850, 2600, 'box'),
         ]
 
         //inventary
@@ -86,7 +111,7 @@ class Game{
         
         //blocks
         this.basicBlocks = [
-            //level1
+            //level0
             [   
                 new BasicBlock(this.ctx, 0, 300, 'left'),
                 new BasicBlock(this.ctx, 50, 300),
@@ -136,58 +161,119 @@ class Game{
                 new BasicBlock(this.ctx, 450, 580, 'right')
 
             ],
-            //level2
-            [
-                new BasicBlock(this.ctx, 1600, 770, 'left'),
-                new BasicBlock(this.ctx, 1650, 770),
-                new BasicBlock(this.ctx, 1700, 770),
-                new BasicBlock(this.ctx, 1750, 770),
-                new BasicBlock(this.ctx, 1800, 770),
-                new BasicBlock(this.ctx, 1850, 770),
-                new BasicBlock(this.ctx, 1900, 770),
-                new BasicBlock(this.ctx, 1950, 770),
-                new BasicBlock(this.ctx, 2000, 770),
-                new BasicBlock(this.ctx, 2050, 770),
-                new BasicBlock(this.ctx, 2100, 770),
-                new BasicBlock(this.ctx, 2150, 770),
-                new BasicBlock(this.ctx, 2200, 770),
-                new BasicBlock(this.ctx, 2250, 770),
-                new BasicBlock(this.ctx, 2300, 770),
-                new BasicBlock(this.ctx, 2350, 770),
-                new BasicBlock(this.ctx, 2400, 770),
-                new BasicBlock(this.ctx, 2450, 770, 'right')
-            ],
-            [
-                new BasicBlock(this.ctx, 2600, 550, 'left'),
-                new BasicBlock(this.ctx, 2650, 550),
-                new BasicBlock(this.ctx, 2700, 550),
-                new BasicBlock(this.ctx, 2750, 550),
-                new BasicBlock(this.ctx, 2800, 550, 'right')
-            ],
-            [
-                new BasicBlock(this.ctx, 1600, 250, 'left'),
-                new BasicBlock(this.ctx, 1650, 250),
-                new BasicBlock(this.ctx, 1700, 250),
-                new BasicBlock(this.ctx, 1750, 250, 'right')
-            ],
-            [
-                new BasicBlock(this.ctx, 1950, 250, 'left'),
-                new BasicBlock(this.ctx, 2000, 250),
-                new BasicBlock(this.ctx, 2050, 250),
-                new BasicBlock(this.ctx, 2100, 250, 'right')
-            ],
 
-            //level2
+            //level1
             [
-                new BasicBlock(this.ctx, 900, 1100, 'left'),
+                new BasicBlock(this.ctx, 650, 1100, 'left'),
+                new BasicBlock(this.ctx, 700, 1100),
+                new BasicBlock(this.ctx, 750, 1100),
+                new BasicBlock(this.ctx, 800, 1100),
+                new BasicBlock(this.ctx, 850, 1100),
+                new BasicBlock(this.ctx, 900, 1100),
                 new BasicBlock(this.ctx, 950, 1100),
                 new BasicBlock(this.ctx, 1000, 1100, 'right'),
-            ]
+            ],
+            [
+                new BasicBlock(this.ctx, 300, 1100, 'left'),
+                new BasicBlock(this.ctx, 350, 1100),
+                new BasicBlock(this.ctx, 400, 1100, 'right'),
+            ],
+            [
+                new BasicBlock(this.ctx, 900, 1400, 'left'),
+                new BasicBlock(this.ctx, 950, 1400),
+                new BasicBlock(this.ctx, 1000, 1400, 'right'),
+            ],
+            [
+                new BasicBlock(this.ctx, 600, 1400, 'left'),
+                new BasicBlock(this.ctx, 650, 1400),
+                new BasicBlock(this.ctx, 700, 1400, 'right'),
+            ],
+            [
+                new BasicBlock(this.ctx, 310, 1400, 'left'),
+                new BasicBlock(this.ctx, 360, 1400),
+                new BasicBlock(this.ctx, 390, 1400, 'right'),
+            ],
+            [
+                new BasicBlock(this.ctx, 90, 1200, 'left'),
+                new BasicBlock(this.ctx, 140, 1200, 'right'),
+            ],
+            [
+                new BasicBlock(this.ctx, 140, 1400, 'left'),
+                new BasicBlock(this.ctx, 190, 1400, 'right'),
+            ],
+            [
+                new BasicBlock(this.ctx, 200, 1550, 'left'),
+                new BasicBlock(this.ctx, 250, 1550),
+                new BasicBlock(this.ctx, 300, 1550),
+                new BasicBlock(this.ctx, 350, 1550),
+                new BasicBlock(this.ctx, 450, 1550),
+                new BasicBlock(this.ctx, 500, 1550, 'right')
+            ],
+            //level2
+            [
+                new BasicBlock(this.ctx, 350, 1850, 'left'),
+                new BasicBlock(this.ctx, 400, 1850),
+                new BasicBlock(this.ctx, 450, 1850),
+                new BasicBlock(this.ctx, 500, 1850),
+                new BasicBlock(this.ctx, 550, 1850, 'right')
+            ],
+            [
+                new BasicBlock(this.ctx, 550, 2150, 'left'),
+                new BasicBlock(this.ctx, 600, 2150),
+                new BasicBlock(this.ctx, 650, 2150),
+                new BasicBlock(this.ctx, 700, 2150),
+                new BasicBlock(this.ctx, 750, 2150),
+                new BasicBlock(this.ctx, 800, 2150, 'right')
+            ],
+            //level3
 
+
+
+            //level4
+            [
+                new BasicBlock(this.ctx, 150, 3150, 'left'),
+                new BasicBlock(this.ctx, 200, 3150),
+                new BasicBlock(this.ctx, 250, 3150),
+                new BasicBlock(this.ctx, 300, 3150),
+                new BasicBlock(this.ctx, 350, 3150),
+                new BasicBlock(this.ctx, 400, 3150),
+                new BasicBlock(this.ctx, 450, 3150),
+                new BasicBlock(this.ctx, 500, 3150),
+                new BasicBlock(this.ctx, 550, 3150),
+                new BasicBlock(this.ctx, 600, 3150),
+                new BasicBlock(this.ctx, 650, 3150),
+                new BasicBlock(this.ctx, 700, 3150),
+                new BasicBlock(this.ctx, 750, 3150),
+                new BasicBlock(this.ctx, 800, 3150),
+                new BasicBlock(this.ctx, 850, 3150),
+                new BasicBlock(this.ctx, 900, 3150),
+                new BasicBlock(this.ctx, 950, 3150),
+                new BasicBlock(this.ctx, 1000, 3150, 'right')
+            ],
+            [
+                new BasicBlock(this.ctx, 100, 2700, 'left'),
+                new BasicBlock(this.ctx, 150, 2700),
+                new BasicBlock(this.ctx, 200, 2700),
+                new BasicBlock(this.ctx, 250, 2700),
+                new BasicBlock(this.ctx, 300, 2700),
+                new BasicBlock(this.ctx, 350, 2700),
+                new BasicBlock(this.ctx, 400, 2700, 'right')
+            ],
+            [
+                new BasicBlock(this.ctx, 600, 2800, 'left'),
+                new BasicBlock(this.ctx, 650, 2800, 'right')
+            ],
+            [
+                new BasicBlock(this.ctx, 800, 2700, 'left'),
+                new BasicBlock(this.ctx, 850, 2700),
+                new BasicBlock(this.ctx, 900, 2700),
+                new BasicBlock(this.ctx, 950, 2700, 'right')
+            ],
         ]
 
         this.blocksMotion = [
-            new BlockWithMotion(this.ctx, 350, 300, 300, 500)      
+            new BlockWithMotion(this.ctx, 350, 300, 300, 500),
+            //new BlockWithMotion(this.ctx, 700, 1850, 700, 900)
         ]
 
         //generate walls
@@ -205,7 +291,7 @@ class Game{
         
         //enemies
         this.basicEnemies = [
-            new BasicEnemy(this.ctx, 2200, 200)
+            new BasicEnemy(this.ctx, 700, 2900)
         ]
 
 
@@ -298,10 +384,9 @@ class Game{
 
         this.ctx.restore()
     }                    
-
+ 
     move(){
         //characters
-        //this.hero.move()
         this.blocksMotion.forEach(block => this.hero.move(block))
         this.basicEnemies.forEach(enemy => enemy.move(this.hero))
 
@@ -333,7 +418,7 @@ class Game{
 
         //blocks
         this.basicBlocks.forEach(platform => platform.forEach(block => this.hero.collisionBlocks(block)))
-        this.blocksMotion.forEach(block => this.hero.collisionBlocks(block))
+        this.blocksMotion.forEach(motionBlock => this.hero.collisionBlocks(motionBlock))
         this.basicEnemies.forEach(enemy => this.basicBlocks.forEach(blockArr => blockArr.forEach(block => enemy.collisionBlocks(block))))
         this.barrels.forEach(barrel => this.basicBlocks.forEach(blockArr => blockArr.forEach(block => barrel.collisionBlocks(block))))
 

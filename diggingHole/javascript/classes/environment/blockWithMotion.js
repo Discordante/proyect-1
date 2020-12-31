@@ -1,5 +1,5 @@
 class BlockWithMotion extends BasicBlock{
-    constructor(ctx, x, y, leftLimit, rightLimit, side){
+    constructor(ctx, x, y, leftLimit, rightLimit){
         super()
         this.ctx = ctx
 
@@ -13,9 +13,6 @@ class BlockWithMotion extends BasicBlock{
         this.pos = {x, y} 
         this.vel = {x: 1, y: 0} 
         this.direction = true   //true: right ----- false: left
-
-        this.side = side
-
     }
 
 
