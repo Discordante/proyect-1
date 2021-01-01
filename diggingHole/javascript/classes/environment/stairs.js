@@ -30,11 +30,15 @@ class Stairs extends GeneralClass{
 
     collision(element){
         this.stairStatus = super.collision(element)
-    }
+        if(this.stairStatus && !element.movements.up){
+            element.vel.y = 0 
+            element.vel.x = 0
 
-    upLadder(element){
-        if(element.movements.up && this.stairStatus){
-            element.vel.y = -GRAVITY
+        }
+        if(this.stairStatus && element.movements.up){
+            element.vel.y = -GRAVITY-2
+            element.vel.x = 0
+
         }
     }
 }

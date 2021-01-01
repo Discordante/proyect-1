@@ -78,14 +78,12 @@ class Game{
             ],
             //level4
             [
-                new Stairs(this.ctx, 1805, 250),
-                new Stairs(this.ctx, 1805, 290),
-                new Stairs(this.ctx, 1805, 330)
-            ],
-            [
-                new Stairs(this.ctx, 550, 2760),
                 new Stairs(this.ctx, 550, 2800),
-                new Stairs(this.ctx, 550, 2840)
+                new Stairs(this.ctx, 550, 2840),
+                new Stairs(this.ctx, 550, 2880),
+                new Stairs(this.ctx, 550, 2920),
+                new Stairs(this.ctx, 550, 2960),
+                new Stairs(this.ctx, 550, 3000),
 
             ]
         ]
@@ -284,8 +282,9 @@ class Game{
         ]
 
         this.blocksMotion = [
-            new BlockWithMotion(this.ctx, 350, 300, 300, 500),
-            new BlockWithMotion(this.ctx, 350, 400, 325, 700)
+            new BlockWithMotion(this.ctx, 150, 150, 250, 400),
+            new BlockWithMotion(this.ctx, 250, 300, 250, 500),
+            new BlockWithMotion(this.ctx, 300, 420, 325, 700)
         ]
 
         //generate walls
@@ -407,7 +406,6 @@ class Game{
         this.roofTraps.forEach(trap => trap.move(this.hero))
 
         //environment
-        this.ladders.forEach(ladder => ladder.forEach( step => step.upLadder(this.hero)))
         this.barrels.forEach(barrel => barrel.move())
 
         //floor
@@ -442,7 +440,7 @@ class Game{
         //environment
         this.door.collision(this.hero)
         this.safeBoxes.forEach(safeBox => safeBox.collision(this.hero))
-        this.ladders.forEach(ladder => ladder.forEach( step => step.collision(this.hero)))
+        this.ladders.forEach(ladder => ladder.forEach(step => step.collision(this.hero)))
         this.barrels.forEach(barrel => barrel.collision(this.hero))
         this.barrels.forEach(barrel =>  this.barrels.forEach(element => barrel.collision(element)))
 

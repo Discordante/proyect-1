@@ -33,10 +33,7 @@ class Hero{
             jumpTimer: 0,
             jumpTimerFunction: undefined,
 
-            crouchStatus: false,
-
-            motionBlockCollision: false,
-            motionBlockDirection: 'left'
+            crouchStatus: false
         }
 
         //inventory
@@ -98,13 +95,14 @@ class Hero{
 
                 {
                     //console.log('up')
-
+                    if(!this.movements.left && !this.movements.right){
+                        this.vel.x = 0
+                    }
                     this.pos.y  = block.pos.y - this.height - 1
                     this.vel.y = 0
                         
                     if(block instanceof BlockWithMotion){
-                        this.movements.motionBlockCollision = true
-                        this.pos.x
+                        this.vel.x = block.vel.x 
                     }
                 }
 
@@ -134,12 +132,9 @@ class Hero{
                     this.pos.x  = block.pos.x + block.width + 1
                     this.vel.x = 0
                 }
-            else{
-                this.movements.motionBlockCollision = false
-            }
     }
 
-    move(element){
+    move(){
         this.previousX = this.pos.x
         this.previousY = this.pos.y
         
@@ -160,18 +155,6 @@ class Hero{
             }
             
         } 
-        
-        else if(this.movements.motionBlockDirection === 'right' && this.movements.motionBlockCollision){
-            this.vel.x = 1
-        }
-        else if(this.movements.motionBlockDirection === 'left' && this.movements.motionBlockCollision){
-            this.vel.x = -1
-        }
-        else {  
-            this.vel.x = 0
-        }
-        
-        console.log(this.movements.motionBlockDirection)
 
         //crouch movement
         if (this.movements.crouch && !this.movements.crouchStatus){ 
@@ -181,7 +164,7 @@ class Hero{
 
         if(!this.movements.crouch && this.movements.crouchStatus){
             this.pos.y -= 50
-            this.height = this.defaultHeight
+            this.height = this.defaultHeight 
             this.movements.crouchStatus = false
         } 
 

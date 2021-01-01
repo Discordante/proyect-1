@@ -11,22 +11,22 @@ class BlockWithMotion extends BasicBlock{
         
         this.pos = {x, y} 
         this.vel = {x: 1, y: 0} 
-        this.direction = true   //true: right ----- false: left
+        this.direction = 'right'   
     }
 
 
     move(hero){
         //console.log(this.direction)
-        if(this.pos.x >= this.rightLimit && this.direction){
+        if(this.pos.x >= this.rightLimit && this.direction === 'right'){
             this.vel.x = -1
-            this.direction = false
-            hero.movements.motionBlockDirection = 'left'
+            this.direction = 'left'
+            hero.movements.motionBlockDirection =  this.direction
             
         }
-        else if(this.pos.x <= this.leftLimit && !this.direction){
+        else if(this.pos.x <= this.leftLimit && this.direction === 'left'){
             this.vel.x = 1  
-            this.direction = true
-            hero.movements.motionBlockDirection = 'right'
+            this.direction = 'right'
+            hero.movements.motionBlockDirection = this.direction
         }
         
         //update position  
