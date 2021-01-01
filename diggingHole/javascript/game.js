@@ -204,8 +204,8 @@ class Game{
                 new BasicBlock(this.ctx, 390, 1400, 'right'),
             ],
             [
-                new BasicBlock(this.ctx, 90, 1200, 'left'),
-                new BasicBlock(this.ctx, 140, 1200, 'right'),
+                new BasicBlock(this.ctx, 100, 1200, 'left'),
+                new BasicBlock(this.ctx, 150, 1200, 'right'),
             ],
             [
                 new BasicBlock(this.ctx, 140, 1400, 'left'),
@@ -285,6 +285,11 @@ class Game{
             new BlockWithMotion(this.ctx, 150, 150, 250, 400),
             new BlockWithMotion(this.ctx, 250, 300, 250, 500),
             new BlockWithMotion(this.ctx, 300, 420, 325, 700)
+        ]
+
+        this.elevatorBlocks = [
+            new ElevatorBlock(this.ctx, 45, 500, 500, 2800),
+            new ElevatorBlock(this.ctx, 200, 300, 300, 700)
         ]
 
         //generate walls
@@ -392,6 +397,7 @@ class Game{
         //floor
         this.basicBlocks.forEach(platform => platform.forEach(block => block.draw()))
         this.blocksMotion.forEach(block => block.draw())
+        this.elevatorBlocks.forEach(block => block.draw())
 
         this.ctx.restore()
     }                    
@@ -409,7 +415,8 @@ class Game{
         this.barrels.forEach(barrel => barrel.move())
 
         //floor
-        this.blocksMotion.forEach(block => block.move(this.hero))
+        this.blocksMotion.forEach(block => block.move())
+        this.elevatorBlocks.forEach(block => block.move())
 
     }
 
@@ -430,6 +437,7 @@ class Game{
         //blocks
         this.basicBlocks.forEach(platform => platform.forEach(block => this.hero.collisionBlocks(block)))
         this.blocksMotion.forEach(motionBlock => this.hero.collisionBlocks(motionBlock))
+        this.elevatorBlocks.forEach(elevatorBlock => this.hero.collisionBlocks(elevatorBlock))
         this.basicEnemies.forEach(enemy => this.basicBlocks.forEach(blockArr => blockArr.forEach(block => enemy.collisionBlocks(block))))
         this.barrels.forEach(barrel => this.basicBlocks.forEach(blockArr => blockArr.forEach(block => barrel.collisionBlocks(block))))
 

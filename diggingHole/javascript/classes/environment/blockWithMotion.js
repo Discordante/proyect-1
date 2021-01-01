@@ -15,18 +15,15 @@ class BlockWithMotion extends BasicBlock{
     }
 
 
-    move(hero){
-        //console.log(this.direction)
+    move(){
         if(this.pos.x >= this.rightLimit && this.direction === 'right'){
             this.vel.x = -1
             this.direction = 'left'
-            hero.movements.motionBlockDirection =  this.direction
             
         }
         else if(this.pos.x <= this.leftLimit && this.direction === 'left'){
             this.vel.x = 1  
             this.direction = 'right'
-            hero.movements.motionBlockDirection = this.direction
         }
         
         //update position  

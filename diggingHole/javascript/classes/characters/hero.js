@@ -98,13 +98,18 @@ class Hero{
                     if(!this.movements.left && !this.movements.right){
                         this.vel.x = 0
                     }
+
                     this.pos.y  = block.pos.y - this.height - 1
                     this.vel.y = 0
-                        
+
                     if(block instanceof BlockWithMotion){
                         this.vel.x = block.vel.x 
                     }
-                }
+
+                    if(block instanceof ElevatorBlock){
+                        this.pos.y  = block.pos.y - this.height - 5
+                    } 
+                } 
 
             else if( //---collision left---
                 this.pos.y + this.height >= block.pos.y &&
@@ -132,6 +137,7 @@ class Hero{
                     this.pos.x  = block.pos.x + block.width + 1
                     this.vel.x = 0
                 }
+
     }
 
     move(){
