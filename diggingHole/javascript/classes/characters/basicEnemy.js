@@ -72,17 +72,18 @@ class BasicEnemy{
                 this.enemyPhase = 1
             },6000)
         }
-        else if(this.distance <= ACT_ENEMY_DISTANCE && this.enemyStatus){
+        if(this.distance <= ACT_ENEMY_DISTANCE && this.enemyStatus && hero.pos.x <= 1000){
             this.enemyPhase = 1
         }
-        else if(this.distance >= ACT_ENEMY_DISTANCE && this.enemyStatus){
+        if((this.distance >= ACT_ENEMY_DISTANCE && this.enemyStatus) || hero.pos.x >= 1000){
             this.enemyPhase = 2
         }
+
     }
 
     move(hero){
         if(this.enemyStatus && this.enemyPhase === 1){
-            if(hero.pos.x > this.pos.x + this.width + 2){
+            if(hero.pos.x > this.pos.x + this.width + 2){ 
                 this.vel.x = ENEMY_VELOCITY.x
             }
             else if(hero.pos.x + hero.width < this.pos.x - 2){

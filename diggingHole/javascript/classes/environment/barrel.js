@@ -79,9 +79,18 @@ class Barrel{
 
                 {
                     //console.log('up')
+                    
                     this.pos.y  = block.pos.y - this.height - 1
                     this.vel.y = 0
                     this.vel.x = 0
+
+                    if(block instanceof BlockWithMotion){
+                        this.vel.x = block.vel.x 
+                    }
+
+                    if(block instanceof ElevatorBlock){
+                        this.pos.y  = block.pos.y - this.height - 12
+                    }
                 }
 
             else if( //---collision left---
@@ -94,7 +103,6 @@ class Barrel{
                 {
                     //console.log('left')
                     this.pos.x  = block.pos.x - this.width - 1
-                    this.vel.x = 0
                 }
 
             else if( // ---collision right---
@@ -108,7 +116,6 @@ class Barrel{
                 {
                     //console.log('right')
                     this.pos.x  = block.pos.x + block.width + 1
-                    this.vel.x = 0
                 }
     }
 
@@ -145,7 +152,7 @@ class Barrel{
             {
                 this.colisionStatus.up = true
             
-                element.pos.y = this.pos.y - this.height -20
+                element.pos.y = this.pos.y - this.height - 20
                 element.vel.x = 0
             }
          //BOTTOM COLLISION
@@ -175,12 +182,12 @@ class Barrel{
         }
         
 
-        if(this.previousX != this.pos.x){
+        /* if(this.previousX != this.pos.x){
             this.sounds.scrap.play()
         }
         else{
             this.sounds.scrap.pause()
-        }
+        } */
 
         //update position  
         this.previousX = this.pos.x
@@ -189,5 +196,12 @@ class Barrel{
 
         this.pos.x += this.vel.x
         this.pos.y += this.vel.y
+
+        if(this.pos.x > 1100 - this.width){
+            this.pos.x = 1100 - this.width
+        }
+        if(this.pos.x < 150 - this.width){
+            this.pos.x = 150 - this.width
+        }
     }
 }

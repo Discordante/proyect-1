@@ -1,16 +1,16 @@
 class ElevatorBlock extends BasicBlock{
-    constructor(ctx, x, y, upLimit, downLimit){
+    constructor(ctx, x, y, width, upLimit, downLimit, speed){
         super(ctx)
         this.ctx = ctx
 
-        this.width = 50
+        this.width = width
         this.height = 50
 
         this.upLimit = upLimit
         this.downLimit = downLimit
         
         this.pos = {x, y} 
-        this.vel = {x: 0, y: 2} 
+        this.vel = {x: 0, y: speed} 
         this.direction = 'down'   
     }
 

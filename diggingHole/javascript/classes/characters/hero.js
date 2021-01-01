@@ -10,7 +10,7 @@ class Hero{
 
         this.blocked = false
 
-        this.pos = {x: 100, y: 200} // position
+        this.pos = {x: 950, y: 200} // position
         this.previousX = this.pos.x
         this.previousY = this.pos.y
 
@@ -39,7 +39,7 @@ class Hero{
         //inventory
         this.inventory = {
             doorKey: true, //change later
-            steelBoots: true
+            steelBoots: false
         }
 
         //collisions
