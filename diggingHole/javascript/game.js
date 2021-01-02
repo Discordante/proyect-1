@@ -17,7 +17,7 @@ class Game{
         this.health = new Health (this.ctx)
 
         //environment
-        this.door = new Door(this.ctx, 125, 670)  
+        this.door = new Door(this.ctx, 125, 620)  
 
         this.safeBoxes = [
             new SafeBox(this.ctx, 2695, 503),
@@ -267,23 +267,37 @@ class Game{
 
         //floor traps
         this.floorTraps = [
-            new FloorTrap(this.ctx, 305, 560),
             new FloorTrap(this.ctx, 220, 740)
         ]
 
         //generate random floor traps
-        for(let i = 0; i< NUM_TRAPS; i++){
+        for(let i = 0; i< NUM_FLOOR_TRAPS; i++){
             this.randomX = Math.floor(Math.random() * this.basicBlocks.length)
             this.randomY = Math.floor(Math.random() * this.basicBlocks[this.randomX].length)
     
             this.floorTraps.push(new FloorTrap(this.ctx, this.basicBlocks[this.randomX][this.randomY].pos.x + 5, this.basicBlocks[this.randomX][this.randomY].pos.y - 20))
         } 
     
+        //foor traps
         this.roofTraps = [
-            new RoofTrap(this.ctx, 480, 405),
-            new RoofTrap(this.ctx, 170, 530),
-
+            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
+            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
+            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
+            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
+            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
+            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
+            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
+            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
+            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
+            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
+            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
+            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
+            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
+            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
+            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
         ]
+        //generate random roof traps
+        
 
         this.blocksMotion = [
             new BlockWithMotion(this.ctx, 150, 150, 250, 400),
@@ -316,14 +330,18 @@ class Game{
         ]
 
 
+        //sound
         this.sounds = {
-            gameOver: new Audio('./././sound/game-over.mp3')
+            gameOver: new Audio('./././sound/game-over.mp3'),
+            cave: new Audio('./sound/cave-sound.mp3')
         } 
         this.sounds.gameOver.volume = 0.6
+        this.sounds.cave.volume = 0.7
     }
 
 
     start(){
+        this.sounds.cave.play()
         if(!this.drawInterval){
             this.drawInterval = setInterval(() => {
                 this.clear()
@@ -430,7 +448,6 @@ class Game{
        if(this.arrow.generateArrow(this.hero)){
            this.arrowArray.push(new ArrowTrap(this.ctx))
        }
-  
     }
 
     activateElements(){

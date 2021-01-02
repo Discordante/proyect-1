@@ -19,7 +19,8 @@ class FloorTrap extends GeneralClass{
 
         this.sounds = {
             trapActive: new Audio('./././sound/Spike_Trap_1.m4a'),
-          } 
+        } 
+        this.sounds.trapActive.volume = 0.3
     }
 
     isReady(){

@@ -2,8 +2,8 @@ class Door extends GeneralClass{
     constructor(ctx, x, y){
         super(ctx, x, y)
 
-        this.height = 100
-        this.width = 80
+        this.height = 150
+        this.width = 110
 
         this.doorStatus = false
         this.doorLock = true

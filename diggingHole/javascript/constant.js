@@ -24,14 +24,14 @@ const MAX_GRAVITY = 20
 
 //damages
 const FLOOR_TRAP_DAMAGE = 20
-const ROOF_TRAP_DAMAGE = 50
+const ROOF_TRAP_DAMAGE = 20
 const ARROW_DAMAGE = 30
 const ENEMY_DAMAGE = 10
 //arrows
 const ARROW_SPEED = -15
 
 //floor traps
-const NUM_TRAPS = 10
+const NUM_FLOOR_TRAPS = 10
 
 
 //health
