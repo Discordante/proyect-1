@@ -38,7 +38,7 @@ class Hero{
 
         //inventory
         this.inventory = {
-            doorKey: true, //change later
+            doorKey: true, 
             steelBoots: false
         }
 
@@ -140,7 +140,7 @@ class Hero{
 
     }
 
-    move(){
+    move(){ 
         this.previousX = this.pos.x
         this.previousY = this.pos.y
         

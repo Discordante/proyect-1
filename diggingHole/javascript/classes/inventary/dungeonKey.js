@@ -30,21 +30,21 @@ class DungeonKey extends GeneralClass{
         return this.img.ready
     }
 
-    draw(){
-        if(!this.keyInventary){
+    draw(enemy){
+        if(!this.keyInventary && enemy.hp <= 0){
             if(this.isReady()){
                 this.ctx.drawImage(this.img, this.pos.x, this.pos.y, this.width, this.height)
             }
         }
     }
 
-    collision(element){
-        if(super.collision(element)){
+    collision(hero, enemy){
+        if(super.collision(hero) && enemy.hp <= 0){
             this.collisionCounter++
             if(this.collisionCounter === 1){
                 this.sounds.itemCollision.play()
                 this.keyInventary = true
-                element.inventory.doorKey = true
+                hero.inventory.doorKey = true
             }
         }
     }

@@ -136,6 +136,7 @@ class Health{
             if(element.trapDamage && element.roofTrapReady){
                 this.hp -= element.damage
                 element.roofTrapReady = false
+                element.trapDamage = false
             }
         }
         else if(element instanceof ArrowTrap){

@@ -42,7 +42,7 @@ class BasicEnemy{
         this.sounds = {
             laugh: new Audio('./././sound/Evil-Laugh-2.mp3'),
             boxHit: new Audio('./././sound/box-hit.mp3'),
-            damage: new Audio('./././sound/damage-sound.mp3'),
+            stone: new Audio('./././sound/stone-hit.mp3'),
             death : new Audio('./././sound/Monster-Growl.mp3')
         } 
         this.sounds.laugh.volume = 0.3 
@@ -224,8 +224,13 @@ class BasicEnemy{
             element.previousY + element.height < this.pos.y) 
             {
 
-                this.colisionStatus.up = true
                 element.vel.y = -20
+
+                if(element instanceof Hero){
+                    this.colisionStatus.up = true
+                }
+                
+                //this.colisionStatus.up = true
 
                 if(element instanceof Barrel){
                     this.hp -= 50

@@ -16,12 +16,7 @@ class Game{
         this.hero = new Hero(this.ctx)
         this.health = new Health (this.ctx)
 
-        //environment
-        this.door = new Door(this.ctx, 125, 620)  
-
-        this.safeBoxes = [
-            new SafeBox(this.ctx, 2695, 503),
-        ]
+        
 
         this.ladders = [
             [
@@ -85,21 +80,6 @@ class Game{
             ]
         ]
         
-        //objects
-        this.barrels = [
-            new Barrel(this.ctx, 300, 150, 'barrel'),
-            new Barrel(this.ctx, 300, 2800, 'barrel'),
-            new Barrel(this.ctx, 300, 2600, 'box'),
-            new Barrel(this.ctx, 850, 2800, 'box'),
-        ]
-
-        //inventary
-        this.steelBoots = new SteelBoots(this.ctx, 1040, 668)
-        this.dungeonKey = new DungeonKey(this.ctx, 550, 100)
-        this.potionsArray = [
-            new Potions(this.ctx, 470, 735)
-        ]
-        
         //blocks
         this.basicBlocks = [
             //level0
@@ -127,15 +107,15 @@ class Game{
                 new BasicBlock(this.ctx, 1050, 500, 'right')
             ],
             [
-                new BasicBlock(this.ctx, 100, 760, 'left'),
-                new BasicBlock(this.ctx, 150, 760),
-                new BasicBlock(this.ctx, 200, 760),
-                new BasicBlock(this.ctx, 250, 760),
-                new BasicBlock(this.ctx, 300, 760),
-                new BasicBlock(this.ctx, 350, 760),
-                new BasicBlock(this.ctx, 400, 760),
-                new BasicBlock(this.ctx, 450, 760),
-                new BasicBlock(this.ctx, 500, 760, 'right'),
+                new BasicBlock(this.ctx, 100, 750, 'left'),
+                new BasicBlock(this.ctx, 150, 750),
+                new BasicBlock(this.ctx, 200, 750),
+                new BasicBlock(this.ctx, 250, 750),
+                new BasicBlock(this.ctx, 300, 750),
+                new BasicBlock(this.ctx, 350, 750),
+                new BasicBlock(this.ctx, 400, 750),
+                new BasicBlock(this.ctx, 450, 750),
+                new BasicBlock(this.ctx, 500, 750, 'right'),
             ],
             [
                 new BasicBlock(this.ctx, 1000, 700, 'left'),
@@ -217,10 +197,6 @@ class Game{
                 new BasicBlock(this.ctx, 800, 2150, 'right')
             ],
             //level3
-
-
-
-            //level4
             [
                 new BasicBlock(this.ctx, 140, 3150, 'left'),
                 new BasicBlock(this.ctx, 190, 3150),
@@ -259,6 +235,51 @@ class Game{
                 new BasicBlock(this.ctx, 900, 2700),
                 new BasicBlock(this.ctx, 950, 2700, 'right')
             ],
+            //level4
+            [
+                new BasicBlock(this.ctx, 140, 3950, 'left'),
+                new BasicBlock(this.ctx, 190, 3950),
+                new BasicBlock(this.ctx, 240, 3950),
+                new BasicBlock(this.ctx, 290, 3950),
+                new BasicBlock(this.ctx, 340, 3950),
+                new BasicBlock(this.ctx, 390, 3950),
+                new BasicBlock(this.ctx, 440, 3950),
+                new BasicBlock(this.ctx, 490, 3950),
+                new BasicBlock(this.ctx, 540, 3950),
+                new BasicBlock(this.ctx, 590, 3950),
+                new BasicBlock(this.ctx, 640, 3950),
+                new BasicBlock(this.ctx, 690, 3950),
+                new BasicBlock(this.ctx, 740, 3950),
+                new BasicBlock(this.ctx, 790, 3950),
+                new BasicBlock(this.ctx, 840, 3950),
+                new BasicBlock(this.ctx, 890, 3950),
+                new BasicBlock(this.ctx, 940, 3950, 'right')
+            ],
+
+        ]
+
+        //environment
+        this.doors = [
+            new Door(this.ctx, 125, 610),  
+            new Door(this.ctx, 200, 3820)
+        ]
+
+        this.safeBoxes = [
+            new SafeBox(this.ctx, 900, 3905),
+        ]
+
+         this.barrels = [
+            new Barrel(this.ctx, 300, 150, 'barrel'),
+            new Barrel(this.ctx, 300, 2800, 'barrel'),
+            new Barrel(this.ctx, 300, 2600, 'box'),
+            new Barrel(this.ctx, 850, 2800, 'box'),
+        ]
+
+        //inventary
+        this.steelBoots = new SteelBoots(this.ctx, 1040, 668)
+        this.dungeonKey = new DungeonKey(this.ctx, 625, 2760)
+        this.potionsArray = [
+            new Potions(this.ctx, 470, 725)
         ]
 
         //traps
@@ -266,11 +287,8 @@ class Game{
         this.arrowArray = []
 
         //floor traps
-        this.floorTraps = [
-            new FloorTrap(this.ctx, 220, 740)
-        ]
+        this.floorTraps = []
 
-        //generate random floor traps
         for(let i = 0; i< NUM_FLOOR_TRAPS; i++){
             this.randomX = Math.floor(Math.random() * this.basicBlocks.length)
             this.randomY = Math.floor(Math.random() * this.basicBlocks[this.randomX].length)
@@ -278,27 +296,14 @@ class Game{
             this.floorTraps.push(new FloorTrap(this.ctx, this.basicBlocks[this.randomX][this.randomY].pos.x + 5, this.basicBlocks[this.randomX][this.randomY].pos.y - 20))
         } 
     
-        //foor traps
-        this.roofTraps = [
-            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
-            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
-            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
-            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
-            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
-            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
-            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
-            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
-            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
-            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
-            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
-            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
-            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
-            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
-            new RoofTrap(this.ctx, Math.floor(Math.random() * 1150), Math.floor(Math.random() * -100000)),
-        ]
-        //generate random roof traps
-        
+        //roof traps
+        this.roofTraps = []
 
+        for(let i = 0; i< NUM_ROOF_TRAPS; i++){
+            this.roofTraps.push(new RoofTrap(this.ctx, Math.floor(Math.random() * 1150),  this.randomY = Math.floor(Math.random() * -100000)))
+        } 
+
+        //motion blocks
         this.blocksMotion = [
             new BlockWithMotion(this.ctx, 150, 150, 250, 400),
             new BlockWithMotion(this.ctx, 250, 300, 250, 500),
@@ -313,12 +318,12 @@ class Game{
 
         //generate walls
 
-        for(let i = 0; i < 64; i++){
+        for(let i = 0; i < 82; i++){
             let auxArray1 = []
             let auxArray2 = []
             auxArray1.push(new BasicBlock(this.ctx, 0, 50 * i, 'wall-left'))
             auxArray2.push(new BasicBlock(this.ctx, 1150, 50 * i, 'wall-right'))
-            if(i < 64){
+            if(i < 82){
                 this.basicBlocks.push(auxArray1)
                 this.basicBlocks.push(auxArray2)
             }
@@ -369,9 +374,9 @@ class Game{
     draw(){
         this.ctx.save()
 
-        if(!this.door.doorLock){
-            this.ctx.translate(-1550, 0)
-        }
+        /* if(!this.door.doorLock){
+            this.ctx.translate(0, -3200)
+        } */
 
         switch(this.level){
             case 0:
@@ -387,7 +392,7 @@ class Game{
                 this.ctx.translate(0,-this.canvas.height * this.level)
                 break
             case 4:
-                this.ctx.translate(0,-this.canvas.height * this.level)
+                this.ctx.translate(0,(-this.canvas.height * this.level)-50)
                 break
             default:
                 this.ctx.translate(0,0)
@@ -395,13 +400,13 @@ class Game{
         }
 
         //environment
-        this.door.draw()
+        this.doors.forEach(door => door.draw())
         this.safeBoxes.forEach(safeBox => safeBox.draw())
         this.ladders.forEach(ladder => ladder.forEach( step => step.draw()))
         this.barrels.forEach(barrel => barrel.draw())
 
         //inventory
-        this.dungeonKey.draw()
+        this.dungeonKey.draw(this.basicEnemies[0])
         this.steelBoots.draw()
         this.potionsArray.forEach(potion => potion.draw())
 
@@ -471,14 +476,15 @@ class Game{
         this.basicEnemies.forEach(enemy => this.barrels.forEach(barrel => enemy.collision(barrel)))
 
         //environment
-        this.door.collision(this.hero)
+        this.doors.forEach(door => door.collision(this.hero))
         this.safeBoxes.forEach(safeBox => safeBox.collision(this.hero))
         this.ladders.forEach(ladder => ladder.forEach(step => step.collision(this.hero)))
         this.barrels.forEach(barrel => barrel.collision(this.hero))
         this.barrels.forEach(barrel =>  this.barrels.forEach(element => barrel.collision(element)))
+        
 
         //inventory
-        this.dungeonKey.collision(this.hero)
+        this.dungeonKey.collision(this.hero, this.basicEnemies[0])
         this.steelBoots.collision(this.hero)
         this.potionsArray.forEach(potion => potion.collision(this.hero))
 
@@ -487,6 +493,7 @@ class Game{
         this.roofTraps.forEach(trap => trap.collision(this.hero))
         this.arrowArray.forEach(arrow => arrow.collision(this.hero))
         this.floorTraps.forEach(trap => this.barrels.forEach(barrel => trap.collision(barrel)))
+      
     }
 
 
@@ -503,12 +510,12 @@ class Game{
     }
 
     newWorld(){
-        this.door.enterDoor(this.hero)
-
-        if(!this.door.doorLock && !this.door.doorThrough){
-            this.hero.pos.x = 1700
-            this.hero.pos.y = 400
-            this.door.doorThrough = true
+        this.doors[0].enterDoor(this.hero)
+        this.level = 4
+        if(!this.doors[0].doorLock && !this.doors[0].doorThrough){
+            this.hero.pos.x = 230
+            this.hero.pos.y = 3800
+            this.doors[0].doorThrough = true
         }
     }
 

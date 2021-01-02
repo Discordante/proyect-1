@@ -31,7 +31,8 @@ const ENEMY_DAMAGE = 10
 const ARROW_SPEED = -15
 
 //floor traps
-const NUM_FLOOR_TRAPS = 10
+const NUM_FLOOR_TRAPS = 1
+const NUM_ROOF_TRAPS = 1
 
 
 //health
