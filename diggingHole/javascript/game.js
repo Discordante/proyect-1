@@ -8,6 +8,7 @@ class Game{
         this.canvas.height = 800
 
         this.level = 1
+        this.boss = true
 
         this.drawInterval = undefined
         
@@ -194,8 +195,8 @@ class Game{
                 new BasicBlock(this.ctx, 500, 1850, 'right')
             ],
             [
-                new BasicBlock(this.ctx, 1050, 1800, 'left'),
-                new BasicBlock(this.ctx, 1100, 1800, 'right'),
+                new BasicBlock(this.ctx, 1050, 1850, 'left'),
+                new BasicBlock(this.ctx, 1100, 1850, 'right'),
             ],
             [
                 new BasicBlock(this.ctx, 100, 2000, 'left'),
@@ -203,7 +204,14 @@ class Game{
                 new BasicBlock(this.ctx, 200, 2000, 'right')
             ],
             [
-                new BasicBlock(this.ctx, 550, 2300, 'left'),
+                new BasicBlock(this.ctx, 100, 2300, 'left'),
+                new BasicBlock(this.ctx, 150, 2300),
+                new BasicBlock(this.ctx, 200, 2300, 'right')
+            ],
+            [
+                new BasicBlock(this.ctx, 450, 2300, 'left'),
+                new BasicBlock(this.ctx, 500, 2300),
+                new BasicBlock(this.ctx, 550, 2300),
                 new BasicBlock(this.ctx, 600, 2300),
                 new BasicBlock(this.ctx, 650, 2300),
                 new BasicBlock(this.ctx, 700, 2300),
@@ -272,14 +280,40 @@ class Game{
 
         ]
 
+        //motion blocks
+        this.blocksMotion = [
+            new BlockWithMotion(this.ctx, 150, 150, 250, 400),
+            new BlockWithMotion(this.ctx, 250, 300, 250, 500),
+            new BlockWithMotion(this.ctx, 300, 420, 350, 750),
+
+            //level-1
+            new BlockWithMotion(this.ctx, 300, 1120, 200, 500),
+
+            //level2
+            new BlockWithMotion(this.ctx, 450, 1850, 700, 900),
+            new BlockWithMotion(this.ctx, 300, 2000, 300, 700),
+        ]
+
+        this.elevatorBlocks = [
+            new ElevatorBlock(this.ctx, 45, 500, 50, 500, 2800, 2),
+            new ElevatorBlock(this.ctx, 200, 300, 50, 300, 700, 2),
+            new ElevatorBlock(this.ctx, 1000, 3000, 150, 2650, 3200, 2),
+
+            //level1
+            new ElevatorBlock(this.ctx, 900, 1500, 50, 1400, 1500, 2),
+
+            //level2
+            new ElevatorBlock(this.ctx, 260, 2100, 50, 2000, 2320, 2),
+        ]
+
         //environment
         this.doors = [
-            new Door(this.ctx, 125, 610),  
+            new Door(this.ctx, 125, 615),  
             new Door(this.ctx, 200, 3820)
         ]
 
         this.safeBoxes = [
-            new SafeBox(this.ctx, 900, 3905),
+            new SafeBox(this.ctx, 800, 3860),
         ]
 
          this.barrels = [
@@ -305,7 +339,8 @@ class Game{
         this.steelBoots = new SteelBoots(this.ctx, 1085, 1510)
         this.dungeonKey = new DungeonKey(this.ctx, 625, 2760)
         this.potionsArray = [
-            new Potions(this.ctx, 470, 725)
+            new Potions(this.ctx, 480, 700),
+            new Potions(this.ctx, 1085, 1795),
         ]
 
         //traps
@@ -325,32 +360,9 @@ class Game{
         //roof traps
         this.roofTraps = []
 
-        for(let i = 0; i< NUM_ROOF_TRAPS; i++){
+        for(let i = 0; i< NUM_ROOF_TRAPS_INIT; i++){
             this.roofTraps.push(new RoofTrap(this.ctx, Math.floor(Math.random() * 1150),  this.randomY = Math.floor(Math.random() * -100000)))
         } 
-
-        //motion blocks
-        this.blocksMotion = [
-            new BlockWithMotion(this.ctx, 150, 150, 250, 400),
-            new BlockWithMotion(this.ctx, 250, 300, 250, 500),
-            new BlockWithMotion(this.ctx, 300, 420, 350, 750),
-
-            //level-1
-            new BlockWithMotion(this.ctx, 300, 1120, 200, 500),
-
-            //level2
-            new BlockWithMotion(this.ctx, 450, 1850, 700, 900),
-            new BlockWithMotion(this.ctx, 300, 2000, 300, 500),
-        ]
-
-        this.elevatorBlocks = [
-            new ElevatorBlock(this.ctx, 45, 500, 50, 500, 2800, 2),
-            new ElevatorBlock(this.ctx, 200, 300, 50, 300, 700, 2),
-            new ElevatorBlock(this.ctx, 1000, 3000, 150, 2650, 3200, 2),
-
-            //level1
-            new ElevatorBlock(this.ctx, 900, 1500, 50, 1400, 1500, 2),
-        ]
 
         //generate walls
 
@@ -490,6 +502,13 @@ class Game{
        if(this.arrow.generateArrow(this.hero)){
            this.arrowArray.push(new ArrowTrap(this.ctx))
        }
+
+       if(this.basicEnemies[0].hp === 0 && this.boss){
+        this.boss = false
+        for(let i = 0; i < NUM_ROOF_TRAPS_FINAL; i++){
+            this.roofTraps.push(new RoofTrap(this.ctx, Math.floor(Math.random() * 1150),  this.randomY = Math.floor(Math.random() * -100000)))
+        } 
+       }
     }
 
     activateElements(){
@@ -530,7 +549,6 @@ class Game{
         this.roofTraps.forEach(trap => trap.collision(this.hero))
         this.arrowArray.forEach(arrow => arrow.collision(this.hero))
         this.floorTraps.forEach(trap => this.barrels.forEach(barrel => trap.collision(barrel)))
-      
     }
 
 

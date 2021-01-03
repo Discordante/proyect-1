@@ -5,15 +5,15 @@ class Potions extends GeneralClass{
         this.x = x
         this.y = y
 
-        this.height = 25
-        this.width = 20
+        this.height = 40
+        this.width = 40
 
         this.potionStatus = false
         this.potionReady = true
         this.collisionCounter = 0
 
         this.img = new Image()
-        this.img.src = './././images/Items/potion.png'
+        this.img.src = './././images/Items/potion2.png'
         this.ready = false
         this.img.onload = () => {
             this.img.ready = true

@@ -2,8 +2,8 @@ class SafeBox extends GeneralClass{
     constructor(ctx, x, y){
         super(ctx, x, y)
 
-        this.height = 50
-        this.width = 60
+        this.height = 100
+        this.width = 120
 
         this.boxStatus = false
         this.boxLock = true

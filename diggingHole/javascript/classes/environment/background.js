@@ -8,7 +8,7 @@ class Background{
         this.width = 1500
 
         this.img = new Image()
-        this.img.src = './././images/environment/background1.jpg'
+        this.img.src = './././images/environment/background2.jpg'
     
         this.ready = false
         this.img.onload = () => {

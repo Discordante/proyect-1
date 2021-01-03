@@ -42,7 +42,6 @@ class BasicEnemy{
         this.sounds = {
             laugh: new Audio('./././sound/Evil-Laugh-2.mp3'),
             boxHit: new Audio('./././sound/box-hit.mp3'),
-            stone: new Audio('./././sound/stone-hit.mp3'),
             death : new Audio('./././sound/Monster-Growl.mp3')
         } 
         this.sounds.laugh.volume = 0.3 
