@@ -38,7 +38,10 @@ class Stairs extends GeneralClass{
         if(this.stairStatus && element.movements.up){
             element.vel.y = -GRAVITY-2
             element.vel.x = 0
+        }
 
+        if(this.stairStatus){
+            element.heightJump.initial = element.pos.y
         }
     }
 }

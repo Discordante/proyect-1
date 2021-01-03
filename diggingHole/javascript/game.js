@@ -19,6 +19,7 @@ class Game{
         
 
         this.ladders = [
+            //level-0
             [
                 new Stairs(this.ctx, 400, 580),
                 new Stairs(this.ctx, 400, 620),
@@ -39,26 +40,35 @@ class Game{
                 new Stairs(this.ctx, 950, 860),
                 new Stairs(this.ctx, 950, 900),
                 new Stairs(this.ctx, 950, 940),
-                new Stairs(this.ctx, 950, 980)
+                new Stairs(this.ctx, 950, 980 )
             ],
-            //level1
-            [
-                new Stairs(this.ctx, 250, 1400),
-                new Stairs(this.ctx, 250, 1440),
-                new Stairs(this.ctx, 250, 1480)
-            ],
-            [
-                new Stairs(this.ctx, 250, 1400),
-                new Stairs(this.ctx, 250, 1440),
-                new Stairs(this.ctx, 250, 1480)
-            ],
+            //level-1
             [
                 new Stairs(this.ctx, 195, 1200),
                 new Stairs(this.ctx, 195, 1240),
                 new Stairs(this.ctx, 195, 1280),
                 new Stairs(this.ctx, 195, 1320)
             ],
-            //level2
+            [
+                new Stairs(this.ctx, 250, 1400),
+                new Stairs(this.ctx, 250, 1440),
+                new Stairs(this.ctx, 250, 1480)
+            ],
+            [
+                new Stairs(this.ctx, 250, 1400),
+                new Stairs(this.ctx, 250, 1440),
+                new Stairs(this.ctx, 250, 1480)
+            ],
+            [
+                new Stairs(this.ctx, 400, 1550),
+                new Stairs(this.ctx, 400, 1590),
+                new Stairs(this.ctx, 400, 1630),
+                new Stairs(this.ctx, 400, 1670),
+                new Stairs(this.ctx, 400, 1710),
+                new Stairs(this.ctx, 400, 1750),
+            ],
+            
+            //level-2
             [
                 new Stairs(this.ctx, 860, 2150),
                 new Stairs(this.ctx, 860, 2190),
@@ -66,9 +76,12 @@ class Game{
                 new Stairs(this.ctx, 860, 2270),
                 new Stairs(this.ctx, 860, 2310),
                 new Stairs(this.ctx, 860, 2350),
-                new Stairs(this.ctx, 860, 2390)
+                new Stairs(this.ctx, 860, 2390),
+                new Stairs(this.ctx, 860, 2430),
+                new Stairs(this.ctx, 860, 2470),
+                new Stairs(this.ctx, 860, 2510)
             ],
-            //level4
+            //level-3
             [
                 new Stairs(this.ctx, 550, 2800),
                 new Stairs(this.ctx, 550, 2840),
@@ -145,56 +158,57 @@ class Game{
                 new BasicBlock(this.ctx, 1000, 1100, 'right'),
             ],
             [
-                new BasicBlock(this.ctx, 300, 1100, 'left'),
-                new BasicBlock(this.ctx, 350, 1100),
-                new BasicBlock(this.ctx, 400, 1100, 'right'),
+                new BasicBlock(this.ctx, 1050, 1550, 'left'),
+                new BasicBlock(this.ctx, 1100, 1550, 'right'),
             ],
             [
-                new BasicBlock(this.ctx, 900, 1400, 'left'),
-                new BasicBlock(this.ctx, 950, 1400),
-                new BasicBlock(this.ctx, 1000, 1400, 'right'),
+                new BasicBlock(this.ctx, 700, 1400, 'left'),
+                new BasicBlock(this.ctx, 750, 1400),
+                new BasicBlock(this.ctx, 800, 1400, 'right'),
             ],
             [
-                new BasicBlock(this.ctx, 600, 1400, 'left'),
-                new BasicBlock(this.ctx, 650, 1400),
-                new BasicBlock(this.ctx, 700, 1400, 'right'),
-            ],
-            [
-                new BasicBlock(this.ctx, 310, 1400, 'left'),
-                new BasicBlock(this.ctx, 360, 1400),
-                new BasicBlock(this.ctx, 390, 1400, 'right'),
+                new BasicBlock(this.ctx, 305, 1400, 'left'),
+                new BasicBlock(this.ctx, 355, 1400),
+                new BasicBlock(this.ctx, 395, 1400, 'right'),
             ],
             [
                 new BasicBlock(this.ctx, 100, 1200, 'left'),
                 new BasicBlock(this.ctx, 150, 1200, 'right'),
             ],
             [
-                new BasicBlock(this.ctx, 140, 1400, 'left'),
-                new BasicBlock(this.ctx, 190, 1400, 'right'),
+                new BasicBlock(this.ctx, 145, 1350, 'left'),
+                new BasicBlock(this.ctx, 195, 1350, 'right'),
             ],
             [
                 new BasicBlock(this.ctx, 200, 1550, 'left'),
                 new BasicBlock(this.ctx, 250, 1550),
                 new BasicBlock(this.ctx, 300, 1550),
-                new BasicBlock(this.ctx, 350, 1550),
-                new BasicBlock(this.ctx, 450, 1550),
-                new BasicBlock(this.ctx, 500, 1550, 'right')
+                new BasicBlock(this.ctx, 350, 1550, 'right')
             ],
             //level2
             [
-                new BasicBlock(this.ctx, 350, 1850, 'left'),
+                new BasicBlock(this.ctx, 300, 1850, 'left'),
+                new BasicBlock(this.ctx, 350, 1850),
                 new BasicBlock(this.ctx, 400, 1850),
                 new BasicBlock(this.ctx, 450, 1850),
-                new BasicBlock(this.ctx, 500, 1850),
-                new BasicBlock(this.ctx, 550, 1850, 'right')
+                new BasicBlock(this.ctx, 500, 1850, 'right')
             ],
             [
-                new BasicBlock(this.ctx, 550, 2150, 'left'),
-                new BasicBlock(this.ctx, 600, 2150),
-                new BasicBlock(this.ctx, 650, 2150),
-                new BasicBlock(this.ctx, 700, 2150),
-                new BasicBlock(this.ctx, 750, 2150),
-                new BasicBlock(this.ctx, 800, 2150, 'right')
+                new BasicBlock(this.ctx, 1050, 1800, 'left'),
+                new BasicBlock(this.ctx, 1100, 1800, 'right'),
+            ],
+            [
+                new BasicBlock(this.ctx, 100, 2000, 'left'),
+                new BasicBlock(this.ctx, 150, 2000),
+                new BasicBlock(this.ctx, 200, 2000, 'right')
+            ],
+            [
+                new BasicBlock(this.ctx, 550, 2300, 'left'),
+                new BasicBlock(this.ctx, 600, 2300),
+                new BasicBlock(this.ctx, 650, 2300),
+                new BasicBlock(this.ctx, 700, 2300),
+                new BasicBlock(this.ctx, 750, 2300),
+                new BasicBlock(this.ctx, 800, 2300, 'right')
             ],
             //level3
             [
@@ -269,14 +283,22 @@ class Game{
         ]
 
          this.barrels = [
-            new Barrel(this.ctx, 300, 150, 'barrel'),
+             //level-0
+            new Barrel(this.ctx, 200, 50, 'barrel'),
+
+            //level-1
+            new Barrel(this.ctx, 750, 1000, 'box'),
+            new Barrel(this.ctx, 350, 1000, 'box'),
+
+
+            //level-3
             new Barrel(this.ctx, 300, 2800, 'barrel'),
             new Barrel(this.ctx, 300, 2600, 'box'),
             new Barrel(this.ctx, 850, 2800, 'box'),
         ]
 
         //inventary
-        this.steelBoots = new SteelBoots(this.ctx, 1040, 668)
+        this.steelBoots = new SteelBoots(this.ctx, 1085, 1510)
         this.dungeonKey = new DungeonKey(this.ctx, 625, 2760)
         this.potionsArray = [
             new Potions(this.ctx, 470, 725)
@@ -307,13 +329,23 @@ class Game{
         this.blocksMotion = [
             new BlockWithMotion(this.ctx, 150, 150, 250, 400),
             new BlockWithMotion(this.ctx, 250, 300, 250, 500),
-            new BlockWithMotion(this.ctx, 300, 420, 325, 700)
+            new BlockWithMotion(this.ctx, 300, 420, 350, 750),
+
+            //level-1
+            new BlockWithMotion(this.ctx, 300, 1120, 200, 500),
+
+            //level2
+            new BlockWithMotion(this.ctx, 450, 1850, 700, 900),
+            new BlockWithMotion(this.ctx, 300, 2000, 300, 500),
         ]
 
         this.elevatorBlocks = [
             new ElevatorBlock(this.ctx, 45, 500, 50, 500, 2800, 2),
             new ElevatorBlock(this.ctx, 200, 300, 50, 300, 700, 2),
             new ElevatorBlock(this.ctx, 1000, 3000, 150, 2650, 3200, 2),
+
+            //level1
+            new ElevatorBlock(this.ctx, 900, 1500, 50, 1400, 1500, 2),
         ]
 
         //generate walls
@@ -515,6 +547,7 @@ class Game{
         if(!this.doors[0].doorLock && !this.doors[0].doorThrough){
             this.hero.pos.x = 230
             this.hero.pos.y = 3800
+            this.hero.heightJump.initial = 3800
             this.doors[0].doorThrough = true
         }
     }

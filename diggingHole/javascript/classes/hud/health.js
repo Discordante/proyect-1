@@ -145,7 +145,6 @@ class Health{
                 element.arrowReady = false
             }
         }
-
         else if(element instanceof BasicEnemy){
             if(element.colisionStatus.down || element.colisionStatus.left || element.colisionStatus.right){
                 this.hp -= element.damage
@@ -162,6 +161,16 @@ class Health{
             }
         }
 
+        //height damage
+        if(hero.heightJump.distance > 200 && hero.heightJump.distance < 400 && !hero.movements.up && hero.heightJump.damage){
+            this.hp -= 30
+            hero.heightJump.damage = false
+        }
+        if(hero.heightJump.distance > 400 && !hero.movements.up){
+            this.hp = 0
+        } 
+
+        //sounds
         if(this.previousHp > this.hp){
             this.sounds.damage.play()
         }

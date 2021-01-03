@@ -6,11 +6,9 @@ class Hero{
         this.defaultHeight = 60
         this.height = 60
 
-        this.health = 100
-
         this.blocked = false
 
-        this.pos = {x: 950, y: 200} // position
+        this.pos = {x: 100, y: 100} // position
         this.previousX = this.pos.x
         this.previousY = this.pos.y
 
@@ -18,6 +16,15 @@ class Hero{
         this.accel = {x: 0, y: 0} // acceleration
 
         this.gravityStatus = true
+
+        this.heightJump = {
+            initial: this.pos.y,
+            final: 0,
+            aux: 0,
+            heightCounter: true,
+            distance: 0,
+            damage: false
+        }
 
         this.movements = {
             up: false,
@@ -95,6 +102,35 @@ class Hero{
 
                 {
                     //console.log('up')
+
+                    //height damage
+
+
+                        if(this.heightJump.heightCounter){
+                            this.heightJump.initial = this.pos.y
+                            this.heightJump.heightCounter = false
+                        } 
+                        if(this.pos.y >= this.heightJump.initial && !this.heightJump.heightCounter){
+                            this.heightJump.final = this.pos.y
+                        }
+                        if(this.pos.y < this.heightJump.initial && !this.heightJump.heightCounter){
+                            this.heightJump.initial = this.pos.y
+                        }
+                        //console.log(`inicial: ${this.heightJump.initial}, final: ${this.heightJump.final}` )
+                        if(this.heightJump.final > this.heightJump.initial){
+                            this.heightJump.distance = this.heightJump.final - this.heightJump.initial
+                            this.heightJump.heightCounter = true
+                            this.heightJump.initial = undefined
+                            this.heightJump.final = undefined
+                        }
+                        if(!this.heightJump.heightCounter){
+                            this.heightJump.distance = 0
+                            this.heightJump.damage = true
+                        }
+                        
+                        
+                   
+
                     if(!this.movements.left && !this.movements.right){
                         this.vel.x = 0
                     }

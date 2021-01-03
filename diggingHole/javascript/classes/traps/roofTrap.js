@@ -35,7 +35,7 @@ class RoofTrap extends GeneralClass{
                 this.vel.y = MAX_GRAVITY - 7
             }
         }
-        if(this.pos.y > 0 && this.pos.y < 100){
+        if(this.pos.y > 0 && this.pos.y < 50){
             this.sounds.rock.play()
             this.roofTrapReady = true
         }
