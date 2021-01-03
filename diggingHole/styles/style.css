@@ -6,11 +6,16 @@ html, body {
   }
 
 canvas {
-    border: 1px dashed black;
+    position: absolute;
+    left: 50%;
+    top: 48.5%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+  }
 
+  #canvas_border {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    overflow: hidden;
   }
