@@ -16,7 +16,7 @@ class Game{
         this.hero = new Hero(this.ctx)
         this.health = new Health (this.ctx)
 
-        
+      
 
         this.ladders = [
             //level-0
@@ -297,6 +297,10 @@ class Game{
             new Barrel(this.ctx, 850, 2800, 'box'),
         ]
 
+        //background
+        
+        this.background = new Background(this.ctx)
+
         //inventary
         this.steelBoots = new SteelBoots(this.ctx, 1085, 1510)
         this.dungeonKey = new DungeonKey(this.ctx, 625, 2760)
@@ -432,6 +436,7 @@ class Game{
         }
 
         //environment
+        this.background.draw()
         this.doors.forEach(door => door.draw())
         this.safeBoxes.forEach(safeBox => safeBox.draw())
         this.ladders.forEach(ladder => ladder.forEach( step => step.draw()))
