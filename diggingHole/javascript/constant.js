@@ -26,19 +26,21 @@ const MAX_GRAVITY = 20
 const FLOOR_TRAP_DAMAGE = 20
 const ROOF_TRAP_DAMAGE = 20
 const ARROW_DAMAGE = 30
-const ENEMY_DAMAGE = 10
+const BASIC_ENEMY_DAMAGE = 5
+const BOSS_ENEMY_DAMAGE = 10
 //arrows
 const ARROW_SPEED = -15
 
 //floor traps
-const NUM_FLOOR_TRAPS = 12
-const NUM_ROOF_TRAPS_INIT = 25
-const NUM_ROOF_TRAPS_FINAL = 75
+const NUM_FLOOR_TRAPS = 10
+const NUM_ROOF_TRAPS_INIT = 10
+const NUM_ROOF_TRAPS_FINAL = 70
 
 
 //health
 const HERO_HEALTH = 100
-const BASIC_ENEMY_HP = 150
+const BOSS_HP = 150
+const BASIC_ENEMY_HP = 50
 const POTION_HEAL = 20
 
 

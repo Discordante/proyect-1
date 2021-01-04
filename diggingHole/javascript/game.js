@@ -378,8 +378,11 @@ class Game{
         }
         
         //enemies
+        this.enemies = [
+            new Enemy (this.ctx, 600, 3700, 400, 800)
+        ]
         this.basicEnemies = [
-            new BasicEnemy(this.ctx, 700, 2900)
+            new BasicEnemy(this.ctx, 700, 400)
         ]
 
 
@@ -465,6 +468,7 @@ class Game{
         //characters
         this.hero.draw()
         this.basicEnemies.forEach(enemy => enemy.draw())
+        this.enemies.forEach(enemy => enemy.draw())
 
         //traps
         this.floorTraps.forEach(trap => trap.draw())
@@ -483,6 +487,7 @@ class Game{
         //characters
         this.hero.move()
         this.basicEnemies.forEach(enemy => enemy.move(this.hero))
+        this.enemies.forEach(enemy => enemy.move(this.hero))
 
         //traps
         this.arrowArray.forEach(arrow => arrow.move(this.hero))
@@ -513,6 +518,7 @@ class Game{
 
     activateElements(){
         this.basicEnemies.forEach(enemy => enemy.activateEnemy(this.hero))
+        this.enemies.forEach(enemy => enemy.activateEnemy(this.hero))
         this.safeBoxes.forEach(safeBox => safeBox.openSafeBox(this.hero))
     }
 
@@ -523,12 +529,14 @@ class Game{
         this.blocksMotion.forEach(motionBlock => this.hero.collisionBlocks(motionBlock))
         this.elevatorBlocks.forEach(elevatorBlock => this.hero.collisionBlocks(elevatorBlock))
         this.basicEnemies.forEach(enemy => this.basicBlocks.forEach(blockArr => blockArr.forEach(block => enemy.collisionBlocks(block))))
+        this.enemies.forEach(enemy => this.basicBlocks.forEach(blockArr => blockArr.forEach(block => enemy.collisionBlocks(block))))
         this.barrels.forEach(barrel => this.basicBlocks.forEach(blockArr => blockArr.forEach(block => barrel.collisionBlocks(block))))
         this.barrels.forEach(barrel => this.blocksMotion.forEach(block => barrel.collisionBlocks(block)))
         this.barrels.forEach(barrel => this.elevatorBlocks.forEach(block => barrel.collisionBlocks(block)))
 
         //enemies
         this.basicEnemies.forEach(enemy => enemy.collision(this.hero))
+        this.enemies.forEach(enemy => enemy.collision(this.hero))
         this.basicEnemies.forEach(enemy => this.barrels.forEach(barrel => enemy.collision(barrel)))
 
         //environment
@@ -551,7 +559,6 @@ class Game{
         this.floorTraps.forEach(trap => this.barrels.forEach(barrel => trap.collision(barrel)))
     }
 
-
     checkHealth(){
         //hero
         this.floorTraps.forEach(trap => this.health.healthStatus(trap, this.hero))
@@ -559,9 +566,11 @@ class Game{
         this.arrowArray.forEach(arrow => this.health.healthStatus(arrow, this.hero))
         this.potionsArray.forEach(potion => this.health.healthStatus(potion, this.hero))
         this.basicEnemies.forEach(enemy => this.health.healthStatus(enemy, this.hero))
+        this.enemies.forEach(enemy => this.health.healthStatus(enemy, this.hero))
         
         //enemies
         this.basicEnemies.forEach(enemy => enemy.healthStatus())
+        this.enemies.forEach(enemy => enemy.healthStatus())
     }
 
     newWorld(){

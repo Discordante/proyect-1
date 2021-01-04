@@ -145,6 +145,11 @@ class Health{
                 element.arrowReady = false
             }
         }
+        else if(element instanceof Enemy){
+            if(element.colisionStatus.down || element.colisionStatus.left || element.colisionStatus.right){
+                this.hp -= element.damage
+            }
+        }
         else if(element instanceof BasicEnemy){
             if(element.colisionStatus.down || element.colisionStatus.left || element.colisionStatus.right){
                 this.hp -= element.damage

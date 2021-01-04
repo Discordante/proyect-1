@@ -1,28 +1,30 @@
-class BasicEnemy{
-    constructor(ctx, x, y){
+class Enemy {
+    constructor(ctx, x, y, leftLimit, rightLimit){
+
         this.ctx = ctx
 
-        this.width = 100
-        this.height = 130
+        this.width = 50
+        this.height = 40
 
         this.pos = {x, y}  // position
         this.vel = {x: 0, y: 0} // velocity
-        this.accel = {x: 0, y: 0} // acceleration
+
+        this.leftLimit = leftLimit
+        this.rightLimit = rightLimit
 
         this.previousX = this.pos.x
         this.previousY = this.pos.y
 
         this.distance = undefined
 
-        this.hp = BOSS_HP
+        this.hp = BASIC_ENEMY_HP
 
-        this.enemyLaugh = true
         this.enemyStatus = false
         this.enemyPhase = 0
         this.enemyDirection = 'left'
 
-        this.damage = BOSS_ENEMY_DAMAGE
-        this.enemyDamageUp = true
+        this.damage = BASIC_ENEMY_DAMAGE
+        this.enemyDamage = true
 
         this.colisionStatus = {
             up: false,
@@ -31,61 +33,93 @@ class BasicEnemy{
             left: false
         }
 
-        this.img = new Image()
+        /* this.img = new Image()
         this.img.src = './././images/sprites/enemy/enemy-1.png'
         this.ready = false
         this.img.onload = () => {
             this.img.ready = true
         }
+        */
+        this.enemyActive = true
 
-        this.deathSound = true
         this.sounds = {
-            laugh: new Audio('./././sound/Evil-Laugh-2.mp3'),
-            boxHit: new Audio('./././sound/box-hit.mp3'),
-            death : new Audio('./././sound/Monster-Growl.mp3')
+            active : new Audio('./././sound/snakehiss.mp3')
         } 
-        this.sounds.laugh.volume = 0.3 
-
+        this.sounds.active.volume = 0.3  
     }
 
     isReady(){
         return this.img.ready
     }
 
-    draw(){
+    /* draw(){
         if(this.isReady()){
             this.ctx.drawImage(this.img, this.pos.x, this.pos.y, this.width, this.height)
         }
+    } */
+
+    draw(){
+        this.ctx.fillStyle = 'green'
+        this.ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height)
     }
     
     activateEnemy(hero){
         this.distance = Math.hypot((this.pos.x - hero.pos.x),(this.pos.y - hero.pos.y))
 
-        if(this.distance <= 500 && !this.enemyStatus){
-            if(this.enemyLaugh){
-                this.sounds.laugh.play()
-                this.enemyLaugh = false
+        if(this.distance <= 300 && !this.enemyStatus){
+            if(this.enemyActive){
+                this.sounds.active.play()
+                this.enemyActive = false
+            }
+            this.enemyStatus = true
+            this.enemyPhase = 1
+        }
+    }
+
+    activateEnemy(hero){
+        this.distance = Math.hypot((this.pos.x - hero.pos.x),(this.pos.y - hero.pos.y))
+
+        if(this.distance <= ACT_ENEMY_DISTANCE && !this.enemyStatus){
+            if(this.enemyActive){
+                this.sounds.active.play()
+                this.enemyActive = false
             }
             setTimeout(() =>{
                 this.enemyStatus = true
                 this.enemyPhase = 1
-            },6000)
+            },1000)
         }
-        if(this.distance <= ACT_ENEMY_DISTANCE && this.enemyStatus && hero.pos.x <= 1000){
+        if(this.distance <= ACT_ENEMY_DISTANCE && this.enemyStatus && hero.pos.x >= this.leftLimit && hero.pos.x <= this.rightLimit){
             this.enemyPhase = 1
         }
-        if((this.distance >= ACT_ENEMY_DISTANCE && this.enemyStatus) || hero.pos.x >= 1000){
+        if((this.distance >= ACT_ENEMY_DISTANCE && this.enemyStatus) || hero.pos.x >= this.rightLimit || hero.pos.x <= this.leftLimit || hero.movements.jump){
             this.enemyPhase = 2
         }
 
     }
 
     move(hero){
-        if(this.enemyStatus && this.enemyPhase === 1){
-            if(hero.pos.x > this.pos.x + this.width + 2){ 
+
+        if(!this.enemyStatus){
+            if(this.enemyDirection === 'left'){
+                this.vel.x = -ENEMY_VELOCITY.x + 2.5
+                if(this.pos.x <= this.leftLimit){
+                    this.enemyDirection = 'right'
+                }
+            }
+            if(this.enemyDirection === 'right'){
+                this.vel.x = ENEMY_VELOCITY.x -2.5
+                if(this.pos.x>= this.rightLimit){
+                    this.enemyDirection = 'left'
+                }
+            }
+        } 
+
+        else if(this.enemyStatus && this.enemyPhase === 1){
+            if(hero.pos.x > this.pos.x + this.width + 1){ 
                 this.vel.x = ENEMY_VELOCITY.x
             }
-            else if(hero.pos.x + hero.width < this.pos.x - 2){
+            else if(hero.pos.x + hero.width < this.pos.x - 1){
                 this.vel.x = -ENEMY_VELOCITY.x
             }
         } 
@@ -93,13 +127,13 @@ class BasicEnemy{
         else if(this.enemyStatus && this.enemyPhase === 2){
             if(this.enemyDirection === 'left'){
                 this.vel.x = -ENEMY_VELOCITY.x
-                if(this.pos.x <= 150){
+                if(this.pos.x <= this.leftLimit){
                     this.enemyDirection = 'right'
                 }
             }
             if(this.enemyDirection === 'right'){
                 this.vel.x = ENEMY_VELOCITY.x
-                if(this.pos.x>= 900){
+                if(this.pos.x>= this.rightLimit){
                     this.enemyDirection = 'left'
                 }
             }
@@ -191,10 +225,7 @@ class BasicEnemy{
             {
                 if(element instanceof Hero){
                     this.colisionStatus.left = true
-                    //this.pos.x = element.pos.x + element.width + 1 //you push enemy
                     element.pos.x = this.pos.x - element.width - 20   //enemy blocks you
-                    element.vel.y = -15
-                    element.vel.x = -50
                 }
             }
         //RIGHT COLLISION
@@ -207,10 +238,7 @@ class BasicEnemy{
             {
                 if(element instanceof Hero){
                     this.colisionStatus.right = true
-                    //this.pos.x = element.pos.x - this.width - 1 //you push enemy
                     element.pos.x = this.pos.x + this.width + 20   //enemy blocks you
-                    element.vel.y = -15
-                    element.vel.x = 50
                 }
         }
         //TOP COLLISION
@@ -227,6 +255,7 @@ class BasicEnemy{
 
                 if(element instanceof Hero){
                     this.colisionStatus.up = true
+                    this.hp -= 50
                 }
                 
                 //this.colisionStatus.up = true
@@ -234,12 +263,6 @@ class BasicEnemy{
                 if(element instanceof Barrel){
                     this.hp -= 50
                     this.sounds.boxHit.play()
-                    if(this.enemyDirection === 'left'){
-                        element.vel.x = 5
-                    }
-                    else{
-                        element.vel.x = -5
-                    }
                 }
             }
          //BOTTOM COLLISION
@@ -256,25 +279,18 @@ class BasicEnemy{
                 }
             }  
         else{
-            if(element instanceof Hero){
-                this.colisionStatus.up = false
-                this.colisionStatus.down = false
-                this.colisionStatus.left = false
-                this.colisionStatus.right = false
-            }
+            this.colisionStatus.up = false
+            this.colisionStatus.down = false
+            this.colisionStatus.left = false
+            this.colisionStatus.right = false
         } 
 
     }
 
     healthStatus(){
-        this.previousHp = this.hp
-        if(this.hp <= 0 && this.deathSound){
+        if(this.hp <= 0){
             this.enemyStatus = false
-            this.deathSound = false
-            this.sounds.death.play()
-            setTimeout(() => {
-                this.pos.x = undefined
-            },2000)
+            this.pos.x = undefined
         }
     }
 }
