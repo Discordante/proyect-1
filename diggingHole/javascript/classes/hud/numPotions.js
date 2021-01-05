@@ -1,23 +1,18 @@
-class Health{
+class NumPotions{
     constructor(ctx){
 
         this.ctx = ctx
 
-        this.width = 400
-        this.height = 250
+        this.width = 50
+        this.height = 50
 
-        this.pos = {x: 40, y: 0}
-        this.hp = HERO_HEALTH
-        this.previousHp = 0
-
-        this.heartBeatSound = true
-        this.soundInterval = undefined
+        this.pos = {x: 50, y: 1100}
 
         //sprite
         this.sprite = new Image()
-        this.sprite.src = './././images/hud/health-bar.png'
+        this.sprite.src = '../../../images/hud/numbers.png'
         this.sprite.isReady = false
-        this.sprite.horizontalFrames = 2
+        this.sprite.horizontalFrames = 6
         this.sprite.verticalFrames = 5
         this.sprite.horizontalFrameIndex = 0
         this.sprite.verticalFrameIndex = 0
@@ -60,52 +55,52 @@ class Health{
     
     animate() {
         switch(this.hp) {
-            case 100:
+            case 0:
                 this.sprite.horizontalFrameIndex = 0
                 this.sprite.verticalFrameIndex = 0
                 break;
-            case 80:
-                this.sprite.horizontalFrameIndex = 1
+            case 1:
+                this.sprite.horizontalFrameIndex = 0
                 this.sprite.verticalFrameIndex = 0
                 break;
-            case 70:
+            case 2:
                 this.sprite.horizontalFrameIndex = 0
                 this.sprite.verticalFrameIndex = 1
                 break;
-            case 60:
-                this.sprite.horizontalFrameIndex = 1
+            case 3:
+                this.sprite.horizontalFrameIndex = 0
                 this.sprite.verticalFrameIndex = 1
                 break;
-            case 50:
+            case 4:
                 this.sprite.horizontalFrameIndex = 0
                 this.sprite.verticalFrameIndex = 2
                 break;
-            case 40:
+            case 5:
                 this.sprite.horizontalFrameIndex = 1
                 this.sprite.verticalFrameIndex = 2
                 break;
-            case 30:
-                this.sprite.horizontalFrameIndex = 0
-                this.sprite.verticalFrameIndex = 3
-                this.sound()
-                break;
-            case 20:
+            case 6:
                 this.sprite.horizontalFrameIndex = 1
                 this.sprite.verticalFrameIndex = 3
                 this.sound()
                 break;
-            case 10:
-                this.sprite.horizontalFrameIndex = 0
+            case 7:
+                this.sprite.horizontalFrameIndex = 1
+                this.sprite.verticalFrameIndex = 3
+                this.sound()
+                break;
+            case 8:
+                this.sprite.horizontalFrameIndex = 1
                 this.sprite.verticalFrameIndex = 4
                 this.sound()
                 break;
-            case 0:
+            case 9:
                 this.sprite.horizontalFrameIndex = 1
                 this.sprite.verticalFrameIndex = 4
                 break;
             default:
               // code block
-        } 
+          } 
 
     }
 
@@ -123,7 +118,7 @@ class Health{
     }
 
     healthStatus(element, hero){
-        //console.log(this.hp)
+        console.log(this.hp)
         this.previousHp = this.hp
 
         if(element instanceof FloorTrap){

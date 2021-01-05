@@ -1,10 +1,10 @@
-class Enemy {
+class SnailEnemy {
     constructor(ctx, x, y, leftLimit, rightLimit){
 
         this.ctx = ctx
 
-        this.width = 860
-        this.height = 107
+        this.width = 885
+        this.height = 130
 
         this.pos = {x, y}  // position
         this.vel = {x: 0, y: 0} // velocity
@@ -43,7 +43,7 @@ class Enemy {
 
         //sprite
         this.sprite = new Image()
-        this.sprite.src = './././images/sprites/enemy/snakes.png'
+        this.sprite.src = './././images/sprites/enemy/snail.png'
         this.sprite.isReady = false
         this.sprite.horizontalFrames = 11
         this.sprite.verticalFrames = 2

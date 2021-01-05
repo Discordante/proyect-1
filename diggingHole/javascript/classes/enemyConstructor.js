@@ -3,8 +3,8 @@ class Enemy {
 
         this.ctx = ctx
 
-        this.width = 860
-        this.height = 107
+        this.width = 50
+        this.height = 50
 
         this.pos = {x, y}  // position
         this.vel = {x: 0, y: 0} // velocity
@@ -32,30 +32,6 @@ class Enemy {
             down: false,
             right: false,
             left: false
-        }
-
-        //sounds
-        this.sounds = {
-            active : new Audio('./././sound/snakehiss.mp3')
-        } 
-        this.sounds.active.volume = 0.3  
-
-
-        //sprite
-        this.sprite = new Image()
-        this.sprite.src = './././images/sprites/enemy/snakes.png'
-        this.sprite.isReady = false
-        this.sprite.horizontalFrames = 11
-        this.sprite.verticalFrames = 2
-        this.sprite.horizontalFrameIndex = 0
-        this.sprite.verticalFrameIndex = 0
-        this.sprite.drawCount = 0
-        this.sprite.onload = () => {
-            this.sprite.isReady = true
-            this.sprite.frameWidth = Math.round(this.width / this.sprite.horizontalFrames)
-            this.sprite.frameHeight = this.height / this.sprite.verticalFrames
-            this.width = this.sprite.frameWidth
-            this.height = this.sprite.frameHeight
         }
     }
 
@@ -133,47 +109,7 @@ class Enemy {
         }
     }
 
-    move(hero){
-
-        if(!this.enemyStatus){
-            if(this.enemyDirection === 'left'){
-                this.vel.x = -ENEMY_VELOCITY.x + 2.5
-                if(this.pos.x <= this.leftLimit){
-                    this.enemyDirection = 'right'
-                }
-            }
-            if(this.enemyDirection === 'right'){
-                this.vel.x = ENEMY_VELOCITY.x -2.5
-                if(this.pos.x>= this.rightLimit){
-                    this.enemyDirection = 'left'
-                }
-            }
-        } 
-
-        else if(this.enemyStatus && this.enemyPhase === 1){
-            if(hero.pos.x > this.pos.x + this.width + 1){ 
-                this.vel.x = ENEMY_VELOCITY.x
-            }
-            else if(hero.pos.x + hero.width < this.pos.x - 1){
-                this.vel.x = -ENEMY_VELOCITY.x
-            }
-        } 
-
-        else if(this.enemyStatus && this.enemyPhase === 2){
-            if(this.enemyDirection === 'left'){
-                this.vel.x = -ENEMY_VELOCITY.x
-                if(this.pos.x <= this.leftLimit){
-                    this.enemyDirection = 'right'
-                }
-            }
-            if(this.enemyDirection === 'right'){
-                this.vel.x = ENEMY_VELOCITY.x
-                if(this.pos.x>= this.rightLimit){
-                    this.enemyDirection = 'left'
-                }
-            }
-        }
-         
+    move(hero){  
         //gravity
         this.vel.y += GRAVITY
         if(this.vel.y >= MAX_GRAVITY){

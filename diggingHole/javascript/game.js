@@ -381,8 +381,8 @@ class Game{
         //enemies
         this.enemies = [
             new Enemy (this.ctx, 800, 200, 800, 1050),
-            new Enemy (this.ctx, 200, 700, 150, 450),
-            new Enemy (this.ctx, 700, 1000, 650, 1000),
+            new SnailEnemy (this.ctx, 200, 650, 150, 450),
+            new Enemy (this.ctx, 700, 1000, 650, 900),
             new Enemy (this.ctx, 700, 1300, 720, 780),
             new Enemy (this.ctx, 100, 1700, 100, 200),
             new Enemy (this.ctx, 700, 2200, 450, 800),

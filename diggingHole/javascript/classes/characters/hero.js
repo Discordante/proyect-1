@@ -8,7 +8,7 @@ class Hero{
 
         this.blocked = false
 
-        this.pos = {x: 100, y: 2000} // position
+        this.pos = {x: 100, y: 100} // position
         this.previousX = this.pos.x
         this.previousY = this.pos.y
 
