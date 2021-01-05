@@ -12,6 +12,9 @@ class BlockWithMotion extends BasicBlock{
         this.pos = {x, y} 
         this.vel = {x: 1, y: 0} 
         this.direction = 'right'   
+
+        this.img.src = '././images/environment/floor/Ground_x3.png'
+          
     }
 
 

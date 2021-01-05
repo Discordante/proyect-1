@@ -12,6 +12,8 @@ class ElevatorBlock extends BasicBlock{
         this.pos = {x, y} 
         this.vel = {x: 0, y: speed} 
         this.direction = 'down'   
+
+        this.img.src = '././images/environment/floor/Ground_x1.png'
     }
 
 
