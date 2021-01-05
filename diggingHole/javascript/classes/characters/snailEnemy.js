@@ -114,63 +114,20 @@ class SnailEnemy {
 
     activateEnemy(hero){
         this.distance = Math.hypot((this.pos.x - hero.pos.x),(this.pos.y - hero.pos.y))
-
-        if(this.distance <= ACT_ENEMY_DISTANCE && !this.enemyStatus){
-            if(this.enemyActive){
-                this.sounds.active.play()
-                this.enemyActive = false
-            }
-            setTimeout(() =>{
-                this.enemyStatus = true
-                this.enemyPhase = 1
-            },1000)
-        }
-        if(this.distance <= ACT_ENEMY_DISTANCE && this.enemyStatus && hero.pos.x >= this.leftLimit && hero.pos.x <= this.rightLimit){
-            this.enemyPhase = 1
-        }
-        if((this.distance >= ACT_ENEMY_DISTANCE && this.enemyStatus) || hero.pos.x >= this.rightLimit || hero.pos.x <= this.leftLimit || hero.movements.jump){
-            this.enemyPhase = 2
-        }
+        this.enemyStatus = true
     }
 
     move(hero){
-
-        if(!this.enemyStatus){
-            if(this.enemyDirection === 'left'){
-                this.vel.x = -ENEMY_VELOCITY.x + 2.5
-                if(this.pos.x <= this.leftLimit){
-                    this.enemyDirection = 'right'
-                }
+        if(this.enemyDirection === 'left'){
+            this.vel.x = -ENEMY_VELOCITY.x + 2.5
+            if(this.pos.x <= this.leftLimit){
+                this.enemyDirection = 'right'
             }
-            if(this.enemyDirection === 'right'){
-                this.vel.x = ENEMY_VELOCITY.x -2.5
-                if(this.pos.x>= this.rightLimit){
-                    this.enemyDirection = 'left'
-                }
-            }
-        } 
-
-        else if(this.enemyStatus && this.enemyPhase === 1){
-            if(hero.pos.x > this.pos.x + this.width + 1){ 
-                this.vel.x = ENEMY_VELOCITY.x
-            }
-            else if(hero.pos.x + hero.width < this.pos.x - 1){
-                this.vel.x = -ENEMY_VELOCITY.x
-            }
-        } 
-
-        else if(this.enemyStatus && this.enemyPhase === 2){
-            if(this.enemyDirection === 'left'){
-                this.vel.x = -ENEMY_VELOCITY.x
-                if(this.pos.x <= this.leftLimit){
-                    this.enemyDirection = 'right'
-                }
-            }
-            if(this.enemyDirection === 'right'){
-                this.vel.x = ENEMY_VELOCITY.x
-                if(this.pos.x>= this.rightLimit){
-                    this.enemyDirection = 'left'
-                }
+        }
+        if(this.enemyDirection === 'right'){
+            this.vel.x = ENEMY_VELOCITY.x -2.5
+            if(this.pos.x>= this.rightLimit){
+                this.enemyDirection = 'left'
             }
         }
          
@@ -290,7 +247,6 @@ class SnailEnemy {
 
                 if(element instanceof Hero){
                     this.colisionStatus.up = true
-                    this.hp -= 50
                 }
                 
                 //this.colisionStatus.up = true

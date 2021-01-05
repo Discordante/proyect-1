@@ -64,7 +64,6 @@ class Enemy {
       }
 
       draw() {
-          console.log(this.sprite.frameWidth)
         if (this.isReady()) {
           this.ctx.drawImage(
             this.sprite,
