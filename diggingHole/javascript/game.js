@@ -606,7 +606,7 @@ class Game{
                 this.ctx.fillStyle = 'red'
                 this.ctx.textAlign = 'center'
                 this.ctx.fillText(
-                    'You lose...',
+                    'Game Over...',
                     this.ctx.canvas.width / 2,
                     this.ctx.canvas.height / 2,
                     )

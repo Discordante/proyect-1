@@ -3,8 +3,9 @@ class Hero{
         this.ctx = ctx
 
         this.width = 40
-        this.defaultHeight = 60
         this.height = 60
+        this.defaultHeight = 60
+        
 
         this.blocked = false
 
@@ -63,6 +64,22 @@ class Hero{
         } 
         this.sounds.jump.volume = 0.3
 
+        /* //sprite
+        this.sprite = new Image()
+        this.sprite.src = './././images/sprites/hero/hero(5).png'
+        this.sprite.isReady = false
+        this.sprite.horizontalFrames = 8
+        this.sprite.verticalFrames = 3
+        this.sprite.horizontalFrameIndex = 0
+        this.sprite.verticalFrameIndex = 0
+        this.sprite.drawCount = 0
+        this.sprite.onload = () => {
+            this.sprite.isReady = true
+            this.sprite.frameWidth = 40
+            this.sprite.frameHeight = 45
+            this.width = this.sprite.frameWidth
+            this.height = this.sprite.frameHeight
+        } */
     }
 
     isReady() {
@@ -73,6 +90,65 @@ class Hero{
         this.ctx.fillStyle = 'red'
         this.ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height)
     }
+
+    /* draw() {
+      if (this.isReady()) {
+        this.ctx.drawImage(
+          this.sprite,
+          this.sprite.horizontalFrameIndex * this.sprite.frameWidth,
+          this.sprite.verticalFrameIndex * this.sprite.frameHeight,
+          this.sprite.frameWidth,
+          this.sprite.frameHeight,
+          this.pos.x,
+          this.pos.y,
+          this.width,
+          this.height
+        )
+        this.sprite.drawCount++
+        this.animate()
+      }
+    } */
+
+   /*  animate() {
+        if (this.movements.left) {
+            this.animateLeft()
+        }else if(this.movements.right) {
+            this.animateRight()
+        }
+        else{
+            this.animateStatic()
+        }
+    }
+
+    animateStatic(){
+        this.sprite.verticalFrameIndex = 2
+        this.sprite.horizontalFrameIndex = 0
+    }
+    
+    animateRight(){
+        if(this.sprite.drawCount % 11 === 0){
+            this.sprite.verticalFrameIndex = 0
+            this.sprite.horizontalFrameIndex = 0
+            if(this.sprite.horizontalFrameIndex === 8){
+                this.sprite.horizontalFrameIndex = 0
+            }else{
+                this.sprite.horizontalFrameIndex++
+            }
+        }
+    }
+
+    animateLeft(){
+        if(this.sprite.drawCount % 11 === 0){
+            this.sprite.verticalFrameIndex = 1
+            this.sprite.horizontalFrameIndex = 0
+            
+            if(this.sprite.horizontalFrameIndex === 8){
+                this.sprite.horizontalFrameIndex = 0
+            }else{
+                this.sprite.horizontalFrameIndex++
+            }
+        }
+    } */
 
     collisionBlocks(block){
         
