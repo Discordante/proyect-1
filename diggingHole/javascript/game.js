@@ -16,8 +16,8 @@ class Game{
         //hero
         this.hero = new Hero(this.ctx)
         this.health = new Health (this.ctx)
+        this.potions = new NumPotions (this.ctx)
 
-      
 
         this.ladders = [
             //level-0
@@ -296,7 +296,7 @@ class Game{
 
         this.elevatorBlocks = [
             new ElevatorBlock(this.ctx, 45, 500, 50, 500, 2800, 2),
-            new ElevatorBlock(this.ctx, 200, 300, 50, 300, 700, 2),
+            new ElevatorBlock(this.ctx, 200, 300, 50, 200, 500, 2),
             new ElevatorBlock(this.ctx, 1000, 3000, 150, 2650, 3200, 2),
 
             //level1
@@ -471,6 +471,7 @@ class Game{
 
         //HUD
         this.health.draw(this.level)
+        this.potions.draw(this.level, this.hero)
 
         //characters
         this.hero.draw()

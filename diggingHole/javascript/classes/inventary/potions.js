@@ -35,9 +35,11 @@ class Potions extends GeneralClass{
     collision(element){
         if(super.collision(element) && this.potionReady && this.collisionCounter === 0){
             this.collisionCounter++
-            this.potionStatus = true
+            this.potionStatus = false
+            element.inventory.potions++
+            this.pos.x = undefined
             this.sounds.pickPotion.play()
         } 
     }
-    
+
 }

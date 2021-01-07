@@ -35,6 +35,7 @@ class Hero{
             run: false,
             jump: false,
             crouch: false,
+            potion: false,
 
             jumpStatus: false,
             jumpLimit: -30,
@@ -47,7 +48,8 @@ class Hero{
         //inventory
         this.inventory = {
             doorKey: false, 
-            steelBoots: false
+            steelBoots: false,
+            potions: 1
         }
 
         //collisions
@@ -286,7 +288,6 @@ class Hero{
             this.movements.crouchStatus = false
         } 
 
-
         //gravity
         if(this.gravityStatus){
             this.vel.y += GRAVITY
@@ -357,6 +358,9 @@ class Hero{
                 break;
             case KEY_CROUCH:
                 this.movements.crouch = status
+                break;
+            case KEY_POTION:
+                this.movements.potion = status
                 break;
 
             default:

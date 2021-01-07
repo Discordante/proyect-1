@@ -3,8 +3,8 @@ class Health{
 
         this.ctx = ctx
 
-        this.width = 400
-        this.height = 250
+        this.width = 220
+        this.height = 780
 
         this.pos = {x: 40, y: 0}
         this.hp = HERO_HEALTH
@@ -15,10 +15,10 @@ class Health{
 
         //sprite
         this.sprite = new Image()
-        this.sprite.src = './././images/hud/health-bar.png'
+        this.sprite.src = './././images/hud/hp-bar.png'
         this.sprite.isReady = false
-        this.sprite.horizontalFrames = 2
-        this.sprite.verticalFrames = 5
+        this.sprite.horizontalFrames = 1
+        this.sprite.verticalFrames = 11
         this.sprite.horizontalFrameIndex = 0
         this.sprite.verticalFrameIndex = 0
 
@@ -32,7 +32,8 @@ class Health{
 
         this.sounds = {
             heartBeat: new Audio('./././sound/heartbeat.mp3'),
-            damage: new Audio('././sound/damage-sound.mp3')
+            damage: new Audio('././sound/damage-sound.mp3'),
+            drink: new Audio('././sound/drinking.mp3'),
           } 
     }
 
@@ -64,44 +65,48 @@ class Health{
                 this.sprite.horizontalFrameIndex = 0
                 this.sprite.verticalFrameIndex = 0
                 break;
+            case 90:
+                this.sprite.horizontalFrameIndex = 0
+                this.sprite.verticalFrameIndex = 1
+                break;
             case 80:
-                this.sprite.horizontalFrameIndex = 1
-                this.sprite.verticalFrameIndex = 0
+                this.sprite.horizontalFrameIndex = 0
+                this.sprite.verticalFrameIndex = 2
                 break;
             case 70:
                 this.sprite.horizontalFrameIndex = 0
-                this.sprite.verticalFrameIndex = 1
+                this.sprite.verticalFrameIndex = 3
                 break;
             case 60:
-                this.sprite.horizontalFrameIndex = 1
-                this.sprite.verticalFrameIndex = 1
+                this.sprite.horizontalFrameIndex = 0
+                this.sprite.verticalFrameIndex = 4
                 break;
             case 50:
                 this.sprite.horizontalFrameIndex = 0
-                this.sprite.verticalFrameIndex = 2
+                this.sprite.verticalFrameIndex = 5
                 break;
             case 40:
-                this.sprite.horizontalFrameIndex = 1
-                this.sprite.verticalFrameIndex = 2
+                this.sprite.horizontalFrameIndex = 0
+                this.sprite.verticalFrameIndex = 6
                 break;
             case 30:
                 this.sprite.horizontalFrameIndex = 0
-                this.sprite.verticalFrameIndex = 3
+                this.sprite.verticalFrameIndex = 7
                 this.sound()
                 break;
             case 20:
-                this.sprite.horizontalFrameIndex = 1
-                this.sprite.verticalFrameIndex = 3
+                this.sprite.horizontalFrameIndex = 0
+                this.sprite.verticalFrameIndex = 8
                 this.sound()
                 break;
             case 10:
                 this.sprite.horizontalFrameIndex = 0
-                this.sprite.verticalFrameIndex = 4
+                this.sprite.verticalFrameIndex = 9
                 this.sound()
                 break;
             case 0:
-                this.sprite.horizontalFrameIndex = 1
-                this.sprite.verticalFrameIndex = 4
+                this.sprite.horizontalFrameIndex = 0
+                this.sprite.verticalFrameIndex = 10
                 break;
             default:
               // code block
@@ -123,7 +128,7 @@ class Health{
     }
 
     healthStatus(element, hero){
-        //console.log(this.hp)
+        console.log(this.hp)
         this.previousHp = this.hp
 
         if(element instanceof FloorTrap){
@@ -160,9 +165,14 @@ class Health{
         }
 
         else if(element instanceof Potions){
-            if(element.potionStatus && element.potionReady && this.hp < 100){
+            if(hero.inventory.potions > 0 && hero.movements.potion && this.hp < 100){
                 this.hp += POTION_HEAL
-                element.potionReady = false
+                if(this.hp > 100){
+                    this.hp = 100
+                }
+                hero.movements.potion = false
+                hero.inventory.potions--
+                this.sounds.drink.play()
             }
         }
 

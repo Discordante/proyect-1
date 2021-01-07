@@ -3,17 +3,17 @@ class NumPotions{
 
         this.ctx = ctx
 
-        this.width = 50
-        this.height = 50
+        this.width = 150
+        this.height = 78
 
-        this.pos = {x: 50, y: 1100}
+        this.pos = {x: 1130, y: 300}
 
         //sprite
         this.sprite = new Image()
-        this.sprite.src = '../../../images/hud/numbers.png'
+        this.sprite.src = './././images/hud/numbers.png'
         this.sprite.isReady = false
-        this.sprite.horizontalFrames = 6
-        this.sprite.verticalFrames = 5
+        this.sprite.horizontalFrames = 5
+        this.sprite.verticalFrames = 2
         this.sprite.horizontalFrameIndex = 0
         this.sprite.verticalFrameIndex = 0
 
@@ -24,19 +24,14 @@ class NumPotions{
           this.width = this.sprite.frameWidth
           this.height = this.sprite.frameHeight
         }
-
-        this.sounds = {
-            heartBeat: new Audio('./././sound/heartbeat.mp3'),
-            damage: new Audio('././sound/damage-sound.mp3')
-          } 
     }
 
     isReady() {
         return this.sprite.isReady
     }
 
-    draw(level) {
-        this.pos.y = (level*800)
+    draw(level, hero) {
+        this.pos.y = 1 + (level*800)
         if (this.isReady()) {
             this.ctx.drawImage(
             this.sprite,
@@ -49,131 +44,58 @@ class NumPotions{
             this.width,
             this.height
             )
-            this.animate()
+            this.animate(hero)
         } 
     }
     
-    animate() {
-        switch(this.hp) {
+    animate(hero) {
+        //console.log(hero.inventory.potions)
+
+        switch(hero.inventory.potions) {
             case 0:
                 this.sprite.horizontalFrameIndex = 0
                 this.sprite.verticalFrameIndex = 0
                 break;
             case 1:
-                this.sprite.horizontalFrameIndex = 0
-                this.sprite.verticalFrameIndex = 0
+                this.sprite.horizontalFrameIndex = 4
+                this.sprite.verticalFrameIndex = 1
                 break;
             case 2:
-                this.sprite.horizontalFrameIndex = 0
-                this.sprite.verticalFrameIndex = 1
+                this.sprite.horizontalFrameIndex = 1
+                this.sprite.verticalFrameIndex = 0
                 break;
             case 3:
-                this.sprite.horizontalFrameIndex = 0
-                this.sprite.verticalFrameIndex = 1
+                this.sprite.horizontalFrameIndex = 2
+                this.sprite.verticalFrameIndex = 0
                 break;
             case 4:
-                this.sprite.horizontalFrameIndex = 0
-                this.sprite.verticalFrameIndex = 2
+                this.sprite.horizontalFrameIndex = 3
+                this.sprite.verticalFrameIndex = 0
                 break;
             case 5:
-                this.sprite.horizontalFrameIndex = 1
-                this.sprite.verticalFrameIndex = 2
+                this.sprite.horizontalFrameIndex = 4
+                this.sprite.verticalFrameIndex = 0
                 break;
             case 6:
-                this.sprite.horizontalFrameIndex = 1
-                this.sprite.verticalFrameIndex = 3
-                this.sound()
+                this.sprite.horizontalFrameIndex = 0
+                this.sprite.verticalFrameIndex = 1
                 break;
             case 7:
                 this.sprite.horizontalFrameIndex = 1
-                this.sprite.verticalFrameIndex = 3
-                this.sound()
+                this.sprite.verticalFrameIndex = 1
                 break;
             case 8:
-                this.sprite.horizontalFrameIndex = 1
-                this.sprite.verticalFrameIndex = 4
-                this.sound()
+                this.sprite.horizontalFrameIndex = 2
+                this.sprite.verticalFrameIndex = 1
                 break;
             case 9:
-                this.sprite.horizontalFrameIndex = 1
-                this.sprite.verticalFrameIndex = 4
+                this.sprite.horizontalFrameIndex = 3
+                this.sprite.verticalFrameIndex = 1
                 break;
             default:
               // code block
           } 
 
-    }
-
-    sound(){
-        if(this.hp <= 30 && this.heartBeatSound){
-            this.sounds.heartBeat.play()
-            this.heartBeatSound = false
-        }
-        if(this.heartBeatSound){    
-            setInterval(()=>{
-                this.heartBeatSound = false
-                clearInterval(this.soundInterval)
-            },5000)
-        }
-    }
-
-    healthStatus(element, hero){
-        console.log(this.hp)
-        this.previousHp = this.hp
-
-        if(element instanceof FloorTrap){
-            if(element.trapStatus && element.trapReady){
-                this.hp -= element.damage
-                element.trapReady = false
-            }
-        }
-        else if(element instanceof RoofTrap){
-            if(element.trapDamage && element.roofTrapReady){
-                this.hp -= element.damage
-                element.roofTrapReady = false
-                element.trapDamage = false
-            }
-        }
-        else if(element instanceof ArrowTrap){
-            if(element.arrowStatus && element.arrowReady){
-                this.hp -= element.damage
-                element.arrowReady = false
-            }
-        }
-        else if(element instanceof Enemy){
-            if(element.colisionStatus.down || element.colisionStatus.left || element.colisionStatus.right){
-                this.hp -= element.damage
-            }
-        }
-        else if(element instanceof BasicEnemy){
-            if(element.colisionStatus.down || element.colisionStatus.left || element.colisionStatus.right){
-                this.hp -= element.damage
-            }
-            if(element.colisionStatus.up){
-                hero.inventory.steelBoots ? 1 : this.hp -= element.damage 
-            }
-        }
-
-        else if(element instanceof Potions){
-            if(element.potionStatus && element.potionReady && this.hp < 100){
-                this.hp += POTION_HEAL
-                element.potionReady = false
-            }
-        }
-
-        //height damage
-        if(hero.heightJump.distance > 200 && hero.heightJump.distance < 400 && !hero.movements.up && hero.heightJump.damage){
-            this.hp -= 30
-            hero.heightJump.damage = false
-        }
-        if(hero.heightJump.distance > 400 && !hero.movements.up){
-            this.hp = 0
-        } 
-
-        //sounds
-        if(this.previousHp > this.hp){
-            this.sounds.damage.play()
-        }
     }
 }
 
