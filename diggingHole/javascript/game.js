@@ -113,12 +113,12 @@ class Game{
                 new BasicBlock(this.ctx, 1100, 300, 'right')
             ],
             [
-                new BasicBlock(this.ctx, 800, 500, 'left'),
-                new BasicBlock(this.ctx, 850, 500),
-                new BasicBlock(this.ctx, 900, 500),
-                new BasicBlock(this.ctx, 950, 500),
-                new BasicBlock(this.ctx, 1000, 500),
-                new BasicBlock(this.ctx, 1050, 500, 'right')
+                new BasicBlock(this.ctx, 790, 500, 'left'),
+                new BasicBlock(this.ctx, 840, 500),
+                new BasicBlock(this.ctx, 890, 500),
+                new BasicBlock(this.ctx, 940, 500),
+                new BasicBlock(this.ctx, 990, 500),
+                new BasicBlock(this.ctx, 1040, 500, 'right')
             ],
             [
                 new BasicBlock(this.ctx, 100, 750, 'left'),

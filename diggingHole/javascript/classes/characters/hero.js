@@ -2,9 +2,9 @@ class Hero{
     constructor(ctx){
         this.ctx = ctx
 
-        this.width = 40
-        this.height = 60
-        this.defaultHeight = 60
+        this.width = 504
+        this.height = 134
+        this.defaultHeight = 134
         
 
         this.blocked = false
@@ -66,34 +66,34 @@ class Hero{
         } 
         this.sounds.jump.volume = 0.3
 
-        /* //sprite
+        //sprite
         this.sprite = new Image()
-        this.sprite.src = './././images/sprites/hero/hero(5).png'
+        this.sprite.src = './././images/sprites/hero/hero.png'
         this.sprite.isReady = false
-        this.sprite.horizontalFrames = 8
-        this.sprite.verticalFrames = 3
+        this.sprite.horizontalFrames = 9
+        this.sprite.verticalFrames = 2
         this.sprite.horizontalFrameIndex = 0
         this.sprite.verticalFrameIndex = 0
         this.sprite.drawCount = 0
         this.sprite.onload = () => {
             this.sprite.isReady = true
-            this.sprite.frameWidth = 40
-            this.sprite.frameHeight = 45
+            this.sprite.frameWidth = Math.floor(this.width / this.sprite.horizontalFrames)
+            this.sprite.frameHeight = Math.floor(this.sprite.height / this.sprite.verticalFrames)
             this.width = this.sprite.frameWidth
             this.height = this.sprite.frameHeight
-        } */
+        } 
     }
 
     isReady() {
         return this.sprite.isReady
     }
 
-    draw(){
+    /* draw(){
         this.ctx.fillStyle = 'red'
         this.ctx.fillRect(this.pos.x, this.pos.y, this.width, this.height)
-    }
+    } */
 
-    /* draw() {
+    draw() {
       if (this.isReady()) {
         this.ctx.drawImage(
           this.sprite,
@@ -109,9 +109,9 @@ class Hero{
         this.sprite.drawCount++
         this.animate()
       }
-    } */
+    } 
 
-   /*  animate() {
+   animate() {
         if (this.movements.left) {
             this.animateLeft()
         }else if(this.movements.right) {
@@ -123,16 +123,15 @@ class Hero{
     }
 
     animateStatic(){
-        this.sprite.verticalFrameIndex = 2
+        this.sprite.verticalFrameIndex = 0
         this.sprite.horizontalFrameIndex = 0
     }
     
     animateRight(){
-        if(this.sprite.drawCount % 11 === 0){
+        if(this.sprite.drawCount % 8 === 0){
             this.sprite.verticalFrameIndex = 0
-            this.sprite.horizontalFrameIndex = 0
             if(this.sprite.horizontalFrameIndex === 8){
-                this.sprite.horizontalFrameIndex = 0
+                this.sprite.horizontalFrameIndex = 1
             }else{
                 this.sprite.horizontalFrameIndex++
             }
@@ -140,17 +139,15 @@ class Hero{
     }
 
     animateLeft(){
-        if(this.sprite.drawCount % 11 === 0){
+        if(this.sprite.drawCount % 8 === 0){
             this.sprite.verticalFrameIndex = 1
-            this.sprite.horizontalFrameIndex = 0
-            
             if(this.sprite.horizontalFrameIndex === 8){
-                this.sprite.horizontalFrameIndex = 0
+                this.sprite.horizontalFrameIndex = 1
             }else{
                 this.sprite.horizontalFrameIndex++
             }
         }
-    } */
+    } 
 
     collisionBlocks(block){
         
