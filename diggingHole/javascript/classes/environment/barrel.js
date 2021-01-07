@@ -153,7 +153,7 @@ class Barrel{
                 this.colisionStatus.up = true
             
                 element.pos.y = this.pos.y - this.height - 20
-                element.vel.x = 0
+                element.vel.x = this.vel.x
             }
          //BOTTOM COLLISION
         else if(

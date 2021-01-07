@@ -12,8 +12,16 @@ class ElevatorBlock extends BasicBlock{
         this.pos = {x, y} 
         this.vel = {x: 0, y: speed} 
         this.direction = 'down'   
-
-        this.img.src = '././images/environment/floor/Ground_x1.png'
+        if(this.width === 150){
+            this.img.src = '././images/environment/floor/Ground_x3.png'
+        }
+        else if(this.width === 100){
+            this.img.src = '././images/environment/floor/Ground_x2.png'
+        }
+        else{
+            this.img.src = '././images/environment/floor/Ground_x1.png'
+        }
+        
     }
 
 

@@ -47,7 +47,7 @@ class Hero{
 
         //inventory
         this.inventory = {
-            doorKey: false, 
+            doorKey: true, 
             steelBoots: false,
             potions: 1
         }
@@ -154,103 +154,102 @@ class Hero{
 
     collisionBlocks(block){
         
-        if (    //---collision down---
-                this.pos.y <= block.pos.y + block.height && 
-                this.pos.y >= block.pos.y && 
-                this.pos.x + this.width >= block.pos.x && 
-                this.pos.x <= block.pos.x + block.width &&
-                this.pos.y + this.height > block.pos.y + block.height &&
-                this.previousY > block.pos.y + block.height
-                ) 
-                {
-                    //console.log('down')
-                    this.pos.y = block.pos.y + block.height + 1
-                    this.vel.y = 0   
+    if (    //---collision down---
+            this.pos.y <= block.pos.y + block.height && 
+            this.pos.y >= block.pos.y && 
+            this.pos.x + this.width >= block.pos.x && 
+            this.pos.x <= block.pos.x + block.width &&
+            this.pos.y + this.height > block.pos.y + block.height &&
+            this.previousY > block.pos.y + block.height
+            ) 
+            {
+                //console.log('down')
+                this.pos.y = block.pos.y + block.height + 1
+                this.vel.y = 0   
+                this.vel.x = 0
+        } 
+
+        else if(//---collision up---
+            this.pos.y + this.height >= block.pos.y &&
+            this.pos.y + this.height <= block.pos.y + block.height &&
+            this.pos.x + this.width >= block.pos.x &&
+            this.pos.x <= block.pos.x + block.width &&
+            this.pos.y < block.pos.y && 
+            this.previousY + this.height < block.pos.y 
+            ) 
+
+            {
+                //console.log('up')
+
+                //height damage
+
+                    if(this.heightJump.heightCounter){
+                        this.heightJump.initial = this.pos.y
+                        this.heightJump.heightCounter = false
+                    } 
+                    if(this.pos.y >= this.heightJump.initial && !this.heightJump.heightCounter){
+                        this.heightJump.final = this.pos.y
+                    }
+                    if(this.pos.y < this.heightJump.initial && !this.heightJump.heightCounter){
+                        this.heightJump.initial = this.pos.y
+                    }
+                    //console.log(`inicial: ${this.heightJump.initial}, final: ${this.heightJump.final}` )
+                    if(this.heightJump.final > this.heightJump.initial){
+                        this.heightJump.distance = this.heightJump.final - this.heightJump.initial
+                        this.heightJump.heightCounter = true
+                        this.heightJump.initial = undefined
+                        this.heightJump.final = undefined
+                    }
+                    if(!this.heightJump.heightCounter){
+                        this.heightJump.distance = 0
+                        this.heightJump.damage = true
+                    }
+                    
+                    
+                
+
+                if(!this.movements.left && !this.movements.right){
                     this.vel.x = 0
+                }
+
+                this.pos.y  = block.pos.y - this.height - 1
+                this.vel.y = 0
+
+                if(block instanceof BlockWithMotion){
+                    this.vel.x = block.vel.x 
+                }
+
+                if(block instanceof ElevatorBlock){
+                    this.pos.y  = block.pos.y - this.height - 5
+                } 
             } 
 
-            else if(//---collision up---
-                this.pos.y + this.height >= block.pos.y &&
-                this.pos.y + this.height <= block.pos.y + block.height &&
-                this.pos.x + this.width >= block.pos.x &&
-                this.pos.x <= block.pos.x + block.width &&
-                this.pos.y < block.pos.y && 
-                this.previousY + this.height < block.pos.y 
-                ) 
+        else if( //---collision left---
+            this.pos.y + this.height >= block.pos.y &&
+            this.pos.y <= block.pos.y + block.height &&
+            this.pos.x + this.width >= block.pos.x &&
+            this.pos.x < block.pos.x && 
+            this.previousX +  this.width < block.pos.x)
+    
+            {
+                //console.log('left')
+                this.pos.x  = block.pos.x - this.width - 1
+                this.vel.x = 0
+            }
 
-                {
-                    //console.log('up')
+        else if( // ---collision right---
+            this.pos.y + this.height >= block.pos.y &&
+            this.pos.y <= block.pos.y + block.height &&
+            this.pos.x <= block.pos.x + block.width &&
+            this.pos.x + this.width > block.pos.x + block.width &&
+            this.previousX > block.pos.x + block.width
+            ) 
 
-                    //height damage
-
-
-                        if(this.heightJump.heightCounter){
-                            this.heightJump.initial = this.pos.y
-                            this.heightJump.heightCounter = false
-                        } 
-                        if(this.pos.y >= this.heightJump.initial && !this.heightJump.heightCounter){
-                            this.heightJump.final = this.pos.y
-                        }
-                        if(this.pos.y < this.heightJump.initial && !this.heightJump.heightCounter){
-                            this.heightJump.initial = this.pos.y
-                        }
-                        //console.log(`inicial: ${this.heightJump.initial}, final: ${this.heightJump.final}` )
-                        if(this.heightJump.final > this.heightJump.initial){
-                            this.heightJump.distance = this.heightJump.final - this.heightJump.initial
-                            this.heightJump.heightCounter = true
-                            this.heightJump.initial = undefined
-                            this.heightJump.final = undefined
-                        }
-                        if(!this.heightJump.heightCounter){
-                            this.heightJump.distance = 0
-                            this.heightJump.damage = true
-                        }
-                        
-                        
-                   
-
-                    if(!this.movements.left && !this.movements.right){
-                        this.vel.x = 0
-                    }
-
-                    this.pos.y  = block.pos.y - this.height - 1
-                    this.vel.y = 0
-
-                    if(block instanceof BlockWithMotion){
-                        this.vel.x = block.vel.x 
-                    }
-
-                    if(block instanceof ElevatorBlock){
-                        this.pos.y  = block.pos.y - this.height - 5
-                    } 
-                } 
-
-            else if( //---collision left---
-                this.pos.y + this.height >= block.pos.y &&
-                this.pos.y <= block.pos.y + block.height &&
-                this.pos.x + this.width >= block.pos.x &&
-                this.pos.x < block.pos.x && 
-                this.previousX +  this.width < block.pos.x)
-        
-                {
-                    //console.log('left')
-                    this.pos.x  = block.pos.x - this.width - 1
-                    this.vel.x = 0
-                }
-
-            else if( // ---collision right---
-                this.pos.y + this.height >= block.pos.y &&
-                this.pos.y <= block.pos.y + block.height &&
-                this.pos.x <= block.pos.x + block.width &&
-                this.pos.x + this.width > block.pos.x + block.width &&
-                this.previousX > block.pos.x + block.width
-                ) 
-
-                {
-                    //console.log('right')
-                    this.pos.x  = block.pos.x + block.width + 1
-                    this.vel.x = 0
-                }
+            {
+                //console.log('right')
+                this.pos.x  = block.pos.x + block.width + 1
+                this.vel.x = 0
+            }
 
     }
 
@@ -362,7 +361,6 @@ class Hero{
             case KEY_POTION:
                 this.movements.potion = status
                 break;
-
             default:
                 break;
           }

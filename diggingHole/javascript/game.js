@@ -408,6 +408,7 @@ class Game{
         if(!this.drawInterval){
             this.drawInterval = setInterval(() => {
                 this.clear()
+                this.pause()
                 this.levelAdmin()
                 this.generateElements()
                 this.activateElements()
@@ -423,6 +424,10 @@ class Game{
  
     clear(){
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    }
+
+    pause(){
+
     }
 
     levelAdmin(){
@@ -593,7 +598,7 @@ class Game{
     }
 
     gameOver(){
-        if(this.health.hp <= 0 /* || this.hero.pos.y >= 1000 */){
+        if(this.health.hp <= 0  || ((this.hero.pos.y >= 3100 && this.hero.pos.y <= 3500))){
             this.sounds.gameOver.play()
             setTimeout(() => {
                 clearInterval(this.drawInterval);
@@ -613,6 +618,24 @@ class Game{
                     )
             },2000)
             this.ctx.restore()
+        }
+        else if(!this.safeBoxes[0].boxLock){
+            setTimeout(() => {
+                clearInterval(this.drawInterval);
+            },100)
+
+            this.ctx.fillStyle = 'rgba(0, 0, 0)'
+                this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height)
+                this.ctx.save()
+                this.ctx.font = '50px Sans-serif'
+                this.ctx.fillStyle = 'red'
+                this.ctx.textAlign = 'center'
+                this.ctx.fillText(
+                    'Victory!',
+                    this.ctx.canvas.width / 2,
+                    this.ctx.canvas.height / 2,
+                    )
+
         }
     }
 

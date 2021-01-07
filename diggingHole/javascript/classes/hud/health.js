@@ -35,6 +35,7 @@ class Health{
             damage: new Audio('././sound/damage-sound.mp3'),
             drink: new Audio('././sound/drinking.mp3'),
           } 
+          this.sounds.drink.volume = 0.6
     }
 
     isReady() {
@@ -128,7 +129,7 @@ class Health{
     }
 
     healthStatus(element, hero){
-        console.log(this.hp)
+        //console.log(this.hp)
         this.previousHp = this.hp
 
         if(element instanceof FloorTrap){
