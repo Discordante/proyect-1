@@ -4,7 +4,7 @@ class Hero{
 
         this.width = 504
         this.height = 134
-        this.defaultHeight = 134
+        this.defaultHeight = 67
         
 
         this.blocked = false
@@ -36,6 +36,7 @@ class Hero{
             jump: false,
             crouch: false,
             potion: false,
+            direction: 'right',
 
             jumpStatus: false,
             jumpLimit: -30,
@@ -47,7 +48,7 @@ class Hero{
 
         //inventory
         this.inventory = {
-            doorKey: true, 
+            doorKey: false, 
             steelBoots: false,
             potions: 1
         }
@@ -123,8 +124,14 @@ class Hero{
     }
 
     animateStatic(){
-        this.sprite.verticalFrameIndex = 0
-        this.sprite.horizontalFrameIndex = 0
+        if(this.movements.direction === 'right'){
+            this.sprite.verticalFrameIndex = 0
+            this.sprite.horizontalFrameIndex = 0
+        }
+        else{
+            this.sprite.verticalFrameIndex = 1
+            this.sprite.horizontalFrameIndex = 0
+        }
     }
     
     animateRight(){
@@ -342,9 +349,11 @@ class Hero{
                 break;
             case KEY_RIGHT:
                 this.movements.right = status
+                this.movements.direction = 'right'
                 break;
             case KEY_LEFT:
                 this.movements.left = status
+                this.movements.direction = 'left'
                 break;
             case KEY_JUMP:
                 this.movements.jump = status

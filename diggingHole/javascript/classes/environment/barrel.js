@@ -89,7 +89,7 @@ class Barrel{
                     }
 
                     if(block instanceof ElevatorBlock){
-                        this.pos.y  = block.pos.y - this.height - 12
+                        this.pos.y  = block.pos.y - this.height - 5
                     }
                 }
 
@@ -197,8 +197,8 @@ class Barrel{
         this.pos.x += this.vel.x
         this.pos.y += this.vel.y
 
-        if(this.pos.x > 1100 - this.width){
-            this.pos.x = 1100 - this.width
+        if(this.pos.x > 1090 - this.width){
+            this.pos.x = 1090 - this.width
         }
         if(this.pos.x < 150 - this.width){
             this.pos.x = 150 - this.width

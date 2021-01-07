@@ -22,10 +22,10 @@ class Game{
         this.ladders = [
             //level-0
             [
-                new Stairs(this.ctx, 400, 580),
-                new Stairs(this.ctx, 400, 620),
-                new Stairs(this.ctx, 400, 660),
-                new Stairs(this.ctx, 400, 700)
+                new Stairs(this.ctx, 460, 580),
+                new Stairs(this.ctx, 460, 620),
+                new Stairs(this.ctx, 460, 660),
+                new Stairs(this.ctx, 460, 700)
             ],
             [
                 new Stairs(this.ctx, 1100, 500),
@@ -103,6 +103,12 @@ class Game{
                 new BasicBlock(this.ctx, 100, 300),
                 new BasicBlock(this.ctx, 150, 300, 'right')
             ],
+            [   
+                new BasicBlock(this.ctx, 300, 150, 'left'),
+                new BasicBlock(this.ctx, 350, 150),
+                new BasicBlock(this.ctx, 400, 150),
+                new BasicBlock(this.ctx, 450, 150, 'right')
+            ],
             [
                 new BasicBlock(this.ctx, 800, 300, 'left'),
                 new BasicBlock(this.ctx, 850, 300),
@@ -143,7 +149,7 @@ class Game{
             [
                 new BasicBlock(this.ctx, 300, 580, 'left'),
                 new BasicBlock(this.ctx, 350, 580),
-                new BasicBlock(this.ctx, 450, 580, 'right')
+                new BasicBlock(this.ctx, 400, 580, 'right')
 
             ],
 
@@ -173,8 +179,8 @@ class Game{
                 new BasicBlock(this.ctx, 395, 1400, 'right'),
             ],
             [
-                new BasicBlock(this.ctx, 100, 1200, 'left'),
-                new BasicBlock(this.ctx, 150, 1200, 'right'),
+                new BasicBlock(this.ctx, 50, 1200, 'left'),
+                new BasicBlock(this.ctx, 100, 1200, 'right'),
             ],
             [
                 new BasicBlock(this.ctx, 145, 1350, 'left'),
@@ -282,7 +288,6 @@ class Game{
 
         //motion blocks
         this.blocksMotion = [
-            new BlockWithMotion(this.ctx, 150, 150, 250, 400),
             new BlockWithMotion(this.ctx, 250, 300, 250, 500),
             new BlockWithMotion(this.ctx, 300, 420, 350, 750),
 
@@ -295,7 +300,6 @@ class Game{
         ]
 
         this.elevatorBlocks = [
-            new ElevatorBlock(this.ctx, 45, 500, 50, 500, 2800, 2),
             new ElevatorBlock(this.ctx, 200, 300, 50, 200, 500, 2),
             new ElevatorBlock(this.ctx, 1000, 3000, 150, 2650, 3200, 2),
 
@@ -318,7 +322,7 @@ class Game{
 
          this.barrels = [
              //level-0
-            new Barrel(this.ctx, 200, 50, 'barrel'),
+            new Barrel(this.ctx, 400, 50, 'barrel'),
 
             //level-1
             new Barrel(this.ctx, 750, 1000, 'box'),
@@ -339,7 +343,7 @@ class Game{
         this.steelBoots = new SteelBoots(this.ctx, 1085, 1510)
         this.dungeonKey = new DungeonKey(this.ctx, 625, 2760)
         this.potionsArray = [
-            new Potions(this.ctx, 480, 700),
+            new Potions(this.ctx, 350, 700),
             new Potions(this.ctx, 1085, 1795),
             new Potions(this.ctx, 160, 2250),
         ]
@@ -598,7 +602,7 @@ class Game{
     }
 
     gameOver(){
-        if(this.health.hp <= 0  || ((this.hero.pos.y >= 3100 && this.hero.pos.y <= 3500))){
+        if(this.health.hp <= 0  || ((this.hero.pos.y >= 3150 && this.hero.pos.y <= 3500))){
             this.sounds.gameOver.play()
             setTimeout(() => {
                 clearInterval(this.drawInterval);
