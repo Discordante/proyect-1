@@ -12,12 +12,16 @@ class Game{
 
         this.drawInterval = undefined
         
+        this.tryAgain = document.getElementById("again")
+        this.continue = document.getElementById("continue")
+        this.exit = document.getElementById("exit")
         
         //hero
         this.hero = new Hero(this.ctx)
         this.health = new Health (this.ctx)
         this.potions = new NumPotions (this.ctx)
 
+        this.gamePause = false
 
         this.ladders = [
             //level-0
@@ -439,10 +443,12 @@ class Game{
         //sound
         this.sounds = {
             gameOver: new Audio('./././sound/game-over.mp3'),
-            cave: new Audio('./sound/cave-sound.mp3')
+            cave: new Audio('./sound/cave-sound.mp3'),
+            pause: new Audio('./sound/pause.mp3'),
         } 
         this.sounds.gameOver.volume = 0.6
         this.sounds.cave.volume = 0.7
+
     }
 
 
@@ -451,7 +457,6 @@ class Game{
         if(!this.drawInterval){
             this.drawInterval = setInterval(() => {
                 this.clear()
-                this.pause()
                 this.levelAdmin()
                 this.generateElements()
                 this.activateElements()
@@ -463,6 +468,7 @@ class Game{
                 this.newWorld()
             },FPS)
         }
+        
     }
  
     clear(){
@@ -471,6 +477,19 @@ class Game{
 
     pause(){
 
+        this.sounds.cave.pause()
+        this.sounds.currentTime = 0
+
+        this.continue.classList.remove("hide")
+        this.exit.classList.remove("hide")
+        this.tryAgain.classList.remove("hide")
+        
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)'
+        this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height)
+        this.ctx.save()
+
+        clearInterval(this.drawInterval)
+        this.drawInterval = false
     }
 
     levelAdmin(){
@@ -647,6 +666,8 @@ class Game{
             },100)
 
             setTimeout(() => {
+                this.tryAgain.classList.remove("hide")
+
                 this.ctx.fillStyle = 'rgba(0, 0, 0)'
                 this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height)
                 this.ctx.save()
@@ -679,9 +700,21 @@ class Game{
                     )
 
         }
+        
     }
 
     onKeyEvent(event){
         this.hero.onKeyEvent(event)
+
+        switch (event.code) {
+            case KEY_PAUSE:
+                if(!this.gamePause){
+                    this.sounds.pause.play()
+                    this.pause()
+                }
+                this.gamePause = true
+                
+                break;
+        }        
     }
 }

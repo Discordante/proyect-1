@@ -15,7 +15,7 @@ const KEY_JUMP = 'Space'
 const KEY_RUN = 'ShiftLeft'
 const KEY_CROUCH = 'ControlLeft'
 const KEY_POTION = 'KeyA'
-const KEY_PAUSE = 'KeyP'
+const KEY_PAUSE = 'Escape'
 
 //physics
 const VELOCITY = {x: 5, y: 0}

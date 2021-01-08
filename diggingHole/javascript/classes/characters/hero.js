@@ -35,6 +35,7 @@ class Hero{
             run: false,
             jump: false,
             crouch: false,
+
             potion: false,
             direction: 'right',
 
@@ -332,7 +333,6 @@ class Hero{
         if(this.pos.y <= 0){   
             this.pos.y = 0
         } */
-
     }
 
    
