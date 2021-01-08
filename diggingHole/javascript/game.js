@@ -387,7 +387,7 @@ class Game{
             new Potions(this.ctx, 150, 2800),
         ]
 
-        //traps
+        //traps try
         this.arrow = new ArrowTrap(this.ctx)
         this.arrowArray = [
             new ArrowTrap(this.ctx, 1200, 250, 'left'),
