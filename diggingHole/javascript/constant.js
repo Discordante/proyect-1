@@ -34,7 +34,7 @@ const BOSS_ENEMY_DAMAGE = 10
 const ARROW_SPEED = -15
 
 //floor traps
-const NUM_FLOOR_TRAPS = 10
+const NUM_FLOOR_TRAPS = 12
 const NUM_ROOF_TRAPS_INIT = 10
 const NUM_ROOF_TRAPS_FINAL = 70
 
@@ -44,6 +44,7 @@ const HERO_HEALTH = 100
 const BOSS_HP = 150
 const BASIC_ENEMY_HP = 50
 const POTION_HEAL = 20
+const NUM_POTIONS = 3
 
 
 //distances

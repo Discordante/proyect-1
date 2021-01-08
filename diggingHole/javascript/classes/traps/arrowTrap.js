@@ -1,15 +1,22 @@
 class ArrowTrap extends GeneralClass{
-    constructor(ctx, x, y){
+    constructor(ctx, x, y, direction){
         super(ctx)
 
         this.height = 5
         this.width = 20
 
-        this.pos = {x:600, y:250}  // position
-        this.vel = {x: ARROW_SPEED, y: 0} // velocity
+        this.pos = {x, y}  // position
+        if(direction === 'left'){
+            this.vel = {x: ARROW_SPEED, y: 0} // velocity
+        }
+        else{
+            this.vel = {x: -ARROW_SPEED, y: 0} // velocity
+        }
+        
 
         this.arrowStatus = false
-        this.arrowReady = true
+        this.arrowReady = false
+        this.distanceActivation = 0
 
         this.damage = ARROW_DAMAGE
 
@@ -38,22 +45,23 @@ class ArrowTrap extends GeneralClass{
 
     collision(element){
         if(super.collision(element) && this.arrowReady){
-            this.vel.x = 0
+            this.pos.x = undefined
             this.arrowStatus = true
         }
     } 
 
-    move(element){
-       super.move(element)
-       if(!this.arrowStatus && this.pos.x > 0){
-        this.sounds.arrowShoot.play()
-       }
-    } 
+    move(hero){
+        this.distanceActivation = Math.hypot((this.pos.x - hero.pos.x),(this.pos.y - hero.pos.y))
 
-    generateArrow(element){
-        if(element.pos.y >= this.pos.y - 10 && element.pos.y <= this.pos.y + 10 && element.pos.x >= this.pos.x - 300 && this.arrowReady){
-            this.arrowReady = false
-            return true
+        if(this.distanceActivation < 400 && Math.abs(this.pos.y - hero.pos.y) <= 20){
+            this.arrowReady = true
+            if(!this.arrowStatus){
+                this.sounds.arrowShoot.play()
+            }
         }
-    }
+        if(this.arrowReady){
+            super.move(hero)
+        }
+        
+    } 
 }

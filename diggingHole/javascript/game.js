@@ -104,10 +104,10 @@ class Game{
                 new BasicBlock(this.ctx, 150, 300, 'right')
             ],
             [   
-                new BasicBlock(this.ctx, 300, 150, 'left'),
-                new BasicBlock(this.ctx, 350, 150),
-                new BasicBlock(this.ctx, 400, 150),
-                new BasicBlock(this.ctx, 450, 150, 'right')
+                new BasicBlock(this.ctx, 300, 140, 'left'),
+                new BasicBlock(this.ctx, 350, 140),
+                new BasicBlock(this.ctx, 400, 140),
+                new BasicBlock(this.ctx, 450, 140, 'right')
             ],
             [
                 new BasicBlock(this.ctx, 800, 300, 'left'),
@@ -179,15 +179,18 @@ class Game{
                 new BasicBlock(this.ctx, 395, 1400, 'right'),
             ],
             [
-                new BasicBlock(this.ctx, 50, 1200, 'left'),
-                new BasicBlock(this.ctx, 100, 1200, 'right'),
+                new BasicBlock(this.ctx, 50, 1100, 'left'),
+                new BasicBlock(this.ctx, 100, 1100, 'right'),
             ],
             [
                 new BasicBlock(this.ctx, 145, 1350, 'left'),
                 new BasicBlock(this.ctx, 195, 1350, 'right'),
             ],
             [
-                new BasicBlock(this.ctx, 200, 1550, 'left'),
+                new BasicBlock(this.ctx, 50, 1550, 'left'),
+                new BasicBlock(this.ctx, 100, 1550),
+                new BasicBlock(this.ctx, 150, 1550),
+                new BasicBlock(this.ctx, 200, 1550),
                 new BasicBlock(this.ctx, 250, 1550),
                 new BasicBlock(this.ctx, 300, 1550),
                 new BasicBlock(this.ctx, 350, 1550, 'right')
@@ -300,11 +303,11 @@ class Game{
         ]
 
         this.elevatorBlocks = [
-            new ElevatorBlock(this.ctx, 200, 300, 50, 200, 500, 2),
+            //level0
             new ElevatorBlock(this.ctx, 1000, 3000, 150, 2650, 3200, 2),
 
             //level1
-            new ElevatorBlock(this.ctx, 900, 1500, 50, 1400, 1500, 2),
+            new ElevatorBlock(this.ctx, 870, 1500, 150, 1400, 1550, 2),
 
             //level2
             new ElevatorBlock(this.ctx, 260, 2100, 50, 2000, 2320, 2),
@@ -323,6 +326,7 @@ class Game{
          this.barrels = [
              //level-0
             new Barrel(this.ctx, 400, 50, 'barrel'),
+            new Barrel(this.ctx, 350, 450, 'box'),
 
             //level-1
             new Barrel(this.ctx, 750, 1000, 'box'),
@@ -336,8 +340,17 @@ class Game{
         ]
 
         //background
-        
         this.background = new Background(this.ctx)
+
+        //signals
+        this.signalsArray = [
+            new Signals (this.ctx, 250, 550, '5'),
+            new Signals (this.ctx, 1050, 150, '4'),
+            new Signals (this.ctx, 75, 1000,'4'),
+            new Signals (this.ctx, 75, 1200,'4'),
+            new Signals (this.ctx, 100, 1700,'4'),
+         
+        ]
 
         //inventary
         this.steelBoots = new SteelBoots(this.ctx, 1085, 1510)
@@ -350,7 +363,12 @@ class Game{
 
         //traps
         this.arrow = new ArrowTrap(this.ctx)
-        this.arrowArray = []
+        this.arrowArray = [
+            new ArrowTrap(this.ctx, 1200, 250, 'left'),
+            new ArrowTrap(this.ctx, 0, 1075,'right'),
+            new ArrowTrap(this.ctx, 0, 1500,'right'),
+            new ArrowTrap(this.ctx, 0, 1950,'right'),
+        ]
 
         //floor traps
         this.floorTraps = []
@@ -472,6 +490,7 @@ class Game{
         this.safeBoxes.forEach(safeBox => safeBox.draw())
         this.ladders.forEach(ladder => ladder.forEach( step => step.draw()))
         this.barrels.forEach(barrel => barrel.draw())
+        this.signalsArray.forEach(signal => signal.draw())
 
         //inventory
         this.dungeonKey.draw(this.basicEnemies[0])
@@ -512,6 +531,7 @@ class Game{
 
         //environment
         this.barrels.forEach(barrel => barrel.move())
+        this.signalsArray.forEach(signal => signal.move())
 
         //floor
         this.blocksMotion.forEach(block => block.move())
@@ -520,10 +540,6 @@ class Game{
     }
 
     generateElements(){
-        
-       if(this.arrow.generateArrow(this.hero)){
-           this.arrowArray.push(new ArrowTrap(this.ctx))
-       }
 
        if(this.basicEnemies[0].hp === 0 && this.boss){
         this.boss = false
@@ -550,6 +566,7 @@ class Game{
         this.barrels.forEach(barrel => this.basicBlocks.forEach(blockArr => blockArr.forEach(block => barrel.collisionBlocks(block))))
         this.barrels.forEach(barrel => this.blocksMotion.forEach(block => barrel.collisionBlocks(block)))
         this.barrels.forEach(barrel => this.elevatorBlocks.forEach(block => barrel.collisionBlocks(block)))
+        this.signalsArray.forEach(signal => this.basicBlocks.forEach(blockArr => blockArr.forEach(block => signal.collisionBlocks(block))))
 
         //enemies
         this.basicEnemies.forEach(enemy => enemy.collision(this.hero))

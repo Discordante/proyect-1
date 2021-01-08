@@ -50,7 +50,7 @@ class Hero{
         this.inventory = {
             doorKey: false, 
             steelBoots: false,
-            potions: 1
+            potions: NUM_POTIONS
         }
 
         //collisions
