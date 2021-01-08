@@ -49,19 +49,24 @@ body{
 }
 
 #start{
-  top: 50%;
-}
-#exit{
   top: 40%;
 }
+#exit{
+  top: 70%;
+}
 #continue{
-  
+  top: 40%;
 }
 #again{
   top: 60%;
 }
 #controls{
   top: 50%;
+}
+
+#back{
+  top: 80%;
+  left: 70%;
 }
 
 

@@ -15,6 +15,7 @@ class Game{
         this.tryAgain = document.getElementById("again")
         this.continue = document.getElementById("continue")
         this.exit = document.getElementById("exit")
+        this.controls = document.getElementById("control")
         
         //hero
         this.hero = new Hero(this.ctx)
@@ -448,6 +449,7 @@ class Game{
         } 
         this.sounds.gameOver.volume = 0.6
         this.sounds.cave.volume = 0.7
+        this.sounds.pause.volume = 0.4
 
     }
 
@@ -483,6 +485,7 @@ class Game{
         this.continue.classList.remove("hide")
         this.exit.classList.remove("hide")
         this.tryAgain.classList.remove("hide")
+        this.controls.classList.remove("hide")
         
         this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)'
         this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height)
@@ -656,6 +659,10 @@ class Game{
             this.hero.heightJump.initial = 3800
             this.doors[0].doorThrough = true
         }
+    }
+
+    control(){
+
     }
 
     gameOver(){
