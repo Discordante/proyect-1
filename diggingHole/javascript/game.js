@@ -495,6 +495,82 @@ class Game{
         this.drawInterval = false
     }
 
+    restart(){
+        //hero
+        this.hero.heightJump.initial = 100
+        this.hero.pos = {x: 100, y: 100}
+        this.hero.vel = {x: 0, y: 0}
+        this.hero.inventory.doorKey = false
+        this.hero.inventory.steelBoots = false
+        this.hero.inventory.potions = NUM_POTIONS
+        this.health.hp = HERO_HEALTH
+
+        //barrels
+        this.barrels = [
+            //level-0
+           new Barrel(this.ctx, 400, 50, 'barrel'),
+           new Barrel(this.ctx, 350, 450, 'box'),
+
+           //level-1
+           new Barrel(this.ctx, 750, 1000, 'box'),
+           new Barrel(this.ctx, 350, 1000, 'box'),
+
+
+           //level-3
+           new Barrel(this.ctx, 200, 2800, 'barrel'),
+           new Barrel(this.ctx, 300, 2600, 'box'),
+           new Barrel(this.ctx, 850, 2800, 'box'),
+       ]
+    
+       //inventary
+       this.steelBoots = new SteelBoots(this.ctx, 1085, 1510)
+       this.dungeonKey = new DungeonKey(this.ctx, 625, 2760)
+
+       this.potionsArray = []
+       this.potionsArray = [
+           new Potions(this.ctx, 350, 700),
+           new Potions(this.ctx, 1000, 250),
+           new Potions(this.ctx, 1085, 1795),
+           new Potions(this.ctx, 160, 2250),
+           new Potions(this.ctx, 150, 2800),
+       ]
+
+        //enemies
+        this.enemies = [
+            new Enemy (this.ctx, 800, 200, 800, 1050),
+            new SnailEnemy (this.ctx, 200, 650, 100, 480),
+            new Enemy (this.ctx, 700, 1000, 650, 900),
+            new SnailEnemy (this.ctx, 700, 1300, 700, 780),
+            new Enemy (this.ctx, 100, 1700, 100, 200),
+            new Enemy (this.ctx, 700, 2200, 450, 800),
+            new Enemy (this.ctx, 100, 2500, 100, 400),
+        ]
+        this.boss = true
+        this.basicEnemies = [
+            new BasicEnemy(this.ctx, 700, 2900)
+        ]
+
+       //traps
+       this.arrowArray = []
+       this.arrowArray = [
+           new ArrowTrap(this.ctx, 1200, 250, 'left'),
+           new ArrowTrap(this.ctx, 0, 1075,'right'),
+           new ArrowTrap(this.ctx, 0, 1500,'right'),
+           new ArrowTrap(this.ctx, 0, 1950,'right'),
+       ]
+
+       //floor traps
+       this.floorTraps = []
+
+       for(let i = 0; i< NUM_FLOOR_TRAPS; i++){
+           this.randomX = Math.floor(Math.random() * 26)
+           this.randomY = Math.floor(Math.random() * this.basicBlocks[this.randomX].length)
+   
+           this.floorTraps.push(new FloorTrap(this.ctx, this.basicBlocks[this.randomX][this.randomY].pos.x + 5, this.basicBlocks[this.randomX][this.randomY].pos.y - 20))
+       } 
+
+    }
+
     levelAdmin(){
         this.level = Math.floor(this.hero.pos.y / 800)
     }

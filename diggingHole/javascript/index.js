@@ -73,18 +73,27 @@ window.onload = () => {
       
 
       tryAgain.addEventListener("click", () => {
+        this.sounds.click.play()
 
         continueButton.classList.add("hide")
         tryAgain.classList.add("hide")
         exitButton.classList.add("hide")
         startButton.classList.add("hide") 
+        controls.classList.add("hide") 
 
-        location.reload();  //DUDA
+        game.gamePause = false
+
+        clearInterval(game.drawInterval)
+        game.drawInterval = false
+        game.clear()
+        game.restart()
+        game.start()
+    
       })
 
       back.addEventListener("click", () => {
         this.sounds.click.play()
-        
+
         back.classList.add("hide")
 
         if(game.gamePause){
