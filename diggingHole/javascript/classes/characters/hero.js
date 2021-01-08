@@ -282,7 +282,7 @@ class Hero{
 
         //crouch movement
         if (this.movements.crouch && !this.movements.crouchStatus){ 
-            this.height = 20
+            this.height = 40
             this.movements.crouchStatus = true
         } 
 

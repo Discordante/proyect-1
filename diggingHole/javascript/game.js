@@ -391,7 +391,7 @@ class Game{
         this.arrow = new ArrowTrap(this.ctx)
         this.arrowArray = [
             new ArrowTrap(this.ctx, 1200, 250, 'left'),
-            new ArrowTrap(this.ctx, 0, 1075,'right'),
+            new ArrowTrap(this.ctx, 0, 1065,'right'),
             new ArrowTrap(this.ctx, 0, 1500,'right'),
             new ArrowTrap(this.ctx, 0, 1950,'right'),
         ]
