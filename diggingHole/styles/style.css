@@ -22,9 +22,6 @@ body{
   background-size: cover;
 }
 
-#canvas-border{
-
-}
 
 .button {
 	box-shadow:inset 0px 1px 0px 0px #a6827e;
@@ -68,7 +65,6 @@ body{
   top: 80%;
   left: 70%;
 }
-
 
 .center{
   position: absolute;

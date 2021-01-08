@@ -7,6 +7,7 @@ let continueButton = document.getElementById('continue')
 let exitButton = document.getElementById('exit')
 let tryAgain = document.getElementById('again')
 let controls = document.getElementById('control')
+let controlsImg = document.getElementById('controlsImg')
 let back = document.getElementById('back')
 
 
@@ -67,6 +68,7 @@ window.onload = () => {
         startButton.classList.add("hide")
 
         back.classList.remove("hide")
+        controlsImg.classList.remove("hide")
 
         game.control(); 
       })
@@ -101,10 +103,12 @@ window.onload = () => {
           exitButton.classList.remove("hide")
           continueButton.classList.remove("hide")
           controls.classList.remove("hide") 
+          controlsImg.classList.add("hide")
         }
         else{
           start.classList.remove("hide")
           controls.classList.remove("hide")
+          controlsImg.classList.add("hide")
         }
        
 
