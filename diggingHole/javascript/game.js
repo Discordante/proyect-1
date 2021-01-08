@@ -480,7 +480,6 @@ class Game{
     pause(){
 
         this.sounds.cave.pause()
-        this.sounds.currentTime = 0
 
         this.continue.classList.remove("hide")
         this.exit.classList.remove("hide")
@@ -504,6 +503,9 @@ class Game{
         this.hero.inventory.steelBoots = false
         this.hero.inventory.potions = NUM_POTIONS
         this.health.hp = HERO_HEALTH
+
+        //sounds
+        this.sounds.cave.currentTime = 0 
 
         //barrels
         this.barrels = [
