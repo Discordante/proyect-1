@@ -53,7 +53,7 @@ class ArrowTrap extends GeneralClass{
     move(hero){
         this.distanceActivation = Math.hypot((this.pos.x - hero.pos.x),(this.pos.y - hero.pos.y))
 
-        if(this.distanceActivation < 400 && Math.abs(this.pos.y - hero.pos.y) <= 20){
+        if(this.distanceActivation < 450 && Math.abs(this.pos.y - hero.pos.y) <= 20){
             this.arrowReady = true
             if(!this.arrowStatus){
                 this.sounds.arrowShoot.play()

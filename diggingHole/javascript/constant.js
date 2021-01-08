@@ -34,7 +34,7 @@ const BOSS_ENEMY_DAMAGE = 10
 const ARROW_SPEED = -15
 
 //floor traps
-const NUM_FLOOR_TRAPS = 12
+const NUM_FLOOR_TRAPS = 15
 const NUM_ROOF_TRAPS_INIT = 10
 const NUM_ROOF_TRAPS_FINAL = 70
 

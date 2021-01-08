@@ -89,8 +89,21 @@ class Game{
                 new Stairs(this.ctx, 550, 2880),
                 new Stairs(this.ctx, 550, 2920),
                 new Stairs(this.ctx, 550, 2960),
-                new Stairs(this.ctx, 550, 3000)
+                new Stairs(this.ctx, 550, 3000),
+                new Stairs(this.ctx, 550, 3040),
+                new Stairs(this.ctx, 550, 3080),
+                new Stairs(this.ctx, 550, 3120),
 
+            ],
+            [
+                new Stairs(this.ctx, 310, 2840),
+                new Stairs(this.ctx, 310, 2880),
+                new Stairs(this.ctx, 310, 2920),
+                new Stairs(this.ctx, 310, 2960),
+                new Stairs(this.ctx, 310, 3000),
+                new Stairs(this.ctx, 310, 3040),
+                new Stairs(this.ctx, 310, 3080),
+                new Stairs(this.ctx, 310, 3120),
             ]
         ]
         
@@ -268,6 +281,12 @@ class Game{
             ],
             //level4
             [
+                new BasicBlock(this.ctx, 100, 2850, 'left'),
+                new BasicBlock(this.ctx, 150, 2850),
+                new BasicBlock(this.ctx, 200, 2850),
+                new BasicBlock(this.ctx, 250, 2850, 'right')
+            ],
+            [
                 new BasicBlock(this.ctx, 140, 3950, 'left'),
                 new BasicBlock(this.ctx, 190, 3950),
                 new BasicBlock(this.ctx, 240, 3950),
@@ -275,7 +294,7 @@ class Game{
                 new BasicBlock(this.ctx, 340, 3950),
                 new BasicBlock(this.ctx, 390, 3950),
                 new BasicBlock(this.ctx, 440, 3950),
-                new BasicBlock(this.ctx, 490, 3950),
+                new BasicBlock(this.ctx, 490, 3950), 
                 new BasicBlock(this.ctx, 540, 3950),
                 new BasicBlock(this.ctx, 590, 3950),
                 new BasicBlock(this.ctx, 640, 3950),
@@ -291,8 +310,8 @@ class Game{
 
         //motion blocks
         this.blocksMotion = [
-            new BlockWithMotion(this.ctx, 250, 300, 250, 500),
-            new BlockWithMotion(this.ctx, 300, 420, 350, 750),
+            new BlockWithMotion(this.ctx, 250, 300, 230, 620),
+            new BlockWithMotion(this.ctx, 600, 420, 350, 750),
 
             //level-1
             new BlockWithMotion(this.ctx, 300, 1120, 200, 500),
@@ -334,7 +353,7 @@ class Game{
 
 
             //level-3
-            new Barrel(this.ctx, 300, 2800, 'barrel'),
+            new Barrel(this.ctx, 200, 2800, 'barrel'),
             new Barrel(this.ctx, 300, 2600, 'box'),
             new Barrel(this.ctx, 850, 2800, 'box'),
         ]
@@ -357,8 +376,10 @@ class Game{
         this.dungeonKey = new DungeonKey(this.ctx, 625, 2760)
         this.potionsArray = [
             new Potions(this.ctx, 350, 700),
+            new Potions(this.ctx, 1000, 250),
             new Potions(this.ctx, 1085, 1795),
             new Potions(this.ctx, 160, 2250),
+            new Potions(this.ctx, 150, 2800),
         ]
 
         //traps
