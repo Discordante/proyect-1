@@ -10,5 +10,6 @@ the numerous traps and dangers.
 <img alt="introduction" width="100%" src='https://raw.githubusercontent.com/Discordante/proyect-1/master/diggingHole/images/html/readmeImg.png'></br>
 
 ### HOW TO PLAY
-
-<img  text-align="center" alt="controls" width="500px" src='https://raw.githubusercontent.com/Discordante/proyect-1/master/diggingHole/images/html/controls.png'></br>
+<p align="center">
+  <img  text-align="center" alt="controls" width="500px" src='https://raw.githubusercontent.com/Discordante/proyect-1/master/diggingHole/images/html/controls.png'></br>
+</p>
