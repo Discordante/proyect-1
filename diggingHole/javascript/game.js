@@ -661,7 +661,7 @@ class Game{
     }
 
     generateElements(){
-
+    
        if(this.basicEnemies[0].hp === 0 && this.boss){
         this.boss = false
         for(let i = 0; i < NUM_ROOF_TRAPS_FINAL; i++){
@@ -737,10 +737,6 @@ class Game{
             this.hero.heightJump.initial = 3800
             this.doors[0].doorThrough = true
         }
-    }
-
-    control(){
-
     }
 
     gameOver(){

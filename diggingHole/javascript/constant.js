@@ -44,7 +44,7 @@ const HERO_HEALTH = 100
 const BOSS_HP = 150
 const BASIC_ENEMY_HP = 50
 const POTION_HEAL = 20
-const NUM_POTIONS = 3
+const NUM_POTIONS = 8
 
 
 //distances
