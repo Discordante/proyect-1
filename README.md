@@ -10,7 +10,7 @@ the numerous traps and dangers.
 
 
 
-<p  align="center" href="https://discordante.github.io/proyect-1/diggingHole/" target="_blank">
+<p  align="center" href="https://discordante.github.io/proyect-1/diggingHole/">
   <img height="65px" src="https://raw.githubusercontent.com/Discordante/proyect-1/master/diggingHole/images/html/play-now.png">
 </p>  
 
