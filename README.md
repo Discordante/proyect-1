@@ -6,12 +6,13 @@ The objective of the game is very simple, you have to get the dungeon treasure a
 the numerous traps and dangers.
 
 
-<img alt="introduction" width="100%" src='https://raw.githubusercontent.com/Discordante/proyect-1/master/diggingHole/images/html/readmeImg.png'></br>
+<img alt="introduction" width="100%" src='https://raw.githubusercontent.com/Discordante/proyect-1/master/diggingHole/images/html/readmeImg.png'></br><
 
-
-<a align="center" href="https://discordante.github.io/proyect-1/diggingHole/" target="_blank">
-   <img height="65px" src="https://raw.githubusercontent.com/Discordante/proyect-1/master/diggingHole/images/html/play-now.png">
-</a>
+<div align="center" >
+   <a href="https://discordante.github.io/proyect-1/diggingHole/" target="_blank">
+      <img height="65px" src="https://raw.githubusercontent.com/Discordante/proyect-1/master/diggingHole/images/html/play-now.png">
+   </a>
+</div>
 
 
 
