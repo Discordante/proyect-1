@@ -1,5 +1,5 @@
 # DiggingHole PLATFORMS GAME 
-##(MODULE 1 IRONHACK PROJECT)
+## IRONHACK PROJECT-1
 
 <img alt="introduction" width="100%" src='https://raw.githubusercontent.com/Discordante/proyect-1/master/diggingHole/images/html/readmeImg.png'></br>
 ### INTRODUCTION 
@@ -10,4 +10,4 @@ the numerous traps and dangers.
 
 ### HOW TO PLAY
 
-<img  alt="controls" width="300px" src='https://raw.githubusercontent.com/Discordante/proyect-1/master/diggingHole/images/html/controls.png'></br>
+<img  align="center" alt="controls" width="500px" src='https://raw.githubusercontent.com/Discordante/proyect-1/master/diggingHole/images/html/controls.png'></br>
