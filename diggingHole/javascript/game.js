@@ -16,7 +16,11 @@ class Game{
         this.continue = document.getElementById("continue")
         this.exit = document.getElementById("exit")
         this.controls = document.getElementById("control")
+        this.options = document.getElementById("options")
+        this.difficulty = document.getElementsByClassName('difficulty')
         
+
+
         //hero
         this.hero = new Hero(this.ctx)
         this.health = new Health (this.ctx)
@@ -485,6 +489,7 @@ class Game{
         this.exit.classList.remove("hide")
         this.tryAgain.classList.remove("hide")
         this.controls.classList.remove("hide")
+        this.options.classList.remove("hide")
         
         this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)'
         this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height)
@@ -492,6 +497,23 @@ class Game{
 
         clearInterval(this.drawInterval)
         this.drawInterval = false
+    }
+
+    configuration(){
+       //console.log(difficulty[1].classList)
+      
+       for (let element of difficulty) {
+        let temp = [...element.classList]
+            if(temp.includes("active") && element.innerHTML === 'EASY'){
+                console.log('easy mode')
+            }
+            else if(temp.includes("active") && element.innerHTML === 'NORMAL'){
+                console.log('normal mode')
+            }
+            else if(temp.includes("active") && element.innerHTML === 'HARD') {
+                console.log('hard mode')
+            }
+        }
     }
 
     restart(){
@@ -661,7 +683,7 @@ class Game{
     }
 
     generateElements(){
-
+    
        if(this.basicEnemies[0].hp === 0 && this.boss){
         this.boss = false
         for(let i = 0; i < NUM_ROOF_TRAPS_FINAL; i++){
@@ -737,10 +759,6 @@ class Game{
             this.hero.heightJump.initial = 3800
             this.doors[0].doorThrough = true
         }
-    }
-
-    control(){
-
     }
 
     gameOver(){
