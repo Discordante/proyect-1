@@ -16,6 +16,7 @@ class Game{
         this.continue = document.getElementById("continue")
         this.exit = document.getElementById("exit")
         this.controls = document.getElementById("control")
+        this.options = document.getElementById("options")
         
         //hero
         this.hero = new Hero(this.ctx)
@@ -485,6 +486,7 @@ class Game{
         this.exit.classList.remove("hide")
         this.tryAgain.classList.remove("hide")
         this.controls.classList.remove("hide")
+        this.options.classList.remove("hide")
         
         this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)'
         this.ctx.fillRect(0,0,this.ctx.canvas.width,this.ctx.canvas.height)
