@@ -17,7 +17,10 @@ class Game{
         this.exit = document.getElementById("exit")
         this.controls = document.getElementById("control")
         this.options = document.getElementById("options")
+        this.difficulty = document.getElementsByClassName('difficulty')
         
+
+
         //hero
         this.hero = new Hero(this.ctx)
         this.health = new Health (this.ctx)
@@ -494,6 +497,23 @@ class Game{
 
         clearInterval(this.drawInterval)
         this.drawInterval = false
+    }
+
+    configuration(){
+       //console.log(difficulty[1].classList)
+      
+       for (let element of difficulty) {
+        let temp = [...element.classList]
+            if(temp.includes("active") && element.innerHTML === 'EASY'){
+                console.log('easy mode')
+            }
+            else if(temp.includes("active") && element.innerHTML === 'NORMAL'){
+                console.log('normal mode')
+            }
+            else if(temp.includes("active") && element.innerHTML === 'HARD') {
+                console.log('hard mode')
+            }
+        }
     }
 
     restart(){

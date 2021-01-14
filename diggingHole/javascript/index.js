@@ -1,5 +1,5 @@
 
-const game = new Game('canvas')
+let game = new Game('canvas')
 
 
 let startButton = document.getElementById('start')
@@ -94,9 +94,41 @@ window.onload = () => {
             element.classList.remove("hide")
           }
         } 
-       
-        
       })
+
+      //difficulty
+      for (let element of difficulty) {
+        element.addEventListener("click", () => {
+          this.sounds.click.play()
+    
+          for (let bUttom of difficulty) {
+            bUttom.classList.remove("active")
+          }
+          element.classList.toggle("active")
+
+          if(element.id === "easy"){
+            NUM_POTIONS = 6
+            NUM_FLOOR_TRAPS = 8
+            NUM_ROOF_TRAPS_INIT = 10
+            NUM_ROOF_TRAPS_FINAL = 30
+            BOSS_HP = 50
+          }
+          else if(element.id === "normal"){
+            NUM_POTIONS = 4
+            NUM_FLOOR_TRAPS = 12
+            NUM_ROOF_TRAPS_INIT = 15
+            NUM_ROOF_TRAPS_FINAL = 60
+          }
+          else if(element.id === "hard"){
+            NUM_POTIONS = 2
+            NUM_FLOOR_TRAPS = 15
+            NUM_ROOF_TRAPS_INIT = 50
+            NUM_ROOF_TRAPS_FINAL = 80
+          }
+          game = new Game('canvas')
+        })
+      }
+     
       
       //tryAgain
       tryAgain.addEventListener("click", () => {
