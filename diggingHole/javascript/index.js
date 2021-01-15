@@ -11,7 +11,9 @@ let controls = document.getElementById('control')
 let controlsImg = document.getElementById('controlsImg')
 let back = document.getElementById('back')
 let options = document.getElementById('options')
-
+let video = document.getElementById('video')
+let audio = document.getElementById('audio')
+audio.volume = 0.5
 
 //sound
 this.sounds = {
@@ -38,6 +40,8 @@ window.onload = () => {
         startButton.classList.add("hide")
         controls.classList.add("hide")
         options.classList.add("hide")
+        video.classList.add("hide")
+        audio.pause()
 
         gameStatus = true
         game.start()
@@ -122,7 +126,7 @@ window.onload = () => {
           else if(element.id === "hard"){
             NUM_POTIONS = 2
             NUM_FLOOR_TRAPS = 15
-            NUM_ROOF_TRAPS_INIT = 50
+            NUM_ROOF_TRAPS_INIT = 20
             NUM_ROOF_TRAPS_FINAL = 80
           }
           game = new Game('canvas')

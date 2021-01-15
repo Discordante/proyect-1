@@ -499,23 +499,6 @@ class Game{
         this.drawInterval = false
     }
 
-    configuration(){
-       //console.log(difficulty[1].classList)
-      
-       for (let element of difficulty) {
-        let temp = [...element.classList]
-            if(temp.includes("active") && element.innerHTML === 'EASY'){
-                console.log('easy mode')
-            }
-            else if(temp.includes("active") && element.innerHTML === 'NORMAL'){
-                console.log('normal mode')
-            }
-            else if(temp.includes("active") && element.innerHTML === 'HARD') {
-                console.log('hard mode')
-            }
-        }
-    }
-
     restart(){
         //hero
         this.hero.heightJump.initial = 100
